@@ -1,0 +1,1391 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>WHY</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Sora:wght@600;700;800&display=swap">
+<style>
+:root{
+  --bg:#e3e8f0;--hi:#fbfdff;--lo:#b3bccf;--tx:#232a40;--mu:#566078;--ac:#4a59d1;--acx:#ffffff;--good:#0f7d57;--bad:#c4344f;--warn:#a86400;--info:#2a6fb0;
+  --f-display:'Sora',system-ui,sans-serif;--f-body:'Inter',system-ui,sans-serif;--f-mono:'JetBrains Mono',ui-monospace,monospace;
+  --raise:8px 8px 18px var(--lo),-8px -8px 18px var(--hi);--raise-s:4px 4px 9px var(--lo),-4px -4px 9px var(--hi);
+  --inset:inset 6px 6px 12px var(--lo),inset -6px -6px 12px var(--hi);--inset-s:inset 3px 3px 6px var(--lo),inset -3px -3px 6px var(--hi);
+  --grad:linear-gradient(145deg,color-mix(in srgb,var(--hi) 55%,var(--bg)),color-mix(in srgb,var(--lo) 30%,var(--bg)));
+  --grad-in:linear-gradient(145deg,color-mix(in srgb,var(--lo) 30%,var(--bg)),color-mix(in srgb,var(--hi) 55%,var(--bg)));
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#222737;--hi:#30374d;--lo:#141824;--tx:#e8ebf7;--mu:#98a2bd;--ac:#8c98ff;--acx:#10142a;--good:#43d19c;--bad:#ff7088;--warn:#f0b44c;--info:#6db3f2;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#222737;--hi:#30374d;--lo:#141824;--tx:#e8ebf7;--mu:#98a2bd;--ac:#8c98ff;--acx:#10142a;--good:#43d19c;--bad:#ff7088;--warn:#f0b44c;--info:#6db3f2;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--tx);font:15px/1.55 var(--f-body);padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));min-height:100vh}
+h1,h2,h3,h4{font-family:var(--f-display);margin:0;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:1.5rem}h3{font-size:1.08rem}h4{font-size:.95rem}
+p{margin:0}.mu{color:var(--mu)}.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.pos{color:var(--good)}.neg{color:var(--bad)}.warnc{color:var(--warn)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:10px}
+.app{display:grid;grid-template-columns:236px minmax(0,1fr);gap:28px;max-width:1500px;margin:0 auto;padding-block:24px}
+.side{position:sticky;top:max(24px,env(safe-area-inset-top,0px));align-self:start;display:flex;flex-direction:column;gap:22px;padding:22px 16px;border-radius:28px;background:var(--grad);box-shadow:var(--raise)}
+.logo{display:flex;align-items:center;gap:12px;padding:0 6px}
+.logo-mark{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;font:800 1.15rem var(--f-display);letter-spacing:.02em;color:var(--ac);background:var(--grad-in);box-shadow:var(--inset-s)}
+.logo b{font:800 1.5rem var(--f-display);letter-spacing:.08em;display:block;line-height:1;text-shadow:2px 2px 3px var(--lo),-2px -2px 3px var(--hi)}
+.logo small{color:var(--mu);font-size:.72rem;letter-spacing:.05em}
+.nav{display:flex;flex-direction:column;gap:12px}
+.nav a{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:18px;text-decoration:none;color:var(--mu);font-weight:600;background:var(--grad);box-shadow:var(--raise-s);transition:box-shadow .15s}
+.nav a svg{width:20px;height:20px;flex:none}
+.nav a[aria-current="page"]{color:var(--ac);background:var(--grad-in);box-shadow:var(--inset-s)}
+.nav a:active{box-shadow:var(--inset-s)}
+.side-foot{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.main{min-width:0;display:flex;flex-direction:column;gap:22px}
+.topbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.topbar h2{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.card{background:var(--grad);border-radius:26px;box-shadow:var(--raise);padding:22px;min-width:0}
+.card.flat{background:var(--bg)}
+.well{background:var(--grad-in);border-radius:18px;box-shadow:var(--inset);padding:16px;min-width:0}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+.kpi{display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:22px;background:var(--grad);box-shadow:var(--raise-s);min-width:0}
+.kpi .l{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.kpi .v{font:700 1.2rem var(--f-mono);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.kpi .s{font-size:.8rem;color:var(--mu)}
+.kpi.na .v{font:600 1rem var(--f-body);color:var(--mu)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border:0;border-radius:16px;background:var(--grad);box-shadow:var(--raise-s);cursor:pointer;font-weight:600;color:var(--tx);text-decoration:none;min-height:44px;transition:box-shadow .12s}
+.btn:active,.btn.on{box-shadow:var(--inset-s)}
+.btn.pri{color:var(--ac)}
+.btn.solid{background:var(--ac);color:var(--acx);box-shadow:4px 4px 10px var(--lo),-4px -4px 10px var(--hi)}
+.btn.sm{padding:7px 12px;min-height:34px;font-size:.85rem;border-radius:12px}
+.btn.danger{color:var(--bad)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.chips{display:flex;gap:12px;overflow-x:auto;padding:8px 6px 14px;margin:0 -6px;scrollbar-width:thin}
+.chip{flex:none;padding:9px 16px;border-radius:14px;border:0;background:var(--grad);box-shadow:var(--raise-s);cursor:pointer;font-weight:600;color:var(--mu);white-space:nowrap}
+.chip[aria-selected="true"]{color:var(--ac);background:var(--grad-in);box-shadow:var(--inset-s)}
+input[type=text],input[type=number],input[type=date],select{width:100%;padding:11px 14px;border:0;border-radius:14px;background:var(--grad-in);box-shadow:var(--inset-s);min-height:44px;color:var(--tx);appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--mu) 50%),linear-gradient(135deg,var(--mu) 50%,transparent 50%);background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:36px}
+input::placeholder{color:var(--mu)}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:.82rem;color:var(--mu);font-weight:600;min-width:0}
+.form{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.hint{font-size:.78rem;color:var(--mu);font-weight:400}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:3px 11px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.03em;background:var(--grad-in);box-shadow:var(--inset-s);white-space:nowrap}
+.tag.good{color:var(--good)}.tag.bad{color:var(--bad)}.tag.warn{color:var(--warn)}.tag.info{color:var(--info)}.tag.mu{color:var(--mu)}
+.tag.crit{color:var(--acx);background:var(--bad);box-shadow:none}
+.tag.high{color:var(--bad)}.tag.med{color:var(--warn)}.tag.low{color:var(--info)}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.sp{justify-content:space-between}
+.stack{display:flex;flex-direction:column;gap:14px;min-width:0}
+.tw{overflow-x:auto;border-radius:18px;background:var(--grad-in);box-shadow:var(--inset);padding:6px 10px}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
+th{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mu);text-align:left;padding:10px 10px;white-space:nowrap;font-weight:700}
+th[data-a]{cursor:pointer}
+td{padding:9px 10px;border-top:1px solid color-mix(in srgb,var(--lo) 35%,transparent);white-space:nowrap}
+td.wrap{white-space:normal;min-width:180px}
+tr.click{cursor:pointer}tr.click:hover td{background:color-mix(in srgb,var(--ac) 7%,transparent)}
+td.r,th.r{text-align:right}
+.meter{height:12px;border-radius:99px;background:var(--grad-in);box-shadow:var(--inset-s);overflow:hidden}
+.meter i{display:block;height:100%;border-radius:99px;background:var(--ac)}
+.banner{display:flex;gap:12px;align-items:flex-start;padding:14px 18px;border-radius:18px;background:var(--grad-in);box-shadow:var(--inset-s);font-size:.88rem}
+.banner.demo{color:var(--warn);font-weight:600}
+.banner svg{flex:none;width:20px;height:20px;margin-top:1px}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:44px 20px}
+.empty .big{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:var(--grad-in);box-shadow:var(--inset);color:var(--ac);font:800 1.7rem var(--f-display)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.cal .dow{font-size:.7rem;color:var(--mu);text-align:center;font-weight:700;letter-spacing:.05em}
+.day{min-height:74px;border-radius:14px;padding:6px 7px;display:flex;flex-direction:column;justify-content:space-between;background:var(--bg);box-shadow:var(--raise-s);border:0;text-align:left;cursor:pointer;overflow:hidden;min-width:0}
+.day.off{box-shadow:var(--inset-s);opacity:.6;cursor:default}
+.day.sel{outline:2px solid var(--ac)}
+.day .d{font-size:.7rem;color:var(--mu);font-weight:600}.day .p{font:700 .78rem var(--f-mono);overflow-wrap:anywhere}.day .c{font-size:.65rem;color:var(--mu)}
+.drawer-bg{position:fixed;inset:0;background:color-mix(in srgb,#000 40%,transparent);z-index:50;display:flex;justify-content:flex-end}
+.drawer{width:min(640px,100%);height:100%;overflow-y:auto;background:var(--bg);padding:24px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 22px;padding-top:calc(24px + env(safe-area-inset-top,0px));box-shadow:-12px 0 30px color-mix(in srgb,#000 30%,transparent);display:flex;flex-direction:column;gap:18px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(90px + env(safe-area-inset-bottom,0px));z-index:80;padding:12px 20px;border-radius:16px;background:var(--bg);box-shadow:var(--raise);font-weight:600;max-width:90vw}
+.sw{position:relative;width:54px;height:30px;flex:none}
+.sw input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+.sw i{position:absolute;inset:0;border-radius:99px;background:var(--grad-in);box-shadow:var(--inset-s)}
+.sw i::after{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:var(--grad);box-shadow:var(--raise-s);transition:transform .15s}
+.sw input:checked+i::after{transform:translateX(24px);background:var(--ac)}
+.sw input:focus-visible+i{outline:2px solid var(--ac);outline-offset:3px}
+.dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 18px;align-items:baseline}
+.dl dt{color:var(--mu);font-size:.85rem}.dl dd{margin:0;font:600 .9rem var(--f-mono);text-align:right;overflow-wrap:anywhere}
+.fact{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:8px 0;border-top:1px solid color-mix(in srgb,var(--lo) 35%,transparent);font-size:.88rem}
+.fact:first-child{border-top:0}.fact b{font:600 .88rem var(--f-mono);text-align:right}
+.find{display:flex;flex-direction:column;gap:14px}
+.find .ttl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+ul.clean{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.svgw{width:100%;overflow:hidden}.svgw svg{display:block}
+.lg{display:flex;flex-wrap:wrap;gap:14px;font-size:.78rem;color:var(--mu)}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.bnav{display:none}
+@media (max-width:900px){
+ .app{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:16px;padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+ .side{position:static;flex-direction:row;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:22px}
+ .side .nav,.side .side-foot .lbl{display:none}.side-foot{flex-direction:row;margin:0}
+ .logo-mark{width:42px;height:42px;border-radius:14px}.logo small{display:none}
+ .bnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--bg);box-shadow:0 -8px 20px color-mix(in srgb,var(--lo) 60%,transparent)}
+ .bnav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:16px;text-decoration:none;color:var(--mu);font-size:.7rem;font-weight:700;background:var(--grad);box-shadow:var(--raise-s)}
+ .bnav a svg{width:20px;height:20px}
+ .bnav a[aria-current="page"]{color:var(--ac);background:var(--grad-in);box-shadow:var(--inset-s)}
+ .card{padding:16px;border-radius:22px}
+ .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div id="app"></div>
+<script>
+/* WHY analytics engine v1.0.0 — deterministic, no network, no AI. All numbers on screen come from here. */
+(function (root) {
+'use strict';
+var VERSION = '1.0.0';
+var EPS = 1e-9;
+var DEF_CFG = {
+  brokerUtcOffset: 0, displayUtcOffset: 0,
+  layering: { gapMin: 60, priceDistPct: 0.5, minEntries: 3, requireOverlap: true },
+  layerExclude: [],
+  risk: { maxLot: 0, lotMultiple: 3, maxExposureLots: 0, dailyLossLimit: 0 },
+  behavior: { revengeWindowMin: 15, martingaleRatio: 1.5, minSample: 8, overtradeSd: 2 },
+  minSample: 20
+};
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+function mergeCfg(c) {
+  var o = clone(DEF_CFG); if (!c) return o;
+  Object.keys(c).forEach(function (k) {
+    if (c[k] && typeof c[k] === 'object') Object.keys(c[k]).forEach(function (j) { if (c[k][j] != null && o[k]) o[k][j] = c[k][j]; });
+    else if (c[k] != null) o[k] = c[k];
+  });
+  return o;
+}
+
+/* ---------- parsing ---------- */
+function parseNum(v) {
+  if (v == null) return null; if (typeof v === 'number') return isFinite(v) ? v : null;
+  var s = String(v).replace(/[\s ]/g, '').replace(/[^\d.,\-+]/g, '');
+  if (!s || s === '-' || s === '+') return null;
+  var lc = s.lastIndexOf(','), ld = s.lastIndexOf('.');
+  if (lc > -1 && ld > -1) { s = lc > ld ? s.replace(/\./g, '').replace(',', '.') : s.replace(/,/g, ''); }
+  else if (lc > -1) { s = (/,\d{1,2}$/.test(s) && (s.match(/,/g) || []).length === 1) ? s.replace(',', '.') : s.replace(/,/g, ''); }
+  var n = parseFloat(s); return isFinite(n) ? n : null;
+}
+function parseTime(v) {
+  if (v == null) return null; var s = String(v).trim(), m;
+  m = s.match(/^(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+  if (m) return Date.UTC(+m[1], m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0));
+  m = s.match(/^(\d{1,2})[.\-\/](\d{1,2})[.\-\/](\d{4})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+  if (m) return Date.UTC(+m[3], m[2] - 1, +m[1], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0));
+  return null;
+}
+function parseDelimited(text) {
+  text = String(text).replace(/^﻿/, '');
+  var lines = text.split(/\r?\n/).filter(function (l) { return l.trim(); }).slice(0, 8), best = ',', bc = -1;
+  [',', ';', '\t'].forEach(function (d) { var c = lines.reduce(function (a, l) { return a + l.split(d).length - 1; }, 0); if (c > bc) { bc = c; best = d; } });
+  var rows = [], row = [], f = '', q = false, i, ch;
+  for (i = 0; i < text.length; i++) {
+    ch = text[i];
+    if (q) { if (ch === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === best) { row.push(f); f = ''; }
+    else if (ch === '\n' || ch === '\r') { if (ch === '\r' && text[i + 1] === '\n') i++; row.push(f); f = ''; if (row.some(function (x) { return x.trim(); })) rows.push(row); row = []; }
+    else f += ch;
+  }
+  row.push(f); if (row.some(function (x) { return x.trim(); })) rows.push(row);
+  return rows;
+}
+function decodeEnt(s) { return s.replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&#(\d+);/g, function (_, n) { return String.fromCharCode(+n); }); }
+function htmlRows(html) {
+  var rows = [], trs = html.split(/<tr[\s>]/i).slice(1);
+  trs.forEach(function (tr) {
+    var cells = [], re = /<t([dh])([^>]*)>([\s\S]*?)<\/t\1>/gi, m;
+    while ((m = re.exec(tr))) {
+      var txt = decodeEnt(m[3].replace(/<[^>]*>/g, '')).replace(/\s+/g, ' ').trim();
+      var cs = /colspan\s*=\s*["']?(\d+)/i.exec(m[2]); cells.push(txt);
+      if (cs) for (var k = 1; k < Math.min(+cs[1], 30); k++) cells.push('');
+    }
+    if (cells.length) rows.push(cells);
+  });
+  return rows;
+}
+var KEYS = {
+  time: ['time', 'waktu', 'datetime', 'tanggal', 'date', 'opentime', 'closetime'], deal: ['deal', 'dealid', 'ticket'],
+  symbol: ['symbol', 'simbol', 'instrument', 'pair'], type: ['type', 'tipe', 'jenis'], dir: ['direction', 'arah', 'entry'],
+  vol: ['volume', 'lot', 'lots', 'size'], price: ['price', 'harga'], order: ['order', 'orderid'],
+  pid: ['position', 'positionid', 'posid'], comm: ['commission', 'komisi'], fee: ['fee', 'biaya'], swap: ['swap'],
+  profit: ['profit', 'pl', 'pnl', 'profitloss', 'realizedpl'], bal: ['balance', 'saldo'], comment: ['comment', 'komentar', 'keterangan'],
+  sl: ['sl', 'stoploss'], tp: ['tp', 'takeprofit']
+};
+function mapHeader(row) {
+  var ix = {}, n = 0;
+  row.forEach(function (c, i) {
+    var k = String(c).toLowerCase().replace(/[^a-z0-9]/g, ''); if (!k) return;
+    Object.keys(KEYS).forEach(function (name) {
+      if (KEYS[name].indexOf(k) < 0) return;
+      var key = name; if (ix[key] != null) { if (name === 'time' || name === 'price') key = name + '2'; else return; }
+      if (ix[key] == null) { ix[key] = i; n++; }
+    });
+  });
+  if (n < 3 || ix.profit == null || ix.time == null || (ix.vol == null && ix.type == null)) return null;
+  return ix;
+}
+function stripBom(t) { return String(t).replace(/^﻿/, ''); }
+function parseSource(text, fileName) {
+  text = stripBom(text); var isHtml = /<\s*(html|table|tr)\b/i.test(text.slice(0, 4000)) || /\.html?$/i.test(fileName || '');
+  var rows = isHtml ? htmlRows(text) : parseDelimited(text);
+  var res = { deals: [], positions: [], warnings: [], skipped: 0, rowsRead: rows.length, kinds: [] };
+  var ix = null, kind = null, i, r;
+  for (i = 0; i < rows.length; i++) {
+    r = rows[i]; var h = mapHeader(r);
+    if (h) { ix = h; kind = (h.sl != null && h.tp != null) ? 'positions' : 'deals'; if (res.kinds.indexOf(kind) < 0) res.kinds.push(kind); continue; }
+    if (!ix) continue;
+    var t = parseTime(r[ix.time]);
+    if (t == null) { if (r.some(function (x) { return String(x).trim(); })) res.skipped++; continue; }
+    if (kind === 'deals') { var d = dealFromRow(r, ix, i + 1); if (d) res.deals.push(d); else res.skipped++; }
+    else { var p = posFromRow(r, ix, i + 1); if (p) res.positions.push(p); else res.skipped++; }
+  }
+  if (!ix) res.warnings.push('Header tabel tidak dikenali. Butuh kolom minimal: Time, Type, Volume, Profit (format Deals MT5) atau tabel Positions MT5.');
+  else if (!res.deals.length && !res.positions.length) res.warnings.push('Header ditemukan, tetapi tidak ada baris data yang bisa dibaca.');
+  return res;
+}
+function dealFromRow(r, ix, rowNo) {
+  var g = function (k) { return ix[k] != null && r[ix[k]] != null ? r[ix[k]] : ''; };
+  var t = parseTime(g('time')); if (t == null) return null;
+  var ty = String(g('type')).trim().toLowerCase(), dr = String(g('dir')).trim().toLowerCase(), isTrade = ty === 'buy' || ty === 'sell';
+  var dir = null; if (isTrade) dir = /^in\s*\/\s*out|inout|reverse/.test(dr) ? 'inout' : /^out|^close|keluar/.test(dr) ? 'out' : /^in|^open|masuk/.test(dr) ? 'in' : null;
+  var pid = String(g('pid')).trim(); if (pid === '0' || pid === '') pid = null;
+  return {
+    id: String(g('deal')).trim() || ('r' + rowNo), t: t, symbol: String(g('symbol')).trim(), type: isTrade ? ty : 'cash', rawType: ty, dir: dir,
+    vol: parseNum(g('vol')) || 0, price: parseNum(g('price')), order: String(g('order')).trim(), pid: pid,
+    comm: parseNum(g('comm')) || 0, fee: parseNum(g('fee')) || 0, swap: parseNum(g('swap')) || 0, profit: parseNum(g('profit')) || 0,
+    bal: parseNum(g('bal')), comment: String(g('comment')).trim(), row: rowNo
+  };
+}
+function posFromRow(r, ix, rowNo) {
+  var g = function (k) { return ix[k] != null && r[ix[k]] != null ? r[ix[k]] : ''; };
+  var t1 = parseTime(g('time')), t2 = parseTime(g('time2')), ty = String(g('type')).trim().toLowerCase();
+  if (t1 == null || (ty !== 'buy' && ty !== 'sell')) return null;
+  return {
+    id: String(g('pid') || g('deal') || ('p' + rowNo)).trim(), symbol: String(g('symbol')).trim(), side: ty, vol: parseNum(g('vol')) || 0,
+    entryT: t1, entryPrice: parseNum(g('price')), sl: parseNum(g('sl')) || null, tp: parseNum(g('tp')) || null,
+    exitT: t2, exitPrice: parseNum(g('price2')), comm: parseNum(g('comm')) || 0, fee: parseNum(g('fee')) || 0, swap: parseNum(g('swap')) || 0, profit: parseNum(g('profit')) || 0, row: rowNo
+  };
+}
+
+/* ---------- cash ledger ---------- */
+function cashKind(d) {
+  var c = (d.comment || '').toLowerCase(), ty = d.rawType;
+  if (ty === 'credit') return 'credit';
+  if (/bonus|promo|reward|rebate|cashback/.test(c) || ty === 'bonus') return 'bonus';
+  if (/^(charge|commission|fee|tax)/.test(ty)) return 'charge';
+  if (/^correction/.test(ty) || /correct|adjust|koreksi|penyesuaian/.test(c)) return 'adjustment';
+  if (ty === 'balance') return d.profit >= 0 ? 'deposit' : 'withdrawal';
+  return 'other';
+}
+function buildCash(deals) {
+  return deals.filter(function (d) { return d.type === 'cash'; }).map(function (d) {
+    var amt = d.profit + d.comm + d.fee + d.swap;
+    return { id: d.id, t: d.t, kind: cashKind(d), amount: amt, comment: d.comment, rawType: d.rawType, bal: d.bal, row: d.row };
+  }).sort(function (a, b) { return a.t - b.t; });
+}
+
+/* ---------- trade reconstruction ---------- */
+function dealCmp(a, b) { return a.t - b.t || (parseFloat(a.id) - parseFloat(b.id) || 0) || a.row - b.row; }
+function isSO(c) { return /\bso:|stop\s*out|stopout/i.test(c || ''); }
+function newTrade(d, pre) {
+  return { id: pre + d.id, symbol: d.symbol, side: d.type, entryVol: d.vol, remaining: d.vol, entryT: d.t, entryPrice: d.price, exitT: null, exitVol: 0, exitValue: 0,
+    profit: 0, comm: 0, fee: 0, swap: 0, entryComm: d.comm, entryFee: d.fee, entrySwap: d.swap, deals: [d], flags: [], stopOut: false, sl: null, tp: null, comment: d.comment };
+}
+function applyExit(T, d, take) {
+  var r = take / (d.vol || take), ri = take / T.entryVol;
+  T.profit += d.profit * r; T.comm += d.comm * r + T.entryComm * ri; T.fee += d.fee * r + T.entryFee * ri; T.swap += d.swap * r + T.entrySwap * ri;
+  T.exitValue += take * d.price; T.exitVol += take; T.exitT = d.t; T.remaining -= take;
+  if (T.deals.indexOf(d) < 0) T.deals.push(d); if (isSO(d.comment)) T.stopOut = true;
+}
+function finalize(T) {
+  var closed = T.remaining <= EPS && T.exitVol > 0;
+  T.status = T.orphan ? 'closed' : closed ? 'closed' : (T.exitVol > 0 ? 'partial' : 'open');
+  T.exitPrice = T.exitVol > 0 ? T.exitValue / T.exitVol : null;
+  T.gross = T.profit; T.costs = T.comm + T.fee + T.swap; T.net = T.profit + T.costs;
+  if (T.orphan) T.quality = 'Partial'; else T.quality = T.mode === 'pid' ? 'Complete' : 'Reconstructed';
+  return T;
+}
+function inferDirs(td) {
+  var net = {}, n = 0;
+  td.forEach(function (d) {
+    if (d.dir) return; var s = d.type === 'buy' ? 1 : -1, cur = net[d.symbol] || 0;
+    if (Math.abs(cur) < EPS || Math.sign(cur) === s) { d.dir = 'in'; net[d.symbol] = cur + s * d.vol; }
+    else { d.dir = 'out'; net[d.symbol] = cur + s * d.vol; } n++;
+  });
+  return n;
+}
+function reconstruct(deals, positions) {
+  var td = deals.filter(function (d) { return d.type === 'buy' || d.type === 'sell'; }).sort(dealCmp), notes = [], trades = [], i;
+  if (!td.length && positions && positions.length) {
+    positions.forEach(function (p) {
+      var T = { id: 'P' + p.id, symbol: p.symbol, side: p.side, entryVol: p.vol, remaining: p.exitT ? 0 : p.vol, entryT: p.entryT, entryPrice: p.entryPrice, exitT: p.exitT, exitVol: p.exitT ? p.vol : 0,
+        exitValue: 0, profit: p.profit, comm: p.comm, fee: p.fee, swap: p.swap, deals: [], flags: [], stopOut: false, sl: p.sl, tp: p.tp, mode: 'positions', comment: '' };
+      finalize(T); T.exitPrice = p.exitPrice; T.quality = 'Complete'; trades.push(T);
+    });
+    notes.push('Trade diambil langsung dari tabel Positions (tanpa deal individual, tanpa arus kas).');
+    return { trades: trades, notes: notes, mode: 'positions' };
+  }
+  var pidCount = td.filter(function (d) { return d.pid; }).length, usePid = td.length > 0 && pidCount / td.length >= 0.9, mode;
+  if (usePid) {
+    mode = 'pid'; var by = {}, order = [];
+    td.forEach(function (d) { if (!by[d.pid]) { by[d.pid] = []; order.push(d.pid); } by[d.pid].push(d); });
+    order.forEach(function (pid) {
+      var g = by[pid], ins = g.filter(function (d) { return d.dir === 'in'; }), outs = g.filter(function (d) { return d.dir !== 'in'; });
+      var T;
+      if (!ins.length) { T = newTrade(outs[0], 'PID'); T.id = 'PID' + pid; T.orphan = true; T.side = outs[0].type === 'sell' ? 'buy' : 'sell'; T.entryT = null; T.entryPrice = null; T.entryVol = outs.reduce(function (a, d) { return a + d.vol; }, 0); T.entryComm = 0; T.entryFee = 0; T.entrySwap = 0; T.deals = []; T.flags.push('Deal masuk tidak ada dalam data'); }
+      else {
+        T = newTrade(ins[0], 'PID'); T.id = 'PID' + pid; T.entryVol = ins.reduce(function (a, d) { return a + d.vol; }, 0); T.remaining = T.entryVol;
+        T.entryPrice = ins.reduce(function (a, d) { return a + d.vol * d.price; }, 0) / T.entryVol; T.entryT = ins[0].t;
+        T.entryComm = 0; T.entryFee = 0; T.entrySwap = 0;
+        ins.forEach(function (d) { T.profit += d.profit; T.comm += d.comm; T.fee += d.fee; T.swap += d.swap; if (T.deals.indexOf(d) < 0) T.deals.push(d); });
+      }
+      outs.forEach(function (d) { var v = d.vol; T.profit += d.profit; T.comm += d.comm; T.fee += d.fee; T.swap += d.swap; T.exitValue += v * d.price; T.exitVol += v; T.exitT = d.t; T.remaining -= v; T.deals.push(d); if (isSO(d.comment)) T.stopOut = true; });
+      T.mode = 'pid'; if (T.remaining < -EPS && !T.orphan) { T.flags.push('Volume keluar melebihi volume masuk'); T.remaining = 0; }
+      finalize(T); trades.push(T);
+    });
+    notes.push('Rekonstruksi memakai Position ID dari data sumber: satu trade = satu posisi (semua deal masuk dan keluar posisi itu).');
+  } else {
+    mode = 'fifo'; var inferred = td.some(function (d) { return !d.dir; }) ? inferDirs(td) : 0;
+    if (inferred) notes.push('Kolom Direction/Position tidak ada pada ' + inferred + ' deal; arah masuk/keluar disimpulkan dari saldo volume per symbol (asumsi netting).');
+    var books = {};
+    td.forEach(function (d) {
+      var bk = books[d.symbol] || (books[d.symbol] = { buy: [], sell: [] });
+      if (d.dir === 'in') { var T = newTrade(d, 'D'); T.mode = 'fifo'; bk[d.type].push(T); trades.push(T); }
+      else {
+        var q = bk[d.type === 'sell' ? 'buy' : 'sell'], rem = d.vol;
+        if (d.dir === 'inout') notes.push('Deal ' + d.id + ' bertipe in/out (reversal); diperlakukan sebagai penutupan saja. Periksa manual.');
+        while (rem > EPS && q.length) { var L = q[0], take = Math.min(rem, L.remaining); applyExit(L, d, take); rem -= take; if (L.remaining <= EPS) q.shift(); }
+        if (rem > EPS) {
+          var O = newTrade(d, 'O'); O.mode = 'fifo'; O.orphan = true; O.side = d.type === 'sell' ? 'buy' : 'sell'; O.entryT = null; O.entryPrice = null; O.entryVol = rem; O.remaining = rem;
+          O.entryComm = 0; O.entryFee = 0; O.entrySwap = 0; O.deals = []; O.flags.push('Deal masuk tidak ada dalam data (histori dimulai di tengah posisi)');
+          applyExit(O, d, rem); trades.push(O);
+        }
+      }
+    });
+    notes.push('Position ID tidak tersedia: posisi direkonstruksi per deal masuk dengan alokasi keluar FIFO per symbol. Satu deal masuk = satu trade; penutupan parsial dialokasikan proporsional. Ini asumsi dan ditandai "Reconstructed".');
+  }
+  trades.forEach(finalize);
+  trades.forEach(function (T) { if (T.status === 'closed' && T.entryT != null) T.holdMin = (T.exitT - T.entryT) / 60000; else T.holdMin = null; });
+  return { trades: trades, notes: notes, mode: mode };
+}
+function attachSLTP(trades, positions) {
+  if (!positions || !positions.length) return 0; var map = {}, n = 0;
+  positions.forEach(function (p) { map[p.symbol + '|' + p.side + '|' + p.entryT] = p; });
+  trades.forEach(function (T) { var p = map[T.symbol + '|' + T.side + '|' + T.entryT]; if (p) { T.sl = p.sl; T.tp = p.tp; n++; } });
+  return n;
+}
+
+/* ---------- helpers ---------- */
+function sum(a, f) { return a.reduce(function (s, x) { return s + (f ? f(x) : x); }, 0); }
+function median(a) { if (!a.length) return null; var s = a.slice().sort(function (x, y) { return x - y; }), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
+function mean(a) { return a.length ? sum(a) / a.length : null; }
+function sd(a) { if (a.length < 2) return null; var m = mean(a); return Math.sqrt(sum(a, function (x) { return (x - m) * (x - m); }) / (a.length - 1)); }
+function wilson(w, n) { if (!n) return null; var z = 1.96, p = w / n, d = 1 + z * z / n, c = (p + z * z / (2 * n)) / d, h = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d; return [Math.max(0, c - h), Math.min(1, c + h)]; }
+function r2(x) { return x == null ? null : Math.round(x * 100) / 100; }
+function dayKey(utcMs, off) { var d = new Date(utcMs + off * 3600000); return d.getUTCFullYear() + '-' + ('0' + (d.getUTCMonth() + 1)).slice(-2) + '-' + ('0' + d.getUTCDate()).slice(-2); }
+function weekKey(utcMs, off) { var d = new Date(utcMs + off * 3600000), dow = (d.getUTCDay() + 6) % 7; var m = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - dow)); return dayKey(m.getTime(), 0); }
+function monthKey(utcMs, off) { return dayKey(utcMs, off).slice(0, 7); }
+
+/* ---------- performance statistics (net basis, costs included) ---------- */
+function perf(trades) {
+  var n = trades.length, o = { n: n };
+  var wins = trades.filter(function (t) { return t.net > 0; }), loss = trades.filter(function (t) { return t.net < 0; }), be = n - wins.length - loss.length;
+  o.wins = wins.length; o.losses = loss.length; o.be = be;
+  o.winrate = n ? wins.length / n : null; o.lossrate = n ? loss.length / n : null; o.winCI = wilson(wins.length, n);
+  o.gross = sum(trades, function (t) { return t.gross; }); o.costs = sum(trades, function (t) { return t.costs; }); o.net = sum(trades, function (t) { return t.net; });
+  o.comm = sum(trades, function (t) { return t.comm; }); o.swap = sum(trades, function (t) { return t.swap; }); o.fee = sum(trades, function (t) { return t.fee; });
+  o.grossProfit = sum(trades.filter(function (t) { return t.gross > 0; }), function (t) { return t.gross; });
+  o.grossLoss = sum(trades.filter(function (t) { return t.gross < 0; }), function (t) { return t.gross; });
+  o.netWin = sum(wins, function (t) { return t.net; }); o.netLoss = sum(loss, function (t) { return t.net; });
+  o.pf = o.netLoss < 0 ? o.netWin / Math.abs(o.netLoss) : (o.netWin > 0 ? Infinity : null);
+  o.avgWin = wins.length ? o.netWin / wins.length : null; o.avgLoss = loss.length ? o.netLoss / loss.length : null;
+  o.payoff = (o.avgWin != null && o.avgLoss) ? o.avgWin / Math.abs(o.avgLoss) : null;
+  o.expectancy = n ? o.net / n : null; var nets = trades.map(function (t) { return t.net; }), s = sd(nets);
+  o.expCI = (n >= 2 && s != null) ? [o.expectancy - 1.96 * s / Math.sqrt(n), o.expectancy + 1.96 * s / Math.sqrt(n)] : null;
+  o.bePct = o.payoff ? 1 / (1 + o.payoff) : null;
+  o.best = n ? trades.reduce(function (a, t) { return t.net > a.net ? t : a; }) : null; o.worst = n ? trades.reduce(function (a, t) { return t.net < a.net ? t : a; }) : null;
+  o.lots = sum(trades, function (t) { return t.entryVol; });
+  var ord = trades.slice().sort(function (a, b) { return a.exitT - b.exitT; }), cw = 0, cl = 0, mw = 0, ml = 0, cur = 0;
+  ord.forEach(function (t) { if (t.net > 0) { cw++; cl = 0; } else if (t.net < 0) { cl++; cw = 0; } else { cw = 0; cl = 0; } mw = Math.max(mw, cw); ml = Math.max(ml, cl); });
+  o.maxWinStreak = mw; o.maxLossStreak = ml;
+  var holds = trades.filter(function (t) { return t.holdMin != null; }).map(function (t) { return t.holdMin; });
+  o.holdMedian = median(holds); o.holdMean = mean(holds); o.holdN = holds.length;
+  return o;
+}
+
+/* ---------- drawdown on realized trading curve ---------- */
+function drawdown(trades, cashFn) {
+  var ord = trades.filter(function (t) { return t.exitT != null; }).slice().sort(function (a, b) { return a.exitT - b.exitT; });
+  var cum = 0, peak = 0, peakT = ord.length ? ord[0].exitT : null, curve = [], maxDD = 0, maxDDPct = null, ddPeakT = null, ddTroughT = null, ddPeakVal = 0, recT = null, tracking = false;
+  curve.push({ t: ord.length ? ord[0].entryT || ord[0].exitT : 0, cum: 0, dd: 0 });
+  ord.forEach(function (t) {
+    cum += t.net; if (cum > peak + EPS) { peak = cum; peakT = t.exitT; }
+    var dd = peak - cum; curve.push({ t: t.exitT, cum: cum, dd: dd, id: t.id });
+    if (dd > maxDD + EPS) { maxDD = dd; ddPeakT = peakT; ddTroughT = t.exitT; ddPeakVal = peak; }
+  });
+  if (ddTroughT != null) { for (var i = 0; i < curve.length; i++) if (curve[i].t > ddTroughT && curve[i].cum >= ddPeakVal - EPS) { recT = curve[i].t; break; } }
+  if (maxDD > 0 && cashFn) { var base = cashFn(ddPeakT) + ddPeakVal; if (base > 0) maxDDPct = maxDD / base; }
+  return { curve: curve, maxDD: maxDD, maxDDPct: maxDDPct, peakT: ddPeakT, troughT: ddTroughT, recoveredT: recT, durMin: ddTroughT != null && ddPeakT != null ? (ddTroughT - ddPeakT) / 60000 : null,
+    recMin: recT != null ? (recT - ddTroughT) / 60000 : null, final: cum, currentDD: peak - cum };
+}
+
+/* ---------- exposure sweep ---------- */
+function peakExposure(trades) {
+  var ev = [];
+  trades.forEach(function (t) { if (t.entryT == null) return; ev.push([t.entryT, t.entryVol]); ev.push([t.exitT != null && t.status === 'closed' ? t.exitT : Infinity, -t.entryVol]); });
+  ev.sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
+  var cur = 0, pk = 0, pkT = null; ev.forEach(function (e) { cur += e[1]; if (cur > pk + EPS) { pk = cur; pkT = e[0]; } });
+  return { peak: pk, t: pkT };
+}
+
+/* ---------- layering detection ---------- */
+function detectLayering(trades, L, exclude, bo) {
+  exclude = exclude || []; bo = bo || 0;
+  var by = {}, groups = [];
+  trades.filter(function (t) { return t.entryT != null && t.entryPrice != null && !t.orphan; }).forEach(function (t) { var k = t.symbol + '|' + t.side; (by[k] || (by[k] = [])).push(t); });
+  Object.keys(by).forEach(function (k) {
+    var arr = by[k].sort(function (a, b) { return a.entryT - b.entryT; }), g = null;
+    arr.forEach(function (t) {
+      var ex = (t.status === 'closed' && t.exitT != null) ? t.exitT : Infinity;
+      if (g) {
+        var gap = (t.entryT - g.lastEntry) / 60000, dist = Math.abs(t.entryPrice - g.lastPrice) / g.lastPrice * 100, ov = t.entryT < g.maxExit;
+        if (gap <= L.gapMin && dist <= L.priceDistPct && (ov || !L.requireOverlap)) { g.trades.push(t); g.lastEntry = t.entryT; g.lastPrice = t.entryPrice; g.maxExit = Math.max(g.maxExit, ex); return; }
+        groups.push(g);
+      }
+      g = { trades: [t], lastEntry: t.entryT, lastPrice: t.entryPrice, maxExit: ex };
+    });
+    if (g) groups.push(g);
+  });
+  var out = [], idn = 0;
+  groups.filter(function (g) { return g.trades.length >= L.minEntries; }).forEach(function (g) {
+    var sig0 = g.trades[0].symbol + '|' + g.trades[0].side + '|' + (g.trades[0].entryT + bo * 3600000) + '|' + g.trades.length;
+    if (exclude.indexOf(sig0) >= 0) return;
+    var ts = g.trades, n = ts.length, tl = sum(ts, function (t) { return t.entryVol; }), id = 'L' + (++idn);
+    var wavg = sum(ts, function (t) { return t.entryPrice * t.entryVol; }) / tl, prices = ts.map(function (t) { return t.entryPrice; });
+    var gaps = [], inc = 0, against = 0, ovl = 0;
+    for (var i = 1; i < n; i++) {
+      gaps.push((ts[i].entryT - ts[i - 1].entryT) / 60000); if (ts[i].entryVol > ts[i - 1].entryVol + EPS) inc++;
+      var worse = ts[i].side === 'buy' ? ts[i].entryPrice < ts[i - 1].entryPrice : ts[i].entryPrice > ts[i - 1].entryPrice; if (worse) against++;
+      var maxEx = Math.max.apply(null, ts.slice(0, i).map(function (t) { return t.status === 'closed' ? t.exitT : Infinity; })); if (ts[i].entryT < maxEx) ovl++;
+    }
+    var exits = ts.filter(function (t) { return t.status === 'closed'; }).map(function (t) { return t.exitT; }), spread = exits.length > 1 ? (Math.max.apply(null, exits) - Math.min.apply(null, exits)) / 60000 : null;
+    var ev = ['Symbol dan arah sama (' + ts[0].symbol + ' ' + ts[0].side.toUpperCase() + ')'], score = 0.15;
+    if (ovl === n - 1) { score += 0.3; ev.push('Semua entry berikutnya dibuka saat posisi sebelumnya masih aktif'); } else if (ovl > 0) { score += 0.15; ev.push(ovl + ' dari ' + (n - 1) + ' entry berikutnya dibuka saat posisi sebelumnya masih aktif'); }
+    var mg = median(gaps); if (mg != null && mg <= L.gapMin / 3) { score += 0.2; ev.push('Jeda antar entry sempit (median ' + r2(mg) + ' menit)'); }
+    if (inc / (n - 1) >= 0.6) { score += 0.2; ev.push('Volume naik pada ' + inc + ' dari ' + (n - 1) + ' entry berikutnya'); }
+    if (against / (n - 1) >= 0.6) { score += 0.15; ev.push('Entry ditambah saat harga bergerak melawan posisi pada ' + against + ' dari ' + (n - 1) + ' entry'); }
+    if (spread != null && spread <= 5 && exits.length === n) { score += 0.15; ev.push('Seluruh posisi ditutup berdekatan (rentang ' + r2(spread) + ' menit)'); }
+    score = Math.min(1, score);
+    var closedAll = ts.every(function (t) { return t.status === 'closed'; }), lastExit = closedAll ? Math.max.apply(null, exits) : null, pe = peakExposure(ts);
+    var grp = { id: id, sig: sig0, symbol: ts[0].symbol, side: ts[0].side, entries: n, totalLots: tl, maxLot: Math.max.apply(null, ts.map(function (t) { return t.entryVol; })), wavg: wavg,
+      priceMin: Math.min.apply(null, prices), priceMax: Math.max.apply(null, prices), firstT: ts[0].entryT, lastEntryT: ts[n - 1].entryT, lastExitT: lastExit,
+      durMin: lastExit != null ? (lastExit - ts[0].entryT) / 60000 : null, net: sum(ts, function (t) { return t.net; }), costs: sum(ts, function (t) { return t.costs; }), gross: sum(ts, function (t) { return t.gross; }),
+      peakLots: pe.peak, confidence: score, level: score >= 0.7 ? 'Tinggi' : score >= 0.45 ? 'Sedang' : 'Rendah', evidence: ev, tradeIds: ts.map(function (t) { return t.id; }), closed: closedAll,
+      priceDistPct: (Math.max.apply(null, prices) - Math.min.apply(null, prices)) / wavg * 100, volProg: ts.map(function (t) { return t.entryVol; }) };
+    ts.forEach(function (t) { t.layerId = id; });
+    out.push(grp);
+  });
+  return out;
+}
+
+/* ---------- behaviour detectors ---------- */
+function sortedByExit(trades) { return trades.filter(function (t) { return t.status === 'closed' && t.exitT != null && t.entryT != null; }).sort(function (a, b) { return a.exitT - b.exitT; }); }
+function prevClosed(ex, T) {
+  var lo = 0, hi = ex.length - 1, ans = null;
+  while (lo <= hi) { var m = (lo + hi) >> 1; if (ex[m].exitT <= T.entryT) { ans = m; lo = m + 1; } else hi = m - 1; }
+  while (ans != null && ex[ans] === T) ans--; return ans != null && ans >= 0 ? ex[ans] : null;
+}
+function conf(n, rate, diff, B) { if (n >= 15 && rate >= 0.5 && (diff == null || diff >= 0.25)) return 'Tinggi'; if (n >= B.minSample && rate >= 0.35) return 'Sedang'; return 'Rendah'; }
+function behaviors(trades, cfg, daily) {
+  var B = cfg.behavior, ex = sortedByExit(trades), ent = ex.slice().sort(function (a, b) { return a.entryT - b.entryT; }), out = {};
+  var afterLoss = [], afterWin = [];
+  ent.forEach(function (t) { var p = prevClosed(ex, t); if (!p) return; (p.net < 0 ? afterLoss : afterWin).push({ t: t, p: p }); });
+  // martingale-like
+  var mHit = afterLoss.filter(function (x) { return x.t.entryVol >= x.p.entryVol * B.martingaleRatio - EPS; }), wHit = afterWin.filter(function (x) { return x.t.entryVol >= x.p.entryVol * B.martingaleRatio - EPS; });
+  var mr = afterLoss.length ? mHit.length / afterLoss.length : null, wr = afterWin.length ? wHit.length / afterWin.length : null;
+  out.martingale = { ratio: B.martingaleRatio, sample: afterLoss.length, hits: mHit.length, rate: mr, rateAfterWin: wr, sampleWin: afterWin.length, net: sum(mHit, function (x) { return x.t.net; }), ids: mHit.map(function (x) { return x.t.id; }),
+    confidence: conf(afterLoss.length, mr || 0, wr != null && mr != null ? mr - wr : null, B), avgLotAfterLoss: mean(afterLoss.map(function (x) { return x.t.entryVol; })), avgLotAfterWin: mean(afterWin.map(function (x) { return x.t.entryVol; })) };
+  // revenge-like
+  var rHit = afterLoss.filter(function (x) { return (x.t.entryT - x.p.exitT) / 60000 <= B.revengeWindowMin && x.t.entryVol >= x.p.entryVol - EPS; });
+  var quick = afterLoss.filter(function (x) { return (x.t.entryT - x.p.exitT) / 60000 <= B.revengeWindowMin; }), rr = afterLoss.length ? rHit.length / afterLoss.length : null;
+  var rest = afterLoss.filter(function (x) { return rHit.indexOf(x) < 0; });
+  out.revenge = { windowMin: B.revengeWindowMin, sample: afterLoss.length, hits: rHit.length, quick: quick.length, rate: rr, net: sum(rHit, function (x) { return x.t.net; }), avgNet: rHit.length ? sum(rHit, function (x) { return x.t.net; }) / rHit.length : null,
+    avgNetOther: rest.length ? sum(rest, function (x) { return x.t.net; }) / rest.length : null, ids: rHit.map(function (x) { return x.t.id; }), confidence: conf(afterLoss.length, rr || 0, null, B) };
+  // winrate after loss / after streak
+  var al = afterLoss.map(function (x) { return x.t; }), aw = afterWin.map(function (x) { return x.t; });
+  out.afterLoss = perf(al); out.afterWin = perf(aw);
+  // overtrading by day
+  var days = Object.keys(daily).map(function (k) { return { k: k, n: daily[k].n, pnl: daily[k].pnl }; }), counts = days.map(function (d) { return d.n; }), m = mean(counts), s = sd(counts);
+  var thr = m != null && s != null ? Math.max(m + B.overtradeSd * s, 2 * (median(counts) || 0)) : null, over = thr != null && days.length >= 5 ? days.filter(function (d) { return d.n > thr; }) : [];
+  var normal = days.filter(function (d) { return over.indexOf(d) < 0; });
+  out.overtrading = { days: days.length, mean: m, median: median(counts), threshold: thr, flagged: over, avgPnlFlagged: over.length ? mean(over.map(function (d) { return d.pnl; })) : null, avgPnlNormal: normal.length ? mean(normal.map(function (d) { return d.pnl; })) : null,
+    netFlagged: sum(over, function (d) { return d.pnl; }), enough: days.length >= 5 };
+  // loss chasing: entry while day's realized pnl so far is negative with lot above median
+  var medLot = median(trades.map(function (t) { return t.entryVol; })), chase = [], dayRun = {};
+  var all = trades.filter(function (t) { return t.entryT != null; }).sort(function (a, b) { return a.entryT - b.entryT; });
+  all.forEach(function (t) {
+    var dk = dayKey(t.entryT, cfg.displayUtcOffset), realized = 0;
+    for (var i = 0; i < ex.length && ex[i].exitT <= t.entryT; i++) if (dayKey(ex[i].exitT, cfg.displayUtcOffset) === dk && ex[i] !== t) realized += ex[i].net;
+    if (realized < 0 && medLot != null && t.entryVol > medLot * 1.0 + EPS) chase.push(t);
+  });
+  out.chasing = { hits: chase.length, net: sum(chase, function (t) { return t.net; }), ids: chase.map(function (t) { return t.id; }), medLot: medLot, sample: all.length };
+  return out;
+}
+
+/* ---------- risk ---------- */
+function riskModule(trades, cfg, daily, layers) {
+  var R = cfg.risk, lots = trades.map(function (t) { return t.entryVol; }), med = median(lots), viol = [];
+  var big = med != null ? trades.filter(function (t) { return t.entryVol > med * R.lotMultiple + EPS; }) : [];
+  var over = R.maxLot > 0 ? trades.filter(function (t) { return t.entryVol > R.maxLot + EPS; }) : [];
+  var pe = peakExposure(trades), expOver = R.maxExposureLots > 0 && pe.peak > R.maxExposureLots;
+  var dl = R.dailyLossLimit > 0 ? Object.keys(daily).filter(function (k) { return daily[k].pnl < -R.dailyLossLimit; }) : [];
+  var hasSL = trades.some(function (t) { return t.sl != null; }), noSL = hasSL ? trades.filter(function (t) { return !t.sl; }) : [];
+  // implied value per price unit per lot (from realised trades), used only to estimate R
+  var imp = {};
+  trades.forEach(function (t) { if (t.status === 'closed' && t.exitPrice != null && t.entryPrice != null && t.entryVol > 0) { var mv = (t.side === 'buy' ? 1 : -1) * (t.exitPrice - t.entryPrice); if (Math.abs(mv) > 1e-9 && Math.abs(t.gross) > 0) { var v = t.gross / (mv * t.entryVol); if (v > 0) (imp[t.symbol] || (imp[t.symbol] = [])).push(v); } } });
+  Object.keys(imp).forEach(function (k) { imp[k] = median(imp[k]); });
+  var rs = [];
+  if (hasSL) trades.forEach(function (t) { if (t.sl && imp[t.symbol] && t.entryPrice != null) { var risk = Math.abs(t.entryPrice - t.sl) * imp[t.symbol] * t.entryVol; if (risk > 0) { t.risk = risk; t.R = t.net / risk; rs.push(t.R); } } });
+  var bySym = {}; trades.forEach(function (t) { var s = bySym[t.symbol] || (bySym[t.symbol] = { symbol: t.symbol, n: 0, lots: 0, maxLot: 0 }); s.n++; s.lots += t.entryVol; s.maxLot = Math.max(s.maxLot, t.entryVol); });
+  var tot = sum(lots) || 1;
+  return { medLot: med, meanLot: mean(lots), maxLot: lots.length ? Math.max.apply(null, lots) : null, minLot: lots.length ? Math.min.apply(null, lots) : null, peak: pe, big: big, over: over, expOver: expOver, dailyLossDays: dl, noSL: noSL, hasSL: hasSL,
+    rMedian: median(rs), rMean: mean(rs), rN: rs.length, implied: imp, bySymbol: Object.keys(bySym).map(function (k) { var s = bySym[k]; s.share = s.lots / tot; return s; }).sort(function (a, b) { return b.lots - a.lots; }),
+    lotSteps: trades.slice().sort(function (a, b) { return a.entryT - b.entryT; }).map(function (t) { return { id: t.id, t: t.entryT, lot: t.entryVol, net: t.net }; }), layerPeak: layers.length ? Math.max.apply(null, layers.map(function (g) { return g.peakLots; })) : 0 };
+}
+
+/* ---------- conditional ---------- */
+function groupBy(trades, keyFn, order) {
+  var m = {}; trades.forEach(function (t) { var k = keyFn(t); if (k == null) return; (m[k] || (m[k] = [])).push(t); });
+  var keys = order || Object.keys(m).sort();
+  return keys.filter(function (k) { return m[k]; }).map(function (k) { var p = perf(m[k]); p.key = k; return p; });
+}
+function sessionOf(utcHour) { return utcHour < 7 ? 'Asia' : utcHour < 13 ? 'London' : utcHour < 21 ? 'New York' : 'Sepi (21-24 UTC)'; }
+
+/* ---------- main analysis ---------- */
+function prepareAccount(acc) {
+  var rc = reconstruct(acc.deals || [], acc.positions || []), notes = rc.notes.slice(), tr = rc.trades, matched = 0;
+  if (rc.mode !== 'positions') matched = attachSLTP(tr, acc.positions || []);
+  var cash = buildCash(acc.deals || []);
+  var rows = (acc.deals || []).slice().sort(dealCmp), recon = { rows: 0, mismatches: 0, first: null, lastBal: null, computedLast: null, diff: null, mismatchRows: [] };
+  var prev = null;
+  rows.forEach(function (d) {
+    if (d.bal == null) return; var pnl = d.profit + d.comm + d.fee + d.swap; recon.rows++;
+    if (prev != null && Math.abs(prev + pnl - d.bal) > 0.02 + Math.abs(d.bal) * 1e-6) { recon.mismatches++; if (recon.mismatchRows.length < 20) recon.mismatchRows.push(d.id); }
+    prev = d.bal;
+  });
+  var hasBal = rows.some(function (d) { return d.bal != null; });
+  var allPnl = sum(rows, function (d) { return d.profit + d.comm + d.fee + d.swap; });
+  var firstWithBal = rows.filter(function (d) { return d.bal != null; })[0], init = null, initNote = null;
+  if (firstWithBal) { init = firstWithBal.bal - (firstWithBal.profit + firstWithBal.comm + firstWithBal.fee + firstWithBal.swap); initNote = Math.abs(init) < 0.005 ? 'Saldo nol sebelum catatan pertama.' : 'Saldo sebelum catatan pertama pada data yang tersedia (bukan bukti saldo awal akun yang sebenarnya).'; }
+  var lastBalRow = hasBal ? rows.filter(function (d) { return d.bal != null; }).pop() : null;
+  recon.lastBal = lastBalRow ? lastBalRow.bal : null; recon.computedLast = init != null ? init + allPnl : null;
+  recon.diff = recon.lastBal != null && recon.computedLast != null ? recon.lastBal - recon.computedLast : null;
+  var openCosts = 0, openTrades = tr.filter(function (t) { return t.status !== 'closed'; });
+  openTrades.forEach(function (t) { var rest = t.remaining / t.entryVol; openCosts += (t.entryComm + t.entryFee + t.entrySwap) * rest; });
+  return { trades: tr, notes: notes, mode: rc.mode, cash: cash, recon: recon, init: init, initNote: initNote, openCosts: openCosts, matched: matched, hasBal: hasBal, firstT: rows.length ? rows[0].t : null, lastT: rows.length ? rows[rows.length - 1].t : null,
+    currency: acc.currency, dealCount: (acc.deals || []).length, tradeDeals: (acc.deals || []).filter(function (d) { return d.type !== 'cash'; }).length };
+}
+
+function analyze(accounts, cfgIn, range) {
+  var cfg = mergeCfg(cfgIn), bo = cfg.brokerUtcOffset, off = cfg.displayUtcOffset;
+  if (!accounts.length) return { empty: true };
+  var cur = accounts[0].currency || '';
+  if (accounts.some(function (a) { return (a.currency || '') !== cur; })) return { error: 'Akun dengan mata uang berbeda tidak digabung tanpa konversi. Pilih satu akun atau samakan mata uang.' };
+  var preps = accounts.map(function (a) { var p = prepareAccount(a); p.acc = a; return p; }), trades = [], cash = [], notes = [], quality = [];
+  preps.forEach(function (p) {
+    var pre = accounts.length > 1 ? p.acc.id + ':' : '';
+    p.trades.forEach(function (t) {
+      t.acct = p.acc.id; t.acctName = p.acc.name; if (pre) t.id = pre + t.id;
+      if (t.entryT != null) t.entryT -= bo * 3600000; if (t.exitT != null) t.exitT -= bo * 3600000;
+      t.sessionHour = t.entryT != null ? new Date(t.entryT).getUTCHours() : null; trades.push(t);
+    });
+    p.cash.forEach(function (c) { c.acct = p.acc.id; c.acctName = p.acc.name; c.t -= bo * 3600000; cash.push(c); });
+    p.notes.forEach(function (n) { notes.push((accounts.length > 1 ? '[' + p.acc.name + '] ' : '') + n); });
+  });
+  cash.sort(function (a, b) { return a.t - b.t; });
+  var rng = range || {}, lo = rng.from != null ? rng.from : -Infinity, hi = rng.to != null ? rng.to : Infinity;
+  var allClosed = trades.filter(function (t) { return t.status === 'closed'; });
+  var closed = allClosed.filter(function (t) { return t.exitT >= lo && t.exitT <= hi; }), openTr = trades.filter(function (t) { return t.status !== 'closed'; });
+  var cashIn = cash.filter(function (c) { return c.t >= lo && c.t <= hi; });
+  var layers = detectLayering(trades, cfg.layering, cfg.layerExclude, bo);
+  var closedIds = {}; closed.forEach(function (t) { closedIds[t.id] = 1; });
+  var layersIn = layers.filter(function (g) { return g.tradeIds.some(function (i) { return closedIds[i]; }); });
+  // flags
+  closed.forEach(function (t) { t.flags = (t.flags || []).filter(function (f) { return !/^(Layering|Lot|Stop)/.test(f); }); });
+  // cash summary
+  var cs = { deposit: 0, withdrawal: 0, credit: 0, bonus: 0, charge: 0, adjustment: 0, other: 0, nDeposit: 0, nWithdrawal: 0 };
+  cashIn.forEach(function (c) { if (c.kind === 'deposit') { cs.deposit += c.amount; cs.nDeposit++; } else if (c.kind === 'withdrawal') { cs.withdrawal += c.amount; cs.nWithdrawal++; } else cs[c.kind] += c.amount; });
+  cs.netExternal = cs.deposit + cs.withdrawal; // withdrawal stored negative
+  var cashFn = function (t) { var base = preps.reduce(function (a, p) { return a + (p.init || 0); }, 0); cash.forEach(function (c) { if (c.t <= t && (c.kind === 'deposit' || c.kind === 'withdrawal')) base += c.amount; }); return base; };
+  var P = perf(closed), D = drawdown(closed, cashFn);
+  var daily = {}; closed.forEach(function (t) { var k = dayKey(t.exitT, off), d = daily[k] || (daily[k] = { k: k, n: 0, pnl: 0, wins: 0, losses: 0, lots: 0, layers: 0, ids: [], flags: 0 }); d.n++; d.pnl += t.net; if (t.net > 0) d.wins++; else if (t.net < 0) d.losses++; d.lots += t.entryVol; d.ids.push(t.id); if (t.layerId) d.layers++; });
+  var R = riskModule(closed, cfg, daily, layersIn);
+  var Bh = behaviors(closed, cfg, daily);
+  // flags per trade
+  var layerGroupById = {}; layersIn.forEach(function (g) { layerGroupById[g.id] = g; });
+  R.big.forEach(function (t) { t.flags.push('Lot > ' + cfg.risk.lotMultiple + 'x median'); });
+  R.over.forEach(function (t) { t.flags.push('Lot melebihi batas pribadi'); });
+  closed.forEach(function (t) { if (t.layerId) t.flags.push('Layering ' + t.layerId); if (t.stopOut) t.flags.push('Stop-out (komentar broker)'); });
+  Bh.martingale.ids.forEach(function (id) { var t = closed.filter(function (x) { return x.id === id; })[0]; if (t) t.flags.push('Lot naik setelah loss'); });
+  Bh.revenge.ids.forEach(function (id) { var t = closed.filter(function (x) { return x.id === id; })[0]; if (t) t.flags.push('Entry cepat setelah loss'); });
+  Object.keys(daily).forEach(function (k) { daily[k].flags = daily[k].ids.reduce(function (a, id) { var t = closed.filter(function (x) { return x.id === id; })[0]; return a + (t && t.flags.length ? 1 : 0); }, 0); });
+  // worst periods
+  var wk = {}, mo = {}; closed.forEach(function (t) { var w = weekKey(t.exitT, off), m = monthKey(t.exitT, off); wk[w] = (wk[w] || 0) + t.net; mo[m] = (mo[m] || 0) + t.net; });
+  var worst = function (o) { var k = Object.keys(o).sort(function (a, b) { return o[a] - o[b]; })[0]; return k ? { k: k, v: o[k] } : null; };
+  var dayArr = Object.keys(daily).map(function (k) { return { k: k, v: daily[k].pnl }; }).sort(function (a, b) { return a.v - b.v; });
+  var surv = { worstDay: dayArr[0] || null, worstWeek: worst(wk), worstMonth: worst(mo), stopOuts: closed.filter(function (t) { return t.stopOut; }), maxLossStreak: P.maxLossStreak, spanDays: closed.length ? Math.round((Math.max.apply(null, closed.map(function (t) { return t.exitT; })) - Math.min.apply(null, closed.map(function (t) { return t.entryT || t.exitT; }))) / 86400000) : 0 };
+  // conditional
+  var cond = {
+    symbol: groupBy(closed, function (t) { return t.symbol; }), side: groupBy(closed, function (t) { return t.side.toUpperCase(); }),
+    weekday: groupBy(closed, function (t) { return t.entryT == null ? null : (new Date(t.entryT + off * 3600000).getUTCDay() + 6) % 7; }, [0, 1, 2, 3, 4, 5, 6]),
+    hour: groupBy(closed, function (t) { return t.entryT == null ? null : new Date(t.entryT + off * 3600000).getUTCHours(); }, Array.apply(null, Array(24)).map(function (_, i) { return i; })),
+    session: groupBy(closed, function (t) { return t.sessionHour == null ? null : sessionOf(t.sessionHour); }, ['Asia', 'London', 'New York', 'Sepi (21-24 UTC)']),
+    layering: groupBy(closed, function (t) { return t.layerId ? 'Dalam rangkaian layering' : 'Entry tunggal'; }),
+    hold: groupBy(closed, function (t) { return t.holdMin == null ? null : t.holdMin < 5 ? '< 5 menit' : t.holdMin < 30 ? '5-30 menit' : t.holdMin < 120 ? '30-120 menit' : t.holdMin < 1440 ? '2-24 jam' : '> 24 jam'; }, ['< 5 menit', '5-30 menit', '30-120 menit', '2-24 jam', '> 24 jam']),
+    lotSize: (function () { var m = R.medLot; if (m == null) return []; return groupBy(closed, function (t) { return t.entryVol <= m ? 'Lot <= median' : t.entryVol <= m * 2 ? 'Lot 1-2x median' : 'Lot > 2x median'; }, ['Lot <= median', 'Lot 1-2x median', 'Lot > 2x median']); })()
+  };
+  // quality
+  var q = { items: [] };
+  preps.forEach(function (p) {
+    var nm = accounts.length > 1 ? p.acc.name + ': ' : '';
+    if (p.recon.mismatches > 0) q.items.push({ lv: 'Inconsistent', t: nm + p.recon.mismatches + ' baris dengan kolom Balance yang tidak sesuai urutan (balance sebelumnya + P/L baris). Contoh deal: ' + p.recon.mismatchRows.slice(0, 5).join(', ') });
+    else if (p.hasBal) q.items.push({ lv: 'Complete', t: nm + 'Kolom Balance konsisten dengan P/L tiap baris (' + p.recon.rows + ' baris diperiksa).' });
+    else q.items.push({ lv: 'Unavailable', t: nm + 'Kolom Balance tidak ada: rekonsiliasi saldo tidak dapat dilakukan.' });
+    if (!p.cash.length) q.items.push({ lv: 'Partial', t: nm + 'Tidak ada catatan arus kas (deposit/withdrawal) pada data. Total deposit dan saldo awal tidak dapat disimpulkan.' });
+    if (p.mode === 'fifo') q.items.push({ lv: 'Reconstructed', t: nm + 'Trade direkonstruksi dengan alokasi FIFO karena Position ID tidak tersedia.' });
+    if (p.trades.some(function (t) { return t.orphan; })) q.items.push({ lv: 'Partial', t: nm + p.trades.filter(function (t) { return t.orphan; }).length + ' penutupan tanpa deal masuk di data (histori dimulai di tengah posisi). Entry price, durasi, dan layering untuk trade ini tidak tersedia.' });
+    if (p.trades.some(function (t) { return t.status !== 'closed'; })) q.items.push({ lv: 'Partial', t: nm + p.trades.filter(function (t) { return t.status !== 'closed'; }).length + ' posisi masih terbuka/parsial. Floating P/L tidak ada pada laporan deal, sehingga tidak dihitung.' });
+    if (!p.trades.some(function (t) { return t.sl != null; })) q.items.push({ lv: 'Unavailable', t: nm + 'Stop loss/take profit tidak ada pada data. R-multiple dan risiko uang per trade tidak dapat dihitung; volume dipakai sebagai proxy.' });
+    if (p.initNote) q.items.push({ lv: 'Estimated', t: nm + 'Saldo awal dihitung dari kolom Balance baris pertama: ' + p.initNote });
+  });
+  q.items.push({ lv: 'Unavailable', t: 'Equity, floating P/L, margin level, dan riwayat perubahan SL/TP tidak ada pada laporan deal. Drawdown dihitung dari realized P/L saat posisi ditutup, bukan equity intrabar.' });
+  if (bo === 0) q.items.push({ lv: 'Estimated', t: 'Offset zona waktu broker belum diatur (UTC+0). Klasifikasi sesi Asia/London/New York memakai waktu broker apa adanya.' });
+  var first = Math.min.apply(null, preps.map(function (p) { return p.firstT == null ? Infinity : p.firstT; })), last = Math.max.apply(null, preps.map(function (p) { return p.lastT == null ? -Infinity : p.lastT; }));
+  var init = preps.every(function (p) { return p.init != null; }) ? sum(preps, function (p) { return p.init; }) : null;
+  var openCosts = sum(preps, function (p) { return p.openCosts; });
+  var realizedAll = sum(allClosed, function (t) { return t.net; });
+  var recon = { lastBal: preps.every(function (p) { return p.recon.lastBal != null; }) ? sum(preps, function (p) { return p.recon.lastBal; }) : null };
+  var totalPnlAllRows = sum(trades, function (t) { return t.net; });
+  var cap = {
+    init: init, initNote: preps.length === 1 ? preps[0].initNote : null, deposit: cs.deposit, withdrawal: cs.withdrawal, netExternal: cs.netExternal, credit: cs.credit, bonus: cs.bonus, adjustment: cs.adjustment, charge: cs.charge,
+    grossProfit: P.grossProfit, grossLoss: P.grossLoss, comm: P.comm, swap: P.swap, fee: P.fee, costs: P.costs, net: P.net, openCosts: openCosts,
+    balance: recon.lastBal, computedBalance: init != null ? init + sum(cashIn.concat([]), function (c) { return c.amount; }) + P.net + openCosts + sum(trades.filter(function (t) { return t.status !== 'closed'; }), function (t) { return t.profit + t.costs; }) : null,
+    peakCum: D.curve.reduce(function (a, c) { return Math.max(a, c.cum); }, 0), currentDD: D.currentDD, nOpen: openTr.length, openRealized: sum(openTr, function (t) { return t.net; })
+  };
+  var coverage = { first: isFinite(first) ? first - bo * 3600000 : null, last: isFinite(last) ? last - bo * 3600000 : null, nDeals: sum(preps, function (p) { return p.dealCount; }), nTradeDeals: sum(preps, function (p) { return p.tradeDeals; }), nTrades: trades.length, nClosed: allClosed.length, nOpen: openTr.length };
+  return { cfg: cfg, currency: cur, accounts: accounts.map(function (a) { return { id: a.id, name: a.name }; }), trades: closed, allTrades: trades, openTrades: openTr, cash: cashIn, cashAll: cash, cashSummary: cs, cap: cap, perf: P, dd: D,
+    daily: daily, risk: R, behavior: Bh, layers: layersIn, allLayers: layers, surv: surv, cond: cond, quality: q.items, notes: notes, coverage: coverage, range: { from: lo, to: hi }, version: VERSION, recon: preps.map(function (p) { return { name: p.acc.name, r: p.recon }; }) };
+}
+
+/* ---------- period comparison ---------- */
+function compare(accounts, cfg, a, b) { var A = analyze(accounts, cfg, a), B = analyze(accounts, cfg, b); return { A: A, B: B }; }
+
+/* ---------- findings (inputs to the AI report) ---------- */
+function findings(res) {
+  var P = res.perf, cs = res.cashSummary, cap = res.cap, B = res.behavior, R = res.risk, cur = res.currency, out = [], n = P.n, cfg = res.cfg;
+  if (!n) return out;
+  var basis = Math.max((cap.init || 0) + cs.deposit, Math.abs(P.grossLoss), 1);
+  var sev = function (impact, c, strongPattern) { var s = Math.abs(impact || 0) / basis; if (c === 'Rendah') return s >= 0.2 ? 'High' : 'Medium'; if (s >= 0.2) return 'Critical'; if (s >= 0.1 || strongPattern) return 'High'; if (s >= 0.03) return 'Medium'; return 'Low'; };
+  var small = n < cfg.minSample;
+  // 1 expectancy / net result
+  if (P.net < 0 || (P.pf != null && P.pf < 1)) {
+    var c = small ? 'Rendah' : 'Sedang';
+    out.push({ id: 'net', title: 'Hasil trading bersih negatif', sev: sev(P.net, c, true), conf: c, impact: P.net, kind: 'Fakta terverifikasi',
+      facts: [['Net trading result', P.net, 'money'], ['Jumlah trade', n, 'int'], ['Profit factor', P.pf, 'num'], ['Expectancy per trade', P.expectancy, 'money'], ['Winrate', P.winrate, 'pct']],
+      ids: [P.worst && P.worst.id], limit: 'Berdasarkan trade yang ditutup pada periode terpilih. Floating P/L tidak termasuk.', formula: 'Net = jumlah (profit + komisi + swap + fee) seluruh trade tertutup' });
+  }
+  // 2 breakeven winrate
+  if (P.bePct != null && P.winrate != null && P.winrate < P.bePct) {
+    out.push({ id: 'edge', title: 'Winrate di bawah titik impas', sev: small ? 'Medium' : 'High', conf: small ? 'Rendah' : 'Sedang', impact: P.net, kind: 'Pola statistik',
+      facts: [['Winrate', P.winrate, 'pct'], ['Winrate impas pada payoff ini', P.bePct, 'pct'], ['Payoff ratio', P.payoff, 'num'], ['Rata-rata menang', P.avgWin, 'money'], ['Rata-rata kalah', P.avgLoss, 'money']],
+      ids: [], limit: 'Titik impas memakai payoff historis; payoff dan winrate keduanya bisa berubah di sampel lain.', formula: 'Winrate impas = 1 / (1 + payoff ratio)' });
+  }
+  // 3 layering
+  var inL = res.trades.filter(function (t) { return t.layerId; });
+  if (res.layers.length) {
+    var pl = perf(inL), outL = perf(res.trades.filter(function (t) { return !t.layerId; })), worstG = res.layers.slice().sort(function (a, b) { return a.net - b.net; })[0], hc = res.layers.filter(function (g) { return g.level === 'Tinggi'; }).length;
+    var c2 = res.layers.length >= 5 && hc >= res.layers.length / 2 ? 'Sedang' : 'Rendah';
+    out.push({ id: 'layer', title: 'Rangkaian layering menyumbang kerugian terbesar', sev: pl.net < 0 ? sev(pl.net, c2, pl.n / n > 0.3) : 'Low', conf: c2, impact: pl.net, kind: 'Pola statistik',
+      facts: [['Kandidat rangkaian layering', res.layers.length, 'int'], ['Trade di dalam rangkaian', pl.n + ' dari ' + n, 'text'], ['Net P/L di dalam rangkaian', pl.net, 'money'], ['Net P/L entry tunggal', outL.net, 'money'], ['Rangkaian terburuk', worstG.net, 'money'], ['Eksposur lot puncak rangkaian terbesar', R.layerPeak, 'num']],
+      ids: worstG.tradeIds, groupIds: res.layers.map(function (g) { return g.id; }), limit: 'Pengelompokan berbasis aturan (waktu, harga, overlap). TP/SL bersama tidak dapat dinilai bila tidak ada di data. Ini kandidat, bukan klaim niat.', formula: 'Lihat Layering Detection: gap waktu, jarak harga, overlap posisi' });
+  }
+  // 4 martingale-like
+  var m = B.martingale;
+  if (m.sample >= 3 && m.hits > 0 && m.rate >= 0.25) {
+    out.push({ id: 'mart', title: 'Lot cenderung naik setelah loss', sev: sev(m.net, m.confidence, m.rate >= 0.4 && m.sample >= 10), conf: m.confidence, impact: m.net, kind: 'Pola statistik',
+      facts: [['Entry setelah loss', m.sample, 'int'], ['Lot naik >= ' + m.ratio + 'x lot loss sebelumnya', m.hits + ' (' + Math.round(m.rate * 100) + '%)', 'text'], ['Pembanding: setelah win', m.rateAfterWin, 'pct'], ['Net P/L trade yang naik lot', m.net, 'money'], ['Rata-rata lot setelah loss / setelah win', (m.avgLotAfterLoss != null ? m.avgLotAfterLoss.toFixed(2) : '-') + ' / ' + (m.avgLotAfterWin != null ? m.avgLotAfterWin.toFixed(2) : '-'), 'text']],
+      ids: m.ids, limit: 'Pola ukuran lot terhadap trade yang ditutup sebelum entry. Data tidak membuktikan niat atau emosi.', formula: 'Hit jika lot entry >= rasio x lot trade loss terakhir yang sudah ditutup' });
+  }
+  // 5 revenge-like
+  var rv = B.revenge;
+  if (rv.sample >= 3 && rv.hits > 0) {
+    out.push({ id: 'rev', title: 'Entry cepat setelah loss dengan lot sama atau lebih besar', sev: sev(rv.net, rv.confidence, rv.rate >= 0.3 && rv.sample >= 10), conf: rv.confidence, impact: rv.net, kind: 'Pola statistik',
+      facts: [['Entry setelah loss', rv.sample, 'int'], ['Entry dalam ' + rv.windowMin + ' menit dengan lot >= loss sebelumnya', rv.hits + ' (' + Math.round(rv.rate * 100) + '%)', 'text'], ['Net P/L trade tersebut', rv.net, 'money'], ['Rata-rata per trade (pola ini / lainnya)', fm(rv.avgNet, cur) + ' / ' + fm(rv.avgNetOther, cur), 'text']],
+      ids: rv.ids, limit: 'Menyerupai pola revenge trading. Emosi tidak dapat dipastikan dari data transaksi.', formula: 'Entry <= N menit setelah penutupan loss dan lot >= lot loss tersebut' });
+  }
+  // 6 overtrading
+  var ov = B.overtrading;
+  if (ov.enough && ov.flagged.length) {
+    out.push({ id: 'over', title: 'Hari dengan jumlah trade jauh di atas kebiasaan', sev: sev(ov.netFlagged, 'Sedang', ov.flagged.length >= 2 && ov.avgPnlFlagged < 0), conf: ov.flagged.length >= 3 ? 'Sedang' : 'Rendah', impact: ov.netFlagged, kind: 'Pola statistik',
+      facts: [['Hari aktif', ov.days, 'int'], ['Median trade per hari', ov.median, 'num'], ['Ambang hari ekstrem', ov.threshold, 'num'], ['Hari melewati ambang', ov.flagged.length, 'int'], ['Rata-rata P/L hari ekstrem / hari normal', fm(ov.avgPnlFlagged, cur) + ' / ' + fm(ov.avgPnlNormal, cur), 'text'], ['Total P/L hari ekstrem', ov.netFlagged, 'money']],
+      ids: [], days: ov.flagged.map(function (d) { return d.k; }), limit: 'Ambang = max(rata-rata + ' + cfg.behavior.overtradeSd + ' simpangan baku, 2x median). Hari ekstrem sedikit, jadi kesimpulan lemah.', formula: 'Ambang harian dari distribusi jumlah trade per hari' });
+  }
+  // 7 risk violations
+  var vio = R.big.length + R.over.length;
+  if (R.big.length >= 1) {
+    var bn = sum(R.big, function (t) { return t.net; });
+    out.push({ id: 'risk', title: 'Ukuran lot melonjak jauh di atas median', sev: sev(bn, 'Sedang', R.big.length >= 3), conf: R.big.length >= 5 ? 'Sedang' : 'Rendah', impact: bn, kind: 'Fakta terverifikasi',
+      facts: [['Median lot', R.medLot, 'num'], ['Lot maksimum', R.maxLot, 'num'], ['Trade dengan lot > ' + cfg.risk.lotMultiple + 'x median', R.big.length, 'int'], ['Net P/L trade tersebut', bn, 'money'], ['Eksposur lot puncak (semua posisi terbuka bersamaan)', R.peak.peak, 'num']],
+      ids: R.big.map(function (t) { return t.id; }), limit: 'Tanpa SL pada data, risiko uang tidak dapat dihitung. Lot dipakai sebagai proxy aktivitas.', formula: 'Lot > pengali x median lot seluruh trade' });
+  }
+  if (R.dailyLossDays && R.dailyLossDays.length) {
+    out.push({ id: 'dloss', title: 'Batas rugi harian dilanggar', sev: 'High', conf: 'Tinggi', impact: sum(R.dailyLossDays, function (k) { return res.daily[k].pnl; }), kind: 'Fakta terverifikasi',
+      facts: [['Batas rugi harian (pengaturan Anda)', cfg.risk.dailyLossLimit, 'money'], ['Hari melanggar', R.dailyLossDays.length, 'int']], ids: [], days: R.dailyLossDays, limit: 'Batas berasal dari pengaturan Anda sendiri.', formula: 'P/L harian < -batas' });
+  }
+  // 8 capital vs losses
+  if (cs.nDeposit > 1 && P.net < 0) {
+    out.push({ id: 'cap', title: 'Modal ditambah sementara hasil trading negatif', sev: 'Medium', conf: 'Tinggi', impact: P.net, kind: 'Fakta terverifikasi',
+      facts: [['Jumlah deposit', cs.nDeposit, 'int'], ['Total deposit', cs.deposit, 'money'], ['Total withdrawal', cs.withdrawal, 'money'], ['Net trading result', P.net, 'money']], ids: [], limit: 'Deposit bukan profit dan withdrawal bukan loss; keduanya dipisahkan dari hasil trading.', formula: 'Net external cash flow = deposit - withdrawal' });
+  }
+  // 9 concentration (worst symbol / hour)
+  var ws = res.cond.symbol.filter(function (s) { return s.n >= cfg.behavior.minSample && s.net < 0; }).sort(function (a, b) { return a.net - b.net; })[0];
+  if (ws) out.push({ id: 'sym', title: 'Symbol dengan kerugian terbesar: ' + ws.key, sev: sev(ws.net, 'Sedang', false), conf: ws.n >= 20 ? 'Sedang' : 'Rendah', impact: ws.net, kind: 'Pola statistik',
+    facts: [['Symbol', ws.key, 'text'], ['Trade', ws.n, 'int'], ['Winrate', ws.winrate, 'pct'], ['Net P/L', ws.net, 'money'], ['Profit factor', ws.pf, 'num']], ids: res.trades.filter(function (t) { return t.symbol === ws.key; }).map(function (t) { return t.id; }), limit: 'Satu symbol bisa dipengaruhi gaya entry (layering, lot) dan bukan hanya instrumennya.', formula: 'Agregasi net P/L per symbol' });
+  // 10 tail
+  if (P.worst && P.avgWin && Math.abs(P.worst.net) > 3 * P.avgWin && n >= 8) {
+    out.push({ id: 'tail', title: 'Satu loss menghapus banyak profit', sev: sev(P.worst.net, 'Sedang', true), conf: 'Tinggi', impact: P.worst.net, kind: 'Fakta terverifikasi',
+      facts: [['Loss terbesar', P.worst.net, 'money'], ['Rata-rata menang', P.avgWin, 'money'], ['Setara jumlah trade menang rata-rata', Math.abs(P.worst.net) / P.avgWin, 'num']], ids: [P.worst.id], limit: 'Satu observasi; tidak menunjukkan pola berulang sendirian.', formula: '|loss terbesar| / rata-rata menang' });
+  }
+  // 11 costs
+  if (P.grossProfit > 0 && Math.abs(P.costs) / P.grossProfit > 0.1) {
+    out.push({ id: 'cost', title: 'Biaya trading memakan porsi besar dari profit kotor', sev: 'Medium', conf: 'Tinggi', impact: P.costs, kind: 'Fakta terverifikasi',
+      facts: [['Komisi', P.comm, 'money'], ['Swap', P.swap, 'money'], ['Fee', P.fee, 'money'], ['Biaya / profit kotor', Math.abs(P.costs) / P.grossProfit, 'pct']], ids: [], limit: '', formula: 'Biaya = komisi + swap + fee' });
+  }
+  // survival
+  if (res.surv.stopOuts.length) {
+    out.push({ id: 'so', title: 'Penutupan stop-out tercatat pada komentar broker', sev: 'Critical', conf: 'Tinggi', impact: sum(res.surv.stopOuts, function (t) { return t.net; }), kind: 'Fakta terverifikasi',
+      facts: [['Trade dengan penanda stop-out', res.surv.stopOuts.length, 'int'], ['Net P/L trade tersebut', sum(res.surv.stopOuts, function (t) { return t.net; }), 'money']], ids: res.surv.stopOuts.map(function (t) { return t.id; }), limit: 'Berdasarkan teks komentar deal dari broker ("so:" atau "stop out"). Tidak ada data margin level.', formula: 'Komentar deal mengandung penanda stop-out' });
+  }
+  var rank = { Critical: 4, High: 3, Medium: 2, Low: 1 };
+  out.forEach(function (f) { f.ids = (f.ids || []).filter(Boolean); });
+  out.sort(function (a, b) { return rank[b.sev] - rank[a.sev] || Math.abs(b.impact || 0) - Math.abs(a.impact || 0); });
+  return out;
+}
+function fm(v, cur) { return v == null ? 'tidak tersedia' : (v < 0 ? '-' : '') + Math.abs(v).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + (cur ? ' ' + cur : ''); }
+
+/* ---------- demo data (clearly synthetic) ---------- */
+function mulberry(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function demoDeals() {
+  var rnd = mulberry(20260101), deals = [], id = 1000, bal = 0, start = Date.UTC(2026, 8, 1), t0 = start;
+  function pad(n) { return ('0' + n).slice(-2); }
+  function add(o) { o.id = String(++id); o.bal = null; var pnl = (o.profit || 0) + (o.comm || 0) + (o.swap || 0) + (o.fee || 0); bal += pnl; o.bal = Math.round(bal * 100) / 100; o.order = String(id + 5000); o.fee = o.fee || 0; o.row = id; deals.push(o); }
+  function cash(t, amt, c) { add({ t: t, symbol: '', type: 'cash', rawType: 'balance', dir: null, vol: 0, price: null, pid: null, comm: 0, swap: 0, profit: amt, comment: c }); }
+  cash(start + 3600000, 6000, 'Deposit'); var lastLoss = null, lotBase = 0.05, day = 0, cur = 2650, sym, depDone = 0;
+  for (var d = 0; d < 68; d++) {
+    var dt = start + d * 86400000, dow = new Date(dt).getUTCDay(); if (dow === 0 || dow === 6) continue; day++;
+    if (day === 12 && !depDone) { cash(dt + 3600000 * 6, 1500, 'Deposit'); depDone = 1; }
+    if (day === 22) cash(dt + 3600000 * 6, -800, 'Withdrawal'); if (day === 30) cash(dt + 3600000 * 6, 2000, 'Deposit');
+    var nSet = (day === 17 || day === 33) ? 9 : 1 + Math.floor(rnd() * 2), tm = dt + 3600000 * (8 + Math.floor(rnd() * 3));
+    for (var s = 0; s < nSet; s++) {
+      sym = rnd() < 0.7 ? 'XAUUSD' : 'EURUSD'; var isX = sym === 'XAUUSD', side = rnd() < 0.5 ? 'buy' : 'sell', sign = side === 'buy' ? 1 : -1, contract = isX ? 100 : 100000;
+      cur += (rnd() - 0.5) * 12; var base = isX ? cur : 1.08 + (rnd() - 0.5) * 0.02, step = isX ? 1.5 : 0.0008;
+      var lot = lotBase, quick = false;
+      if (lastLoss && rnd() < 0.55) { lot = Math.min(0.4, Math.round(lastLoss * (1.5 + rnd()) * 100) / 100); quick = true; tm += (3 + Math.floor(rnd() * 10)) * 60000; } else { tm += (25 + Math.floor(rnd() * 90)) * 60000; }
+      var layered = rnd() < 0.3, entries = layered ? 3 + Math.floor(rnd() * 3) : 1, lots = [], px = [], et = [], tt = tm, ps = base;
+      for (var e = 0; e < entries; e++) { lots.push(layered ? Math.round(lotBase * (e === 0 ? 1 : e + 1) * 100) / 100 : lot); px.push(Math.round(ps * 100000) / 100000); et.push(tt); ps -= sign * step * (0.6 + rnd()); tt += (2 + Math.floor(rnd() * 5)) * 60000; }
+      var hold = (layered ? 35 : 12) + Math.floor(rnd() * 70), exT = tt + hold * 60000, win = rnd() < (layered ? 0.45 : 0.52), mvAvg;
+      var wsum = 0, psum = 0; lots.forEach(function (l, i) { wsum += l; psum += l * px[i]; }); var avg = psum / wsum;
+      mvAvg = win ? (isX ? 3 + rnd() * 6 : 0.0004 + rnd() * 0.0008) : -(isX ? (layered ? 8 + rnd() * 18 : 5 + rnd() * 10) : (layered ? 0.0012 + rnd() * 0.002 : 0.0006 + rnd() * 0.0012));
+      var exPx = Math.round((avg + sign * mvAvg) * 100000) / 100000, total = 0, pid = 'P' + (id + 1);
+      var inIds = [];
+      lots.forEach(function (l, i) { add({ t: et[i], symbol: sym, type: side, rawType: side, dir: 'in', vol: l, price: px[i], pid: null, comm: -Math.round(l * 3.5 * 100) / 100, swap: 0, profit: 0, comment: '' }); });
+      var pnlTrade = 0;
+      lots.forEach(function (l, i) { var pr = Math.round(sign * (exPx - px[i]) * l * contract * 100) / 100, sw = (rnd() < 0.08 && hold > 60) ? -Math.round(l * 4 * 100) / 100 : 0; pnlTrade += pr + sw - l * 3.5; add({ t: exT + i * 20000, symbol: sym, type: side === 'buy' ? 'sell' : 'buy', rawType: side === 'buy' ? 'sell' : 'buy', dir: 'out', vol: l, price: exPx, pid: null, comm: -Math.round(l * 3.5 * 100) / 100, swap: sw, profit: pr, comment: '' }); });
+      tm = exT + lots.length * 20000;
+      if (pnlTrade < 0) lastLoss = Math.max.apply(null, lots); else lastLoss = null;
+      if (win) lotBase = 0.05;
+    }
+  }
+  // final stop-out sequence on a leveraged layering cluster
+  var so = start + 70 * 86400000 + 3600000 * 10; var soLots = [0.2, 0.3, 0.4, 0.5], pxs = [2688, 2685.5, 2682.8, 2680.1], sIds = [];
+  soLots.forEach(function (l, i) { add({ t: so + i * 180000, symbol: 'XAUUSD', type: 'buy', rawType: 'buy', dir: 'in', vol: l, price: pxs[i], pid: null, comm: -Math.round(l * 3.5 * 100) / 100, swap: 0, profit: 0, comment: '' }); });
+  var exs = 2662.4; soLots.forEach(function (l, i) { add({ t: so + 3600000 * 2 + i * 1000, symbol: 'XAUUSD', type: 'sell', rawType: 'sell', dir: 'out', vol: l, price: exs, pid: null, comm: -Math.round(l * 3.5 * 100) / 100, swap: 0, profit: Math.round((exs - pxs[i]) * l * 100 * 100) / 100, comment: 'so: 19.84% / 1450.10 / 7308.40' }); });
+  deals.sort(dealCmp); var b2 = 0; deals.forEach(function (x) { b2 += (x.profit || 0) + (x.comm || 0) + (x.swap || 0) + (x.fee || 0); x.bal = Math.round(b2 * 100) / 100; });
+  return deals;
+}
+
+root.WHY = { VERSION: VERSION, DEF_CFG: DEF_CFG, mergeCfg: mergeCfg, parseSource: parseSource, parseNum: parseNum, parseTime: parseTime, parseDelimited: parseDelimited, reconstruct: reconstruct, buildCash: buildCash, detectLayering: detectLayering,
+  perf: perf, drawdown: drawdown, analyze: analyze, compare: compare, findings: findings, demoDeals: demoDeals, dayKey: dayKey, fm: fm, wilson: wilson, median: median, dealCmp: dealCmp, prepareAccount: prepareAccount };
+if (typeof module !== 'undefined' && module.exports) module.exports = root.WHY;
+})(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this));
+</script><script>
+/* WHY — UI layer. All numbers come from WHY engine (engine.js). Data lives in this browser only. */
+(function () {
+'use strict';
+var W = window.WHY, LS = 'why.v1', THEME = 'why.theme';
+var $ = function (s, r) { return (r || document).querySelector(s); };
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+/* ---------------- state ---------------- */
+var S = { v: 1, profile: { name: '' }, cfg: clone(W.DEF_CFG), accounts: [], active: 'all', preset: 'all', from: '', to: '', log: [], tone: 'tegas' };
+var V = { dj: 'modal', calMonth: null, calDay: null, tf: { sym: '', side: '', res: '', flag: '', q: '', ids: null, idsLabel: '' }, sort: { k: 'exitT', d: -1 }, page: 0, drawer: null, imp: null, cmp: { preset: 'month' }, openLim: {}, toast: '' };
+var mem = null;
+function load() { try { var raw = localStorage.getItem(LS); if (raw) { var o = JSON.parse(raw); if (o && o.v === 1) { S = Object.assign(S, o); S.cfg = W.mergeCfg(S.cfg); } } } catch (e) { } }
+function save() { try { localStorage.setItem(LS, JSON.stringify(S)); return true; } catch (e) { toast('Penyimpanan browser penuh atau diblokir. Data hanya ada selama tab ini terbuka.'); return false; } }
+function logA(t) { S.log.unshift({ t: Date.now(), m: t }); S.log = S.log.slice(0, 80); }
+var toastT;
+function toast(m) { V.toast = m; var el = $('#toast'); if (el) { el.textContent = m; el.hidden = false; } clearTimeout(toastT); toastT = setTimeout(function () { var e = $('#toast'); if (e) e.hidden = true; }, 3800); }
+
+/* ---------------- formatting ---------------- */
+function nf(v, d) { if (d == null) d = 2; return v == null || !isFinite(v) ? '–' : v.toLocaleString('id-ID', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+function money(v, c) { return v == null || !isFinite(v) ? 'tidak tersedia' : (v > 0 ? '+' : v < 0 ? '−' : '') + nf(Math.abs(v)) + (c ? ' ' + c : ''); }
+function plain(v, c) { return v == null || !isFinite(v) ? 'tidak tersedia' : (v < 0 ? '−' : '') + nf(Math.abs(v)) + (c ? ' ' + c : ''); }
+function cls(v) { return v > 0 ? 'pos' : v < 0 ? 'neg' : ''; }
+function pct(v, d) { return v == null ? '–' : nf(v * 100, d == null ? 1 : d) + '%'; }
+function pf(v) { return v == null ? '–' : v === Infinity ? '∞' : nf(v, 2); }
+function dur(m) { if (m == null) return '–'; if (m < 1) return '< 1 mnt'; if (m < 60) return Math.round(m) + ' mnt'; if (m < 1440) return Math.floor(m / 60) + ' j ' + Math.round(m % 60) + ' m'; return Math.floor(m / 1440) + ' h ' + Math.round((m % 1440) / 60) + ' j'; }
+function off() { return +S.cfg.displayUtcOffset || 0; }
+function fT(ms, short) { if (ms == null || !isFinite(ms)) return '–'; var s = new Date(ms + off() * 3600000).toISOString(); return short ? s.slice(0, 10) : s.slice(0, 16).replace('T', ' '); }
+function fD(k) { return k; }
+function lot(v) { return v == null ? '–' : nf(v, 2); }
+function px(v) { return v == null ? '–' : nf(v, v > 500 ? 2 : 5); }
+function sevTag(s) { var m = { Critical: ['crit', 'KRITIS'], High: ['high', 'TINGGI'], Medium: ['med', 'SEDANG'], Low: ['low', 'RENDAH'] }[s] || ['mu', s]; return '<span class="tag ' + m[0] + '">' + m[1] + '</span>'; }
+function lvTag(l) { var c = { Complete: 'good', Partial: 'warn', Estimated: 'warn', Unavailable: 'mu', Inconsistent: 'bad', Reconstructed: 'info' }[l] || 'mu'; return '<span class="tag ' + c + '">' + esc(l) + '</span>'; }
+function confTag(c) { return '<span class="tag ' + (c === 'Tinggi' ? 'good' : c === 'Sedang' ? 'warn' : 'mu') + '">Keyakinan ' + esc(c) + '</span>'; }
+var IC = {
+  home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 8h8M8 12h8"/></svg>',
+  ai: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  gear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>',
+  info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>',
+  moon: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg>'
+};
+
+/* ---------------- analysis cache ---------------- */
+var cache = {};
+function selAccounts() { return S.active === 'all' ? S.accounts : S.accounts.filter(function (a) { return a.id === S.active; }); }
+function accSig(list) { return list.map(function (a) { return a.id + ':' + (a.updatedAt || 0) + ':' + a.deals.length; }).join(','); }
+function runA(list, range) { var key = accSig(list) + '|' + JSON.stringify(S.cfg) + '|' + JSON.stringify(range || null); if (!cache[key]) { if (Object.keys(cache).length > 30) cache = {}; var t0 = Date.now(); cache[key] = W.analyze(list, S.cfg, range); cache[key].ms = Date.now() - t0; } return cache[key]; }
+function range() {
+  var base = runA(selAccounts(), null); if (!base || base.empty || base.error) return null;
+  var o = off() * 3600000, p = S.preset, last = base.coverage.last, first = base.coverage.first;
+  function dayStart(k) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(k); return m ? Date.UTC(+m[1], m[2] - 1, +m[3]) - o : null; }
+  if (p === 'all' || last == null) return null;
+  var d0 = Date.parse(W.dayKey(last, off()) + 'T00:00:00Z') - o;
+  if (p === '30d') return { from: d0 - 29 * 86400000, to: d0 + 86400000 - 1 };
+  if (p === 'month' || p === 'prev') { var dd = new Date(last + off() * 3600000), y = dd.getUTCFullYear(), m = dd.getUTCMonth() - (p === 'prev' ? 1 : 0); return { from: Date.UTC(y, m, 1) - o, to: Date.UTC(y, m + 1, 1) - o - 1 }; }
+  if (p === 'custom') { var a = dayStart(S.from), b = dayStart(S.to); return { from: a != null ? a : undefined, to: b != null ? b + 86400000 - 1 : undefined }; }
+  return null;
+}
+function A() { var list = selAccounts(); if (!list.length) return { empty: true }; return runA(list, range()); }
+
+/* ---------------- charts (SVG, sized to container) ---------------- */
+var CW = 640;
+function ticks(lo, hi, n) { if (hi - lo < 1e-9) { hi = lo + 1; } var span = hi - lo, s0 = span / n, mag = Math.pow(10, Math.floor(Math.log10(s0))), nm = s0 / mag, st = (nm < 1.5 ? 1 : nm < 3 ? 2 : nm < 7 ? 5 : 10) * mag, a = Math.floor(lo / st) * st, b = Math.ceil(hi / st) * st, t = []; for (var v = a; v <= b + st / 2; v += st) t.push(+v.toFixed(8)); return t; }
+function short(v) { var a = Math.abs(v); return (v < 0 ? '−' : '') + (a >= 1e6 ? nf(a / 1e6, 1) + 'jt' : a >= 1e4 ? nf(a / 1e3, 0) + 'rb' : a >= 1e3 ? nf(a / 1e3, 1) + 'rb' : nf(a, a < 10 && a % 1 ? 1 : 0)); }
+function lineChart(pts, o) {
+  o = o || {}; var w = Math.max(280, CW - 4), h = o.h || 220, m = { l: 52, r: 18, t: 14, b: 26 }, iw = w - m.l - m.r, ih = h - m.t - m.b;
+  if (!pts.length) return '<div class="well mu">Belum ada data untuk digambar.</div>';
+  var ys = pts.map(function (p) { return p.y; }), lo = Math.min(0, Math.min.apply(null, ys)), hi = Math.max(0, Math.max.apply(null, ys)), tk = ticks(lo, hi, 4); lo = tk[0]; hi = tk[tk.length - 1];
+  var t0 = pts[0].t, t1 = pts[pts.length - 1].t, sx = function (t) { return m.l + (t1 === t0 ? iw / 2 : (t - t0) / (t1 - t0) * iw); }, sy = function (y) { return m.t + (hi - y) / (hi - lo) * ih; };
+  var col = o.color || 'var(--ac)', s = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '" role="img" aria-label="' + esc(o.label || 'grafik') + '">';
+  tk.forEach(function (v) { s += '<line x1="' + m.l + '" x2="' + (w - m.r) + '" y1="' + sy(v) + '" y2="' + sy(v) + '" stroke="var(--lo)" stroke-opacity="' + (v === 0 ? .9 : .35) + '" stroke-dasharray="' + (v === 0 ? '0' : '3 4') + '"/><text x="' + (m.l - 8) + '" y="' + (sy(v) + 4) + '" text-anchor="end" font-size="11" font-family="JetBrains Mono,monospace" fill="var(--mu)">' + short(v) + '</text>'; });
+  var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + sx(p.t).toFixed(1) + ' ' + sy(p.y).toFixed(1); }).join('');
+  if (o.area !== false) s += '<path d="' + d + 'L' + sx(t1).toFixed(1) + ' ' + sy(0) + 'L' + sx(t0).toFixed(1) + ' ' + sy(0) + 'Z" fill="' + col + '" fill-opacity=".14"/>';
+  s += '<path d="' + d + '" fill="none" stroke="' + col + '" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>';
+  var lp = pts[pts.length - 1]; s += '<circle cx="' + sx(lp.t) + '" cy="' + sy(lp.y) + '" r="5" fill="' + col + '" stroke="var(--bg)" stroke-width="2"/>';
+  var ex = pts.reduce(function (a, p) { return (o.worst ? p.y < a.y : p.y > a.y) ? p : a; }, pts[0]); if (o.mark && ex !== lp) s += '<circle cx="' + sx(ex.t) + '" cy="' + sy(ex.y) + '" r="4" fill="var(--bg)" stroke="' + col + '" stroke-width="2"/>';
+  for (var i = 0; i < 4; i++) { var tt = t0 + (t1 - t0) * i / 3; s += '<text x="' + (sx(tt) + (i === 0 ? 0 : i === 3 ? 0 : 0)) + '" y="' + (h - 6) + '" text-anchor="' + (i === 0 ? 'start' : i === 3 ? 'end' : 'middle') + '" font-size="11" fill="var(--mu)" font-family="JetBrains Mono,monospace">' + fT(tt, true).slice(2) + '</text>'; }
+  return '<div class="svgw">' + s + '</svg></div>';
+}
+function barChart(items, o) {
+  o = o || {}; var w = Math.max(280, CW - 4), h = o.h || 200, m = { l: 48, r: 10, t: 14, b: 30 }, iw = w - m.l - m.r, ih = h - m.t - m.b;
+  if (!items.length) return '<div class="well mu">Belum ada data.</div>';
+  var vs = items.map(function (i) { return i.v; }), lo = Math.min(0, Math.min.apply(null, vs)), hi = Math.max(0, Math.max.apply(null, vs)), tk = ticks(lo, hi, 4); lo = tk[0]; hi = tk[tk.length - 1];
+  var sy = function (y) { return m.t + (hi - y) / (hi - lo) * ih; }, bw = iw / items.length, s = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '" role="img" aria-label="' + esc(o.label || 'grafik batang') + '">';
+  tk.forEach(function (v) { s += '<line x1="' + m.l + '" x2="' + (w - m.r) + '" y1="' + sy(v) + '" y2="' + sy(v) + '" stroke="var(--lo)" stroke-opacity="' + (v === 0 ? .9 : .35) + '" stroke-dasharray="' + (v === 0 ? '0' : '3 4') + '"/><text x="' + (m.l - 7) + '" y="' + (sy(v) + 4) + '" text-anchor="end" font-size="11" font-family="JetBrains Mono,monospace" fill="var(--mu)">' + short(v) + '</text>'; });
+  var every = Math.ceil(items.length / Math.max(2, Math.floor(iw / 44)));
+  items.forEach(function (it, i) {
+    var x = m.l + i * bw + bw * .15, ww = Math.max(1.5, bw * .7), y0 = sy(0), y1 = sy(it.v), c = it.c || (it.v >= 0 ? 'var(--good)' : 'var(--bad)');
+    s += '<rect x="' + x.toFixed(1) + '" y="' + Math.min(y0, y1).toFixed(1) + '" width="' + ww.toFixed(1) + '" height="' + Math.max(1, Math.abs(y1 - y0)).toFixed(1) + '" rx="' + Math.min(4, ww / 2) + '" fill="' + c + '"><title>' + esc(it.l + ': ' + (o.fmt ? o.fmt(it.v) : nf(it.v))) + (it.n != null ? ' (n=' + it.n + ')' : '') + '</title></rect>';
+    if (i % every === 0) s += '<text x="' + (x + ww / 2).toFixed(1) + '" y="' + (h - 9) + '" text-anchor="middle" font-size="10.5" fill="var(--mu)" font-family="JetBrains Mono,monospace">' + esc(it.l) + '</text>';
+  });
+  if (o.line != null) { s += '<line x1="' + m.l + '" x2="' + (w - m.r) + '" y1="' + sy(o.line) + '" y2="' + sy(o.line) + '" stroke="var(--warn)" stroke-width="1.6" stroke-dasharray="6 4"/><text x="' + (w - m.r) + '" y="' + (sy(o.line) - 5) + '" text-anchor="end" font-size="11" fill="var(--warn)">' + esc(o.lineLabel || '') + '</text>'; }
+  return '<div class="svgw">' + s + '</svg></div>';
+}
+function hist(nets, bins) {
+  if (nets.length < 3) return '<div class="well mu">Butuh minimal 3 trade untuk distribusi.</div>';
+  var lo = Math.min.apply(null, nets), hi = Math.max.apply(null, nets), k = bins || 14, st = (hi - lo) / k || 1, c = Array.apply(null, Array(k)).map(function () { return 0; });
+  nets.forEach(function (v) { c[Math.min(k - 1, Math.floor((v - lo) / st))]++; });
+  return barChart(c.map(function (n, i) { var mid = lo + st * (i + .5); return { l: short(mid), v: n, n: n, c: mid >= 0 ? 'var(--good)' : 'var(--bad)' }; }), { h: 190, fmt: function (v) { return v + ' trade'; }, label: 'Distribusi net P/L per trade' });
+}
+
+/* ---------------- shared bits ---------------- */
+function kpi(l, v, s, c, na) { return '<div class="kpi' + (na ? ' na' : '') + '"><span class="l">' + esc(l) + '</span><span class="v ' + (c || '') + '">' + v + '</span>' + (s ? '<span class="s">' + s + '</span>' : '') + '</div>'; }
+function fact(k, v) { return '<div class="fact"><span>' + esc(k) + '</span><b>' + v + '</b></div>'; }
+function sec(title, body, right) { return '<section class="card stack"><div class="row sp"><h3>' + esc(title) + '</h3>' + (right || '') + '</div>' + body + '</section>'; }
+function tbl(head, rows, o) { o = o || {}; return '<div class="tw"><table><thead><tr>' + head.map(function (h, i) { var al = o.r && o.r.indexOf(i) >= 0 ? ' r' : ''; return '<th class="' + al.trim() + '"' + (o.sort && o.sort[i] ? ' data-a="sort" data-k="' + o.sort[i] + '"' : '') + '>' + h + '</th>'; }).join('') + '</tr></thead><tbody>' + (rows.length ? rows.join('') : '<tr><td colspan="' + head.length + '" class="mu wrap">Tidak ada data.</td></tr>') + '</tbody></table></div>'; }
+function warnSmall(n, min) { return n < min ? ' <span class="tag warn" title="Sampel kecil, jangan menarik kesimpulan">n=' + n + ' kecil</span>' : ''; }
+function isDemoSel() { return selAccounts().some(function (a) { return a.isDemo; }); }
+function demoBanner() { return isDemoSel() ? '<div class="banner demo">' + IC.info + '<span>DATA CONTOH SIMULASI. Angka di bawah dihitung dari data buatan untuk memperagakan fitur. Ini bukan akun trading nyata.</span></div>' : ''; }
+function noData() { return '<section class="card empty"><div class="big">?</div><h3>Belum ada akun atau data</h3><p class="mu" style="max-width:46ch">WHY menghitung semuanya dari riwayat akun Anda. Impor laporan Deals atau Positions dari MetaTrader 5 (CSV atau HTML), atau lihat dulu cara kerjanya dengan data contoh simulasi.</p><div class="row" style="justify-content:center"><button class="btn solid" data-a="imp-open">Impor laporan MT5</button><button class="btn" data-a="demo">Muat data contoh (simulasi)</button></div></section>'; }
+function ctxBar(res) {
+  var opts = '<option value="all"' + (S.active === 'all' ? ' selected' : '') + '>Semua akun (gabungan)</option>' + S.accounts.map(function (a) { return '<option value="' + a.id + '"' + (S.active === a.id ? ' selected' : '') + '>' + esc(a.name) + ' (' + esc(a.currency) + ')</option>'; }).join('');
+  var pr = [['all', 'Seluruh histori'], ['30d', '30 hari terakhir data'], ['month', 'Bulan terakhir data'], ['prev', 'Bulan sebelumnya'], ['custom', 'Pilih tanggal']].map(function (p) { return '<option value="' + p[0] + '"' + (S.preset === p[0] ? ' selected' : '') + '>' + p[1] + '</option>'; }).join('');
+  return '<div class="card"><div class="form"><label class="f" for="sel-acc">Akun<select id="sel-acc" data-ch="acc">' + opts + '</select></label><label class="f" for="sel-per">Periode (berdasarkan waktu tutup)<select id="sel-per" data-ch="preset">' + pr + '</select></label>' +
+    (S.preset === 'custom' ? '<label class="f" for="d-from">Dari<input type="date" id="d-from" data-ch="from" value="' + esc(S.from) + '"></label><label class="f" for="d-to">Sampai<input type="date" id="d-to" data-ch="to" value="' + esc(S.to) + '"></label>' : '') + '</div>' +
+    (res && res.coverage && res.coverage.first != null ? '<p class="hint" style="margin-top:12px">Cakupan data: ' + fT(res.coverage.first, true) + ' sampai ' + fT(res.coverage.last, true) + ' · zona waktu tampilan UTC' + (off() >= 0 ? '+' : '') + off() + (S.cfg.brokerUtcOffset === 0 ? ' · offset broker belum diatur (Settings)' : '') + '</p>' : '') + '</div>';
+}
+
+/* ---------------- BERANDA ---------------- */
+function pageHome() {
+  var h = '<div class="topbar"><h2>Beranda</h2><div class="row"><button class="btn solid" data-a="imp-open">Impor / perbarui data</button></div></div>';
+  if (!S.accounts.length) return h + noData();
+  var tot = runA(S.accounts.filter(function (a) { return true; }), null), sel = A();
+  var cards = S.accounts.map(function (a) {
+    var r = runA([a], null), ok = r && !r.error && !r.empty, cov = ok ? r.coverage : null, rec = ok ? r.quality.filter(function (q) { return /Balance/.test(q.t); })[0] : null;
+    var age = a.updatedAt ? Math.floor((Date.now() - a.updatedAt) / 86400000) : null;
+    return '<div class="card stack"><div class="row sp"><h3>' + esc(a.name) + '</h3>' + (a.isDemo ? '<span class="tag warn">SIMULASI</span>' : '<span class="tag info">DATA DIIMPOR</span>') + '</div>' +
+      '<dl class="dl"><dt>Platform</dt><dd>' + esc(a.platform) + (a.broker ? ' · ' + esc(a.broker) : '') + '</dd><dt>Mata uang</dt><dd>' + esc(a.currency) + '</dd><dt>Sumber</dt><dd>' + (a.isDemo ? 'Generator contoh' : 'Berkas laporan') + '</dd>' +
+      '<dt>Cakupan histori</dt><dd>' + (cov && cov.first != null ? fT(cov.first, true) + ' → ' + fT(cov.last, true) : 'kosong') + '</dd><dt>Deal / trade</dt><dd>' + (cov ? cov.nDeals + ' / ' + cov.nTrades : '0') + '</dd>' +
+      '<dt>Pembaruan terakhir</dt><dd>' + fT(a.updatedAt + off() * 0, false).replace(/^/, '') + '</dd><dt>Rekonsiliasi saldo</dt><dd>' + (rec ? lvTag(rec.lv) : lvTag('Unavailable')) + '</dd></dl>' +
+      (age != null && age > 7 ? '<div class="banner">' + IC.info + '<span>Data terakhir diperbarui ' + age + ' hari lalu. Impor laporan terbaru untuk memperbarui.</span></div>' : '') +
+      '<div class="row"><button class="btn sm" data-a="imp-open" data-id="' + a.id + '">Perbarui data</button><button class="btn sm" data-a="goto-acc" data-id="' + a.id + '">Buka Deep Jurnal</button></div></div>';
+  }).join('');
+  var sum = '';
+  if (sel && !sel.error && !sel.empty) {
+    var P = sel.perf, c = sel.currency;
+    sum = '<section class="card stack"><div class="row sp"><h3>Ringkasan singkat</h3><span class="hint">' + (S.active === 'all' ? 'Semua akun' : esc(sel.accounts[0].name)) + ' · ' + (S.preset === 'all' ? 'seluruh histori' : 'periode terpilih') + '</span></div><div class="grid g4">' +
+      kpi('Net trading result', money(P.net, c), 'setelah komisi, swap, fee', cls(P.net)) + kpi('Trade tertutup', nf(P.n, 0), P.n < sel.cfg.minSample ? 'sampel kecil' : '') + kpi('Winrate', pct(P.winrate), P.winCI ? 'CI 95%: ' + pct(P.winCI[0], 0) + '–' + pct(P.winCI[1], 0) : '') + kpi('Maks. drawdown', plain(sel.dd.maxDD, c), 'realized, dari puncak ke lembah') + '</div></section>';
+  } else if (sel && sel.error) sum = '<section class="card"><div class="banner">' + IC.info + '<span>' + esc(sel.error) + '</span></div></section>';
+  var fails = S.log.filter(function (l) { return /^Impor gagal/.test(l.m); }).length;
+  var status = '<section class="card stack"><h3>Status sistem</h3><div class="grid g3">' +
+    '<div class="well stack"><b>Akun tersimpan</b><span class="num" style="font-size:1.6rem">' + S.accounts.length + '</span><span class="hint">Di browser ini</span></div>' +
+    '<div class="well stack"><b>Sinkronisasi otomatis</b><span class="tag mu" style="align-self:flex-start">BELUM AKTIF</span><span class="hint">Koneksi langsung ke broker belum dibangun. Data diperbarui lewat impor laporan. Lihat syaratnya di Settings.</span></div>' +
+    '<div class="well stack"><b>Impor gagal tercatat</b><span class="num" style="font-size:1.6rem">' + fails + '</span><span class="hint">Dari riwayat aktivitas</span></div></div>' +
+    '<div class="grid g2"><div class="well stack"><b>Keamanan data</b><ul class="clean hint"><li>Password broker tidak pernah diminta atau disimpan.</li><li>Data trading hanya tersimpan di browser ini, tidak dikirim ke server.</li><li>WHY tidak punya fitur trading atau penarikan dana.</li></ul></div>' +
+    '<div class="well stack"><b>Yang berfungsi sekarang</b><ul class="clean hint"><li>Impor CSV/HTML MT5 (Deals dan Positions), banyak akun, tanpa duplikasi.</li><li>Semua modul Deep Jurnal dan AI Analisis dari data impor.</li><li>Ekspor dan hapus data dari Settings.</li></ul></div></div></section>';
+  return h + demoBanner() + sum + '<div class="grid g2">' + cards + '</div>' + status;
+}
+
+/* ---------------- DEEP JURNAL ---------------- */
+var DJ = [['modal', 'Modal & Akun'], ['kalender', 'Kalender'], ['trade', 'Riwayat Trade'], ['layering', 'Layering'], ['risiko', 'Risiko'], ['statistik', 'Statistik'], ['perilaku', 'Perilaku'], ['drawdown', 'Drawdown & Survival'], ['kas', 'Arus Kas'], ['banding', 'Perbandingan'], ['kualitas', 'Kualitas & Rumus']];
+function pageDJ() {
+  var res = A(), h = '<div class="topbar"><h2>Deep Jurnal</h2><span class="hint">Bukti, bukan opini. Setiap angka bisa ditelusuri ke transaksi sumber.</span></div>';
+  if (res.empty) return h + noData();
+  h += ctxBar(res); if (res.error) return h + '<section class="card"><div class="banner">' + IC.info + '<span>' + esc(res.error) + '</span></div></section>';
+  h += demoBanner() + '<div class="chips" role="tablist">' + DJ.map(function (t) { return '<button class="chip" role="tab" aria-selected="' + (V.dj === t[0]) + '" data-a="dj" data-k="' + t[0] + '">' + t[1] + '</button>'; }).join('') + '</div>';
+  var fn = { modal: djModal, kalender: djCal, trade: djTrade, layering: djLayer, risiko: djRisk, statistik: djStats, perilaku: djBeh, drawdown: djDD, kas: djCash, banding: djCmp, kualitas: djQual }[V.dj];
+  return h + '<div class="stack" style="gap:22px">' + fn(res) + '</div>';
+}
+function djModal(r) {
+  var c = r.cap, cur = r.currency, P = r.perf, all = r.range.from === -Infinity && r.range.to === Infinity;
+  var rows = [['Saldo awal pada awal data' + (c.init == null ? '' : ''), c.init, 'p'], ['+ Deposit', c.deposit, 'm'], ['− Withdrawal', c.withdrawal, 'm']];
+  if (c.credit) rows.push(['Kredit', c.credit, 'm']); if (c.bonus) rows.push(['Bonus', c.bonus, 'm']); if (c.adjustment) rows.push(['Penyesuaian saldo', c.adjustment, 'm']); if (c.charge) rows.push(['Biaya akun', c.charge, 'm']);
+  rows.push(['+ Gross profit', c.grossProfit, 'm'], ['− Gross loss', c.grossLoss, 'm'], ['− Komisi', c.comm, 'm'], ['− Swap', c.swap, 'm'], ['− Fee', c.fee, 'm']);
+  if (c.openCosts || c.openRealized) rows.push(['Biaya & realized parsial posisi terbuka', c.openCosts + c.openRealized, 'm']);
+  var wf = tbl(['Komponen', 'Jumlah (' + cur + ')'], rows.map(function (x) { return '<tr><td>' + x[0] + '</td><td class="r num ' + (x[2] === 'm' ? cls(x[1]) : '') + '">' + (x[2] === 'm' ? money(x[1]) : plain(x[1])) + '</td></tr>'; }).concat(all ? ['<tr><td><b>= Saldo hitungan WHY</b></td><td class="r num"><b>' + plain(c.computedBalance) + '</b></td></tr>', '<tr><td><b>Saldo di kolom Balance terakhir</b></td><td class="r num"><b>' + plain(c.balance) + '</b></td></tr>'] : []), { r: [1] });
+  var curve = r.dd.curve.map(function (p) { return { t: p.t, y: p.cum }; });
+  var k = '<div class="grid g4">' + kpi('Saldo saat ini', plain(c.balance != null ? c.balance : c.computedBalance, cur), c.balance != null ? 'dari kolom Balance terakhir' : 'hitungan WHY', '', c.balance == null && c.computedBalance == null) +
+    kpi('Equity & floating P/L', 'Tidak tersedia', 'Laporan deal tidak memuat posisi terbuka', '', true) +
+    kpi('Total deposit', plain(c.deposit, cur), r.cashSummary.nDeposit + ' transaksi') + kpi('Total withdrawal', plain(Math.abs(c.withdrawal), cur), r.cashSummary.nWithdrawal + ' transaksi') +
+    kpi('Net arus kas eksternal', money(c.netExternal, cur), 'deposit − withdrawal', cls(c.netExternal)) + kpi('Net trading result', money(c.net, cur), 'terpisah dari deposit/withdrawal', cls(c.net)) +
+    kpi('Gross profit / loss', nf(c.grossProfit, 0) + ' / ' + nf(c.grossLoss, 0), 'sebelum biaya') + kpi('Komisi + swap + fee', money(c.costs, cur), c.grossProfit > 0 ? pct(Math.abs(c.costs) / c.grossProfit, 0) + ' dari gross profit' : '', cls(c.costs)) + '</div>';
+  var note = c.init != null ? '<p class="hint">Saldo awal dihitung dari kolom Balance baris pertama. ' + esc(c.initNote || '') + '</p>' : '<p class="hint">Saldo awal tidak dapat disimpulkan dari data ini.</p>';
+  return k + sec('Dari mana saldo berasal', '<div class="grid g2"><div class="stack">' + wf + (all ? '' : '<p class="hint">Rekonsiliasi saldo hanya ditampilkan untuk seluruh histori.</p>') + note + '</div><div class="stack"><h4>Kurva hasil trading (realized, kumulatif)</h4>' + lineChart(curve, { label: 'Kurva P/L kumulatif', mark: true }) + '<p class="hint">Deposit dan withdrawal tidak masuk kurva ini. Titik pada kurva = satu trade ditutup.</p></div></div>') +
+    (r.openTrades.length ? sec('Posisi terbuka / parsial', '<p class="hint">Floating P/L tidak ada di laporan deal, sehingga tidak dihitung. Biaya dan hasil parsial yang sudah terealisasi dimasukkan pada baris di atas.</p>' + tbl(['Symbol', 'Arah', 'Lot masuk', 'Lot tersisa', 'Entry', 'Waktu masuk'], r.openTrades.map(function (t) { return '<tr><td>' + esc(t.symbol) + '</td><td>' + t.side.toUpperCase() + '</td><td class="num">' + lot(t.entryVol) + '</td><td class="num">' + lot(t.remaining) + '</td><td class="num">' + px(t.entryPrice) + '</td><td class="num">' + fT(t.entryT) + '</td></tr>'; }))) : '');
+}
+function djCal(r) {
+  var keys = Object.keys(r.daily).sort(); if (!keys.length) return sec('Kalender trading', '<p class="mu">Belum ada trade tertutup pada periode ini.</p>');
+  if (!V.calMonth) V.calMonth = keys[keys.length - 1].slice(0, 7);
+  var ym = V.calMonth.split('-'), y = +ym[0], m = +ym[1] - 1, first = new Date(Date.UTC(y, m, 1)), dim = new Date(Date.UTC(y, m + 1, 0)).getUTCDate(), lead = (first.getUTCDay() + 6) % 7;
+  var mk = V.calMonth, mDays = keys.filter(function (k) { return k.slice(0, 7) === mk; }), mp = mDays.reduce(function (a, k) { return a + r.daily[k].pnl; }, 0), mn = mDays.reduce(function (a, k) { return a + r.daily[k].n; }, 0);
+  var mx = Math.max.apply(null, keys.map(function (k) { return Math.abs(r.daily[k].pnl); })) || 1;
+  var cells = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map(function (d) { return '<div class="dow">' + d + '</div>'; }).join('');
+  for (var i = 0; i < lead; i++) cells += '<div></div>';
+  for (var d = 1; d <= dim; d++) {
+    var k = mk + '-' + ('0' + d).slice(-2), dd = r.daily[k];
+    if (!dd) { cells += '<div class="day off"><span class="d">' + d + '</span></div>'; continue; }
+    var a = Math.round(Math.min(1, Math.abs(dd.pnl) / mx) * 38 + 8), col = dd.pnl >= 0 ? 'var(--good)' : 'var(--bad)';
+    cells += '<button class="day' + (V.calDay === k ? ' sel' : '') + '" data-a="calday" data-k="' + k + '" style="background:color-mix(in srgb,' + col + ' ' + a + '%,var(--bg))" aria-label="' + k + ': ' + money(dd.pnl) + ', ' + dd.n + ' trade"><span class="d">' + d + '</span><span class="p ' + cls(dd.pnl) + '">' + short(dd.pnl) + '</span><span class="c">' + dd.n + ' tr' + (dd.layers ? ' · L' + dd.layers : '') + '</span></button>';
+  }
+  var allM = Array.from(new Set(keys.map(function (k) { return k.slice(0, 7); }))), ix = allM.indexOf(mk);
+  var nav = '<div class="row sp"><button class="btn sm" data-a="calnav" data-k="-1"' + (ix <= 0 ? ' disabled' : '') + '>‹ Sebelumnya</button><div style="text-align:center"><b class="mono">' + mk + '</b><div class="hint">' + money(mp, r.currency) + ' · ' + mn + ' trade</div></div><button class="btn sm" data-a="calnav" data-k="1"' + (ix >= allM.length - 1 ? ' disabled' : '') + '>Berikutnya ›</button></div>';
+  var det = '';
+  if (V.calDay && r.daily[V.calDay]) {
+    var dd = r.daily[V.calDay], ts = r.trades.filter(function (t) { return dd.ids.indexOf(t.id) >= 0; }).sort(function (a, b) { return a.exitT - b.exitT; });
+    det = sec('Rincian ' + V.calDay, '<div class="grid g4">' + kpi('Net P/L', money(dd.pnl, r.currency), '', cls(dd.pnl)) + kpi('Trade', dd.n, dd.wins + ' menang · ' + dd.losses + ' kalah') + kpi('Winrate harian', pct(dd.wins / dd.n, 0)) + kpi('Total lot', lot(dd.lots), dd.layers ? dd.layers + ' trade dalam layering' : '') + '</div>' + tradeTable(ts, true) + '<p class="hint">Catatan pribadi per hari belum tersedia.</p>');
+  }
+  return sec('Kalender trading', nav + '<div class="cal">' + cells + '</div><p class="hint">Hari dikelompokkan menurut waktu tutup trade pada zona waktu tampilan. Intensitas warna = besar P/L relatif terhadap hari terbesar. L = jumlah trade dalam kandidat layering.</p>') + det;
+}
+function tradeFilter(r) {
+  var f = V.tf, ts = r.trades.slice();
+  if (f.ids) ts = ts.filter(function (t) { return f.ids.indexOf(t.id) >= 0; });
+  if (f.sym) ts = ts.filter(function (t) { return t.symbol === f.sym; });
+  if (f.side) ts = ts.filter(function (t) { return t.side === f.side; });
+  if (f.res === 'win') ts = ts.filter(function (t) { return t.net > 0; }); if (f.res === 'loss') ts = ts.filter(function (t) { return t.net < 0; });
+  if (f.flag === 'any') ts = ts.filter(function (t) { return t.flags.length; }); else if (f.flag) ts = ts.filter(function (t) { return t.flags.join('|').indexOf(f.flag) >= 0; });
+  if (f.q) ts = ts.filter(function (t) { return (t.id + ' ' + t.symbol + ' ' + t.acctName).toLowerCase().indexOf(f.q.toLowerCase()) >= 0; });
+  var k = V.sort.k, d = V.sort.d; ts.sort(function (a, b) { var x = a[k], y = b[k]; if (x == null) return 1; if (y == null) return -1; return (x > y ? 1 : x < y ? -1 : 0) * d; });
+  return ts;
+}
+function tradeTable(ts, noSort) {
+  var sortable = noSort ? null : { 0: 'entryT', 1: 'symbol', 3: 'entryVol', 7: 'gross', 8: 'costs', 9: 'net', 10: 'holdMin' };
+  return tbl(['Masuk', 'Symbol', 'Arah', 'Lot', 'Entry', 'Exit', 'Waktu keluar', 'Gross', 'Biaya', 'Net', 'Durasi', 'Kualitas', 'Flag'], ts.map(function (t) {
+    return '<tr class="click" data-a="trade" data-id="' + esc(t.id) + '"><td class="num">' + fT(t.entryT) + '</td><td>' + esc(t.symbol) + '</td><td>' + t.side.toUpperCase() + '</td><td class="num r">' + lot(t.entryVol) + '</td><td class="num r">' + px(t.entryPrice) + '</td><td class="num r">' + px(t.exitPrice) + '</td><td class="num">' + fT(t.exitT) + '</td><td class="num r ' + cls(t.gross) + '">' + nf(t.gross) + '</td><td class="num r">' + nf(t.costs) + '</td><td class="num r ' + cls(t.net) + '"><b>' + nf(t.net) + '</b></td><td class="num r">' + dur(t.holdMin) + '</td><td>' + lvTag(t.quality) + '</td><td>' + (t.flags.length ? '<span class="tag warn">' + t.flags.length + '</span>' : '') + '</td></tr>';
+  }), { r: [3, 4, 5, 7, 8, 9, 10], sort: sortable });
+}
+function djTrade(r) {
+  var f = V.tf, ts = tradeFilter(r), per = 25, pages = Math.max(1, Math.ceil(ts.length / per)); if (V.page >= pages) V.page = pages - 1;
+  var syms = Array.from(new Set(r.trades.map(function (t) { return t.symbol; }))).sort();
+  var flagOpts = [['', 'Semua'], ['any', 'Ada flag apa pun'], ['Layering', 'Layering'], ['Lot naik setelah loss', 'Lot naik setelah loss'], ['Entry cepat', 'Entry cepat setelah loss'], ['median', 'Lot besar'], ['Stop-out', 'Stop-out']];
+  var fl = '<div class="form"><label class="f" for="f-sym">Symbol<select id="f-sym" data-tf="sym"><option value="">Semua</option>' + syms.map(function (s) { return '<option' + (f.sym === s ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select></label>' +
+    '<label class="f" for="f-side">Arah<select id="f-side" data-tf="side"><option value="">Semua</option><option value="buy"' + (f.side === 'buy' ? ' selected' : '') + '>Buy</option><option value="sell"' + (f.side === 'sell' ? ' selected' : '') + '>Sell</option></select></label>' +
+    '<label class="f" for="f-res">Hasil<select id="f-res" data-tf="res"><option value="">Semua</option><option value="win"' + (f.res === 'win' ? ' selected' : '') + '>Menang</option><option value="loss"' + (f.res === 'loss' ? ' selected' : '') + '>Kalah</option></select></label>' +
+    '<label class="f" for="f-flag">Flag<select id="f-flag" data-tf="flag">' + flagOpts.map(function (o) { return '<option value="' + o[0] + '"' + (f.flag === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>' +
+    '<label class="f" for="f-q">Cari ID / symbol<input type="text" id="f-q" data-tf="q" value="' + esc(f.q) + '" placeholder="mis. D1042"></label></div>';
+  var ban = f.ids ? '<div class="banner">' + IC.info + '<span>Menampilkan ' + ts.length + ' trade pendukung: ' + esc(f.idsLabel) + '. <button class="btn sm" data-a="tf-clear">Hapus filter</button></span></div>' : '';
+  var tot = ts.reduce(function (a, t) { return a + t.net; }, 0);
+  return sec('Riwayat trade', fl + ban + '<div class="row sp"><span class="hint">' + ts.length + ' trade · net ' + money(tot, r.currency) + ' · satu baris = satu posisi hasil rekonstruksi, bukan satu deal</span><button class="btn sm" data-a="csv">Ekspor CSV tampilan ini (salin)</button></div>' + tradeTable(ts.slice(V.page * per, V.page * per + per)) +
+    '<div class="row sp"><button class="btn sm" data-a="pg" data-k="-1"' + (V.page <= 0 ? ' disabled' : '') + '>‹</button><span class="hint">Halaman ' + (V.page + 1) + ' dari ' + pages + '</span><button class="btn sm" data-a="pg" data-k="1"' + (V.page >= pages - 1 ? ' disabled' : '') + '>›</button></div>');
+}
+function djLayer(r) {
+  var G = r.layers, L = r.cfg.layering, inL = r.trades.filter(function (t) { return t.layerId; }), pl = W.perf(inL), po = W.perf(r.trades.filter(function (t) { return !t.layerId; })), cur = r.currency;
+  var cfgTxt = 'Jeda antar entry ≤ ' + L.gapMin + ' menit · jarak harga ≤ ' + L.priceDistPct + '% · minimal ' + L.minEntries + ' entry · ' + (L.requireOverlap ? 'posisi harus overlap' : 'overlap tidak wajib');
+  var k = '<div class="grid g4">' + kpi('Kandidat rangkaian', G.length, 'terdeteksi berdasarkan aturan') + kpi('Trade dalam rangkaian', pl.n + ' / ' + r.perf.n, r.perf.n ? pct(pl.n / r.perf.n, 0) : '') + kpi('Net P/L dalam rangkaian', money(pl.net, cur), 'entry tunggal: ' + money(po.net), cls(pl.net)) + kpi('Eksposur lot puncak rangkaian', G.length ? lot(Math.max.apply(null, G.map(function (g) { return g.peakLots; }))) : '–', 'lot terbuka bersamaan') + '</div>';
+  var rows = G.slice().sort(function (a, b) { return a.net - b.net; }).map(function (g) {
+    return '<tr class="click" data-a="layer" data-id="' + g.id + '"><td class="num">' + g.id + '</td><td>' + esc(g.symbol) + ' ' + g.side.toUpperCase() + '</td><td class="num">' + fT(g.firstT) + '</td><td class="num r">' + g.entries + '</td><td class="num r">' + lot(g.totalLots) + '</td><td class="num r">' + px(g.wavg) + '</td><td class="num r">' + nf(g.priceDistPct, 2) + '%</td><td class="num r">' + dur(g.durMin) + '</td><td class="num r ' + cls(g.net) + '"><b>' + nf(g.net) + '</b></td><td><span class="tag ' + (g.level === 'Tinggi' ? 'good' : g.level === 'Sedang' ? 'warn' : 'mu') + '">' + g.level + ' ' + nf(g.confidence * 100, 0) + '%</span></td></tr>';
+  });
+  return k + sec('Rangkaian layering', '<div class="banner">' + IC.info + '<span><b>Kandidat, bukan klaim niat.</b> Aturan aktif: ' + cfgTxt + '. TP yang sama saja tidak cukup untuk menyimpulkan layering, dan TP/SL bersama hanya dinilai bila ada di data. Ubah ambang di Settings. Klik baris untuk melihat bukti.</span></div>' +
+    tbl(['ID', 'Instrumen', 'Mulai', 'Entry', 'Total lot', 'Rata-rata tertimbang', 'Rentang harga', 'Durasi', 'Net P/L', 'Keyakinan'], rows, { r: [3, 4, 5, 6, 7, 8] }) + (G.length ? '' : '<p class="mu">Tidak ada rangkaian yang memenuhi aturan pada periode ini.</p>'));
+}
+function djRisk(r) {
+  var R = r.risk, cur = r.currency, cfg = r.cfg;
+  var k = '<div class="grid g4">' + kpi('Lot median', lot(R.medLot), 'rata-rata ' + lot(R.meanLot)) + kpi('Lot maksimum', lot(R.maxLot), R.medLot ? nf(R.maxLot / R.medLot, 1) + 'x median' : '') + kpi('Eksposur puncak', lot(R.peak.peak), 'lot terbuka bersamaan' + (R.peak.t ? ' · ' + fT(R.peak.t) : '')) + kpi('Risiko uang per trade', R.hasSL ? (R.rN + ' trade terukur') : 'Tidak tersedia', R.hasSL ? 'estimasi dari SL dan nilai per poin implisit' : 'SL tidak ada di data. Lot dipakai sebagai proxy aktivitas, bukan risiko uang.', '', !R.hasSL) + '</div>';
+  var vio = [['Lot > ' + cfg.risk.lotMultiple + 'x median', R.big.length, R.big.map(function (t) { return t.id; })], ['Lot melebihi batas pribadi' + (cfg.risk.maxLot > 0 ? ' (' + cfg.risk.maxLot + ')' : ' (belum diatur)'), R.over.length, R.over.map(function (t) { return t.id; })], ['Hari melewati batas rugi harian' + (cfg.risk.dailyLossLimit > 0 ? ' (' + cfg.risk.dailyLossLimit + ' ' + cur + ')' : ' (belum diatur)'), R.dailyLossDays.length, null], ['Eksposur puncak melewati batas' + (cfg.risk.maxExposureLots > 0 ? ' (' + cfg.risk.maxExposureLots + ' lot)' : ' (belum diatur)'), R.expOver ? 1 : 0, null]];
+  if (R.hasSL) vio.push(['Trade tanpa stop loss', R.noSL.length, R.noSL.map(function (t) { return t.id; })]);
+  var vt = tbl(['Pelanggaran', 'Jumlah', ''], vio.map(function (v, i) { return '<tr><td class="wrap">' + v[0] + '</td><td class="num r ' + (v[1] ? 'neg' : '') + '">' + v[1] + '</td><td>' + (v[2] && v[2].length ? '<button class="btn sm" data-a="ids" data-n="' + esc(v[0]) + '" data-ids="' + esc(JSON.stringify(v[2])) + '">Lihat trade</button>' : '') + '</td></tr>'; }), { r: [1] });
+  var steps = R.lotSteps.slice(-90).map(function (s, i) { return { l: String(i + 1), v: s.lot, n: null, c: s.net >= 0 ? 'var(--good)' : 'var(--bad)' }; });
+  var bs = tbl(['Symbol', 'Trade', 'Total lot', 'Porsi lot', 'Lot maks'], R.bySymbol.map(function (s) { return '<tr><td>' + esc(s.symbol) + '</td><td class="num r">' + s.n + '</td><td class="num r">' + lot(s.lots) + '</td><td class="num r">' + pct(s.share, 0) + '</td><td class="num r">' + lot(s.maxLot) + '</td></tr>'; }), { r: [1, 2, 3, 4] });
+  return k + '<div class="grid g2">' + sec('Pelanggaran risiko', vt + '<p class="hint">Batas pribadi diatur di Settings. Pelanggaran dihitung dari data lot, bukan dari risiko uang.</p>') + sec('Konsentrasi per symbol', bs) + '</div>' +
+    sec('Progresi lot (90 trade terakhir, urut waktu entry)', barChart(steps, { h: 190, fmt: function (v) { return nf(v, 2) + ' lot'; }, label: 'Progresi lot' }) + '<div class="lg"><span><i style="background:var(--good)"></i>trade menang</span><span><i style="background:var(--bad)"></i>trade kalah</span></div>') +
+    (R.hasSL ? sec('R-multiple (estimasi)', '<div class="grid g3">' + kpi('R median', nf(R.rMedian, 2), R.rN + ' trade') + kpi('R rata-rata', nf(R.rMean, 2)) + kpi('Status', 'Estimated', '', '') + '</div><p class="hint">Risiko uang = |entry − SL| × nilai per poin per lot × lot. Nilai per poin diturunkan dari median trade yang sama di data, bukan dari spesifikasi kontrak broker.</p>') : '');
+}
+function condTable(rows, labelFn, minS) {
+  return tbl(['Kondisi', 'Trade', 'Winrate', 'Net P/L', 'Profit factor', 'Expectancy'], rows.map(function (p) { return '<tr><td>' + esc(labelFn ? labelFn(p.key) : p.key) + warnSmall(p.n, minS) + '</td><td class="num r">' + p.n + '</td><td class="num r">' + pct(p.winrate, 0) + '</td><td class="num r ' + cls(p.net) + '">' + nf(p.net) + '</td><td class="num r">' + pf(p.pf) + '</td><td class="num r ' + cls(p.expectancy) + '">' + nf(p.expectancy) + '</td></tr>'; }), { r: [1, 2, 3, 4, 5] });
+}
+function djStats(r) {
+  var P = r.perf, cur = r.currency, ms = r.cfg.behavior.minSample, WD = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+  var warn = P.n < r.cfg.minSample ? '<div class="banner">' + IC.info + '<span>Hanya ' + P.n + ' trade (kurang dari ' + r.cfg.minSample + '). Angka di bawah belum stabil secara statistik. Statistik historis bukan jaminan hasil ke depan.</span></div>' : '';
+  var k = '<div class="grid g4">' + kpi('Trade tertutup', nf(P.n, 0), P.wins + ' menang · ' + P.losses + ' kalah · ' + P.be + ' impas') + kpi('Winrate', pct(P.winrate), P.winCI ? 'CI 95% (Wilson): ' + pct(P.winCI[0], 0) + '–' + pct(P.winCI[1], 0) : '') + kpi('Loss rate', pct(P.lossrate)) + kpi('Profit factor', pf(P.pf), 'net menang ÷ |net kalah|') +
+    kpi('Expectancy / trade', money(P.expectancy, cur), P.expCI ? 'CI 95%: ' + nf(P.expCI[0], 1) + ' s/d ' + nf(P.expCI[1], 1) : '', cls(P.expectancy)) + kpi('Rata-rata menang', money(P.avgWin, cur), '', 'pos') + kpi('Rata-rata kalah', money(P.avgLoss, cur), '', 'neg') + kpi('Payoff ratio', nf(P.payoff, 2), P.bePct != null ? 'winrate impas ' + pct(P.bePct, 0) : '') +
+    kpi('Menang beruntun maks', P.maxWinStreak) + kpi('Kalah beruntun maks', P.maxLossStreak) + kpi('Recovery factor', r.dd.maxDD > 0 ? nf(P.net / r.dd.maxDD, 2) : '–', 'net ÷ maks drawdown') + kpi('Durasi hold median', dur(P.holdMedian), 'rata-rata ' + dur(P.holdMean) + ' · n=' + P.holdN) + '</div>';
+  var cond = '<div class="grid g2">' +
+    sec('Per jam entry (zona waktu tampilan)', barChart(r.cond.hour.map(function (p) { return { l: String(p.key), v: p.net, n: p.n }; }), { h: 180, fmt: function (v) { return nf(v) + ' ' + cur; }, label: 'Net P/L per jam' })) +
+    sec('Per hari dalam minggu', barChart(r.cond.weekday.map(function (p) { return { l: WD[p.key], v: p.net, n: p.n }; }), { h: 180, fmt: function (v) { return nf(v) + ' ' + cur; }, label: 'Net P/L per hari' })) + '</div>' +
+    sec('Per sesi', condTable(r.cond.session, null, ms) + '<p class="hint">Sesi dihitung dari jam UTC (Asia 00–07, London 07–13, New York 13–21) memakai offset broker di Settings.</p>') +
+    '<div class="grid g2">' + sec('Per symbol', condTable(r.cond.symbol, null, ms)) + sec('Buy vs Sell', condTable(r.cond.side, null, ms)) + sec('Durasi hold', condTable(r.cond.hold, null, ms)) + sec('Ukuran lot dibanding median', condTable(r.cond.lotSize, null, ms)) + '</div>' +
+    sec('Layering vs entry tunggal', condTable(r.cond.layering, null, ms)) +
+    sec('Setelah loss vs setelah win', tbl(['Kondisi entry', 'Trade', 'Winrate', 'Net P/L', 'Expectancy'], [['Entry setelah trade loss', r.behavior.afterLoss], ['Entry setelah trade win', r.behavior.afterWin]].map(function (x) { var p = x[1]; return '<tr><td>' + x[0] + warnSmall(p.n, ms) + '</td><td class="num r">' + p.n + '</td><td class="num r">' + pct(p.winrate, 0) + '</td><td class="num r ' + cls(p.net) + '">' + nf(p.net) + '</td><td class="num r">' + nf(p.expectancy) + '</td></tr>'; }), { r: [1, 2, 3, 4] }) + '<p class="hint">Ini korelasi pada sampel di atas, bukan sebab-akibat. Trade sebelumnya = trade terakhir yang sudah ditutup saat entry dibuka.</p>');
+  return warn + k + sec('Distribusi net P/L per trade', hist(r.trades.map(function (t) { return t.net; })) + '<p class="hint">Net = profit + komisi + swap + fee. Satu batang = rentang hasil per trade.</p>') + cond;
+}
+function djBeh(r) {
+  var B = r.behavior, ms = r.cfg.behavior.minSample, cur = r.currency, cfg = r.cfg.behavior;
+  function card(t, rule, body, ids, label, limit, conf) {
+    return '<section class="card find"><div class="ttl"><h3>' + t + '</h3>' + (conf ? confTag(conf) : '') + '</div><p class="hint"><b>Aturan:</b> ' + rule + '</p>' + body + (ids && ids.length ? '<div><button class="btn sm" data-a="ids" data-n="' + esc(label) + '" data-ids="' + esc(JSON.stringify(ids)) + '">Lihat ' + ids.length + ' trade</button></div>' : '') + '<p class="hint"><b>Keterbatasan:</b> ' + limit + ' · versi algoritma ' + W.VERSION + '</p></section>';
+  }
+  var m = B.martingale, rv = B.revenge, o = B.overtrading, ch = B.chasing;
+  var dayItems = Object.keys(r.daily).sort().slice(-60).map(function (k) { return { l: k.slice(5), v: r.daily[k].n, n: r.daily[k].n, c: o.threshold != null && r.daily[k].n > o.threshold ? 'var(--bad)' : 'var(--ac)' }; });
+  return '<div class="grid g2">' +
+    card('Pola menyerupai martingale', 'Lot entry ≥ ' + m.ratio + 'x lot trade loss terakhir yang sudah ditutup. Ambang diubah di Settings.', '<div>' + fact('Entry setelah loss (sampel)', m.sample + warnSmall(m.sample, ms)) + fact('Memenuhi aturan', m.hits + ' (' + pct(m.rate, 0) + ')') + fact('Pembanding: entry setelah win', pct(m.rateAfterWin, 0) + ' dari ' + m.sampleWin) + fact('Rata-rata lot setelah loss / win', lot(m.avgLotAfterLoss) + ' / ' + lot(m.avgLotAfterWin)) + fact('Net P/L trade yang memenuhi', '<span class="' + cls(m.net) + '">' + money(m.net, cur) + '</span>') + '</div>', m.ids, 'lot naik setelah loss', 'Menunjukkan pola ukuran lot, bukan niat atau emosi.', m.confidence) +
+    card('Pola menyerupai revenge trading', 'Entry ≤ ' + rv.windowMin + ' menit setelah loss ditutup dengan lot ≥ lot loss tersebut.', '<div>' + fact('Entry setelah loss (sampel)', rv.sample + warnSmall(rv.sample, ms)) + fact('Entry ≤ ' + rv.windowMin + ' menit setelah loss', rv.quick) + fact('Memenuhi aturan lengkap', rv.hits + ' (' + pct(rv.rate, 0) + ')') + fact('Rata-rata P/L: pola ini / lainnya', nf(rv.avgNet) + ' / ' + nf(rv.avgNetOther)) + fact('Net P/L trade yang memenuhi', '<span class="' + cls(rv.net) + '">' + money(rv.net, cur) + '</span>') + '</div>', rv.ids, 'entry cepat setelah loss', 'Hanya bisa disebut menyerupai revenge trading. Emosi tidak bisa dipastikan dari data transaksi.', rv.confidence) +
+    card('Overtrading', 'Hari ekstrem = jumlah trade > max(rata-rata + ' + cfg.overtradeSd + ' simpangan baku, 2x median) pada hari aktif. Butuh ≥ 5 hari aktif.', o.enough ? '<div>' + fact('Hari aktif', o.days) + fact('Median trade per hari', nf(o.median, 1)) + fact('Ambang', nf(o.threshold, 1)) + fact('Hari ekstrem', o.flagged.length) + fact('Rata-rata P/L hari ekstrem / normal', nf(o.avgPnlFlagged) + ' / ' + nf(o.avgPnlNormal)) + '</div>' + barChart(dayItems, { h: 150, line: o.threshold, lineLabel: 'ambang', label: 'Trade per hari', fmt: function (v) { return v + ' trade'; } }) : '<p class="mu">Belum cukup hari aktif untuk baseline.</p>', null, '', 'Baseline dihitung dari periode terpilih sendiri; hari ekstrem sedikit berarti kesimpulan lemah.', o.flagged.length >= 3 ? 'Sedang' : 'Rendah') +
+    card('Mengejar kerugian harian', 'Entry dibuka saat P/L realized hari itu sudah negatif dan lot di atas median (' + lot(ch.medLot) + ').', '<div>' + fact('Entry memenuhi aturan', ch.hits + ' dari ' + ch.sample) + fact('Net P/L trade tersebut', '<span class="' + cls(ch.net) + '">' + money(ch.net, cur) + '</span>') + '</div>', ch.ids, 'entry setelah rugi harian', 'Berdasarkan P/L yang sudah ditutup; floating loss tidak terlihat.', ch.hits >= 10 ? 'Sedang' : 'Rendah') + '</div>';
+}
+function djDD(r) {
+  var D = r.dd, S2 = r.surv, cur = r.currency;
+  var dd = D.curve.map(function (p) { return { t: p.t, y: -p.dd }; });
+  var k = '<div class="grid g4">' + kpi('Maks. drawdown (realized)', plain(D.maxDD, cur), D.maxDDPct != null ? pct(D.maxDDPct, 1) + ' dari modal saat puncak' : 'persen tidak dapat dihitung', 'neg') + kpi('Drawdown saat ini', plain(D.currentDD, cur), 'dari puncak kurva realized') + kpi('Durasi drawdown terdalam', dur(D.durMin), fT(D.peakT, true) + ' → ' + fT(D.troughT, true)) + kpi('Waktu pemulihan', D.recMin != null ? dur(D.recMin) : (D.maxDD > 0 ? 'Belum pulih' : '–'), '') +
+    kpi('Hari terburuk', S2.worstDay ? money(S2.worstDay.v, cur) : '–', S2.worstDay ? S2.worstDay.k : '', 'neg') + kpi('Minggu terburuk', S2.worstWeek ? money(S2.worstWeek.v, cur) : '–', S2.worstWeek ? 'mulai ' + S2.worstWeek.k : '', 'neg') + kpi('Bulan terburuk', S2.worstMonth ? money(S2.worstMonth.v, cur) : '–', S2.worstMonth ? S2.worstMonth.k : '', 'neg') + kpi('Kalah beruntun maks', S2.maxLossStreak, 'dalam ' + S2.spanDays + ' hari data') + '</div>';
+  var so = S2.stopOuts.length ? '<div class="banner">' + IC.info + '<span><b>Terverifikasi dari komentar broker:</b> ' + S2.stopOuts.length + ' trade ditutup dengan penanda stop-out ("so:" / "stop out") pada komentar deal. <button class="btn sm" data-a="ids" data-n="penanda stop-out" data-ids="' + esc(JSON.stringify(S2.stopOuts.map(function (t) { return t.id; }))) + '">Lihat trade</button></span></div>' : '<div class="banner">' + IC.info + '<span>Tidak ada penanda stop-out pada komentar deal. Ini <b>tidak</b> membuktikan tidak pernah terjadi margin call: data margin level tidak ada di laporan deal.</span></div>';
+  return k + sec('Kurva drawdown (realized)', lineChart(dd, { color: 'var(--bad)', worst: true, mark: true, label: 'Drawdown realized', h: 200 }) + '<p class="hint">Dihitung dari P/L kumulatif trade yang sudah ditutup. Drawdown equity intrabar (termasuk floating loss) tidak dapat dihitung tanpa data equity. Persentase memakai modal bersih (saldo awal + deposit − withdrawal) pada saat puncak.</p>') + sec('Stop-out dan margin call', so + '<p class="hint">Penurunan saldo besar tidak otomatis berarti margin call. WHY hanya menandai stop-out bila broker menuliskannya di komentar deal.</p>');
+}
+function djCash(r) {
+  var rc = {}; r.recon.forEach(function (x) { x.r.mismatchRows.forEach(function (i) { rc[i] = 1; }); });
+  var names = { deposit: 'Deposit', withdrawal: 'Withdrawal', credit: 'Kredit', bonus: 'Bonus', charge: 'Biaya akun', adjustment: 'Penyesuaian', other: 'Lainnya' };
+  var rows = r.cash.map(function (c) { return '<tr><td class="num">' + fT(c.t) + '</td><td><span class="tag ' + (c.kind === 'deposit' ? 'good' : c.kind === 'withdrawal' ? 'bad' : 'info') + '">' + names[c.kind] + '</span></td><td class="num r ' + cls(c.amount) + '">' + money(c.amount, r.currency) + '</td><td class="num r">' + (c.bal != null ? nf(c.bal) : '–') + '</td><td class="wrap">' + esc(c.comment || c.rawType) + '</td><td>' + (c.bal == null ? lvTag('Unavailable') : rc[c.id] ? lvTag('Inconsistent') : lvTag('Complete')) + '</td>' + (r.accounts.length > 1 ? '<td>' + esc(c.acctName) + '</td>' : '') + '</tr>'; });
+  var cs = r.cashSummary;
+  return '<div class="grid g4">' + kpi('Deposit', plain(cs.deposit, r.currency), cs.nDeposit + ' transaksi') + kpi('Withdrawal', plain(Math.abs(cs.withdrawal), r.currency), cs.nWithdrawal + ' transaksi') + kpi('Net arus kas', money(cs.netExternal, r.currency), '', cls(cs.netExternal)) + kpi('Bonus / kredit / penyesuaian', nf(cs.bonus + cs.credit + cs.adjustment + cs.charge, 2), 'tidak dihitung sebagai deposit') + '</div>' +
+    sec('Buku arus kas', tbl(['Waktu', 'Jenis', 'Jumlah', 'Saldo setelah', 'Catatan sumber', 'Verifikasi'].concat(r.accounts.length > 1 ? ['Akun'] : []), rows, { r: [2, 3] }) + '<p class="hint">Jenis ditentukan dari tipe baris dan komentar broker: tipe "balance" positif = deposit, negatif = withdrawal, kecuali komentar menyebut bonus atau koreksi. Verifikasi = kolom Balance baris itu cocok dengan saldo sebelumnya + jumlah. Deposit bukan profit; withdrawal bukan trading loss.</p>');
+}
+function cmpRanges() {
+  var base = runA(selAccounts(), null), last = base.coverage.last, first = base.coverage.first, o = off() * 3600000, d0 = Date.parse(W.dayKey(last, off()) + 'T00:00:00Z') - o, p = V.cmp.preset;
+  var dd = new Date(last + off() * 3600000), y = dd.getUTCFullYear(), m = dd.getUTCMonth();
+  if (p === '30') return { a: { from: d0 - 29 * 86400000, to: d0 + 86399999 }, b: { from: d0 - 59 * 86400000, to: d0 - 30 * 86400000 + 86399999 }, la: '30 hari terakhir', lb: '30 hari sebelumnya' };
+  if (p === 'half') { var mid = (first + last) / 2; return { a: { from: mid, to: last + 1 }, b: { from: first - 1, to: mid - 1 }, la: 'Paruh kedua data', lb: 'Paruh pertama data' }; }
+  if (p === 'custom') { var c = V.cmp; function ds(k) { var q = /^(\d{4})-(\d{2})-(\d{2})$/.exec(k || ''); return q ? Date.UTC(+q[1], q[2] - 1, +q[3]) - o : null; } return { a: { from: ds(c.af), to: ds(c.at) != null ? ds(c.at) + 86399999 : null }, b: { from: ds(c.bf), to: ds(c.bt) != null ? ds(c.bt) + 86399999 : null }, la: 'Periode A', lb: 'Periode B', custom: true }; }
+  return { a: { from: Date.UTC(y, m, 1) - o, to: Date.UTC(y, m + 1, 1) - o - 1 }, b: { from: Date.UTC(y, m - 1, 1) - o, to: Date.UTC(y, m, 1) - o - 1 }, la: 'Bulan terakhir data', lb: 'Bulan sebelumnya' };
+}
+function djCmp(r) {
+  var rg = cmpRanges(), sel = selAccounts(), a = W.analyze(sel, S.cfg, rg.a), b = W.analyze(sel, S.cfg, rg.b), c = r.currency;
+  var pre = [['month', 'Bulan terakhir vs sebelumnya'], ['30', '30 hari terakhir vs 30 sebelumnya'], ['half', 'Paruh kedua vs pertama data'], ['custom', 'Pilih tanggal']];
+  var ctl = '<div class="form"><label class="f" for="cmp-p">Bandingkan<select id="cmp-p" data-cmp="preset">' + pre.map(function (p) { return '<option value="' + p[0] + '"' + (V.cmp.preset === p[0] ? ' selected' : '') + '>' + p[1] + '</option>'; }).join('') + '</select></label>' +
+    (V.cmp.preset === 'custom' ? [['af', 'A dari'], ['at', 'A sampai'], ['bf', 'B dari'], ['bt', 'B sampai']].map(function (x) { return '<label class="f" for="cmp-' + x[0] + '">' + x[1] + '<input type="date" id="cmp-' + x[0] + '" data-cmp="' + x[0] + '" value="' + esc(V.cmp[x[0]] || '') + '"></label>'; }).join('') : '') + '</div>';
+  if (a.error || b.error) return sec('Perbandingan periode', ctl + '<p class="mu">' + esc(a.error || b.error) + '</p>');
+  var rows = [['Trade tertutup', function (x) { return x.perf.n; }, 0, 0], ['Net trading result', function (x) { return x.perf.net; }, 2, 1], ['Winrate', function (x) { return x.perf.winrate; }, 'p', 1], ['Profit factor', function (x) { return x.perf.pf; }, 2, 1], ['Expectancy / trade', function (x) { return x.perf.expectancy; }, 2, 1], ['Rata-rata menang', function (x) { return x.perf.avgWin; }, 2, 1], ['Rata-rata kalah', function (x) { return x.perf.avgLoss; }, 2, 1], ['Maks. drawdown', function (x) { return x.dd.maxDD; }, 2, -1], ['Total lot', function (x) { return x.perf.lots; }, 2, 0], ['Lot median', function (x) { return x.risk.medLot; }, 2, 0], ['Rangkaian layering', function (x) { return x.layers.length; }, 0, -1], ['Komisi + swap + fee', function (x) { return x.perf.costs; }, 2, 1], ['Deposit', function (x) { return x.cashSummary.deposit; }, 2, 0], ['Withdrawal', function (x) { return Math.abs(x.cashSummary.withdrawal); }, 2, 0]];
+  function f(v, d) { return v == null ? '–' : d === 'p' ? pct(v, 1) : v === Infinity ? '∞' : nf(v, d); }
+  var tb = tbl(['Metrik', esc(rg.la), esc(rg.lb), 'Selisih (A − B)'], rows.map(function (x) { var va = x[1](a), vb = x[1](b), dv = va != null && vb != null && isFinite(va) && isFinite(vb) ? va - vb : null, good = dv == null || !x[3] ? '' : (dv * x[3] > 0 ? 'pos' : dv * x[3] < 0 ? 'neg' : ''); return '<tr><td>' + x[0] + '</td><td class="num r">' + f(va, x[2]) + '</td><td class="num r">' + f(vb, x[2]) + '</td><td class="num r ' + good + '">' + (dv == null ? '–' : (x[2] === 'p' ? nf(dv * 100, 1) + ' poin' : (dv > 0 ? '+' : '') + nf(dv, x[2] === 0 ? 0 : 2))) + '</td></tr>'; }), { r: [1, 2, 3] });
+  var warn = [];
+  if (a.perf.n < r.cfg.minSample || b.perf.n < r.cfg.minSample) warn.push('Salah satu periode kurang dari ' + r.cfg.minSample + ' trade (A: ' + a.perf.n + ', B: ' + b.perf.n + '). Perbedaan bisa hanya kebetulan.');
+  if (a.perf.n && b.perf.n && Math.max(a.perf.n, b.perf.n) / Math.min(a.perf.n, b.perf.n) > 2) warn.push('Jumlah trade kedua periode berbeda lebih dari 2x. Bandingkan rata-rata per trade, bukan total.');
+  if (a.cashSummary.nDeposit + a.cashSummary.nWithdrawal + b.cashSummary.nDeposit + b.cashSummary.nWithdrawal) warn.push('Ada deposit atau withdrawal pada periode ini. Ukuran akun berubah, jadi bandingkan P/L absolut dengan hati-hati.');
+  return sec('Perbandingan periode', ctl + '<p class="hint">' + esc(rg.la) + ': ' + fT(rg.a.from, true) + ' → ' + fT(rg.a.to, true) + ' · ' + esc(rg.lb) + ': ' + fT(rg.b.from, true) + ' → ' + fT(rg.b.to, true) + '</p>' + tb + warn.map(function (w) { return '<div class="banner">' + IC.info + '<span>' + esc(w) + '</span></div>'; }).join(''));
+}
+var FORMULAS = [
+  ['Net trading result', 'Jumlah (profit + komisi + swap + fee) seluruh trade tertutup', 'Semua trade tertutup pada periode', 'Termasuk komisi, swap, fee', 'Posisi terbuka, deposit, withdrawal, bonus'],
+  ['Gross profit / loss', 'Jumlah profit trade bernilai positif / negatif, sebelum biaya', 'Trade tertutup', 'Tidak', 'Biaya trading'],
+  ['Winrate', 'Trade dengan net > 0 ÷ jumlah trade tertutup', 'Trade tertutup', 'Ya (net)', 'Trade terbuka. Impas dihitung di penyebut'],
+  ['Interval keyakinan winrate', 'Wilson 95% untuk proporsi', 'Trade tertutup', 'Ya', '–'],
+  ['Profit factor', 'Σ net trade menang ÷ |Σ net trade kalah|', 'Trade tertutup', 'Ya', '–'],
+  ['Expectancy', 'Σ net ÷ jumlah trade = P(win)×rata-rata menang − P(loss)×|rata-rata kalah|', 'Trade tertutup', 'Ya', '–'],
+  ['Payoff ratio / winrate impas', 'Rata-rata menang ÷ |rata-rata kalah|; impas = 1 ÷ (1 + payoff)', 'Trade tertutup', 'Ya', '–'],
+  ['Maks. drawdown (realized)', 'Puncak kurva P/L kumulatif − lembah sesudahnya, berdasarkan waktu tutup', 'Trade tertutup', 'Ya', 'Floating P/L, equity intrabar, deposit, withdrawal'],
+  ['Recovery factor', 'Net trading result ÷ maks. drawdown', 'Trade tertutup', 'Ya', '–'],
+  ['Saldo hitungan WHY', 'Saldo awal + arus kas + net trading + biaya & hasil parsial posisi terbuka', 'Seluruh histori', 'Ya', '–'],
+  ['Layering', 'Symbol dan arah sama, jeda ≤ ambang, jarak harga ≤ ambang, entry berikutnya dibuka saat posisi sebelumnya aktif', 'Semua trade berposisi masuk', 'Ya (net grup)', 'TP/SL bersama bila tidak ada di data'],
+  ['Pola martingale-like', 'Lot entry ≥ rasio × lot trade loss terakhir yang sudah ditutup', 'Entry setelah loss', 'Net', '–'],
+  ['Pola revenge-like', 'Entry ≤ N menit setelah loss ditutup dan lot ≥ lot loss itu', 'Entry setelah loss', 'Net', '–'],
+  ['Overtrading', 'Trade per hari > max(rata-rata + k×SD, 2×median)', 'Hari aktif', 'Net', 'Hari tanpa trade']
+];
+function djQual(r) {
+  var cv = r.coverage;
+  var q = r.quality.map(function (x) { return '<div class="row" style="align-items:flex-start;flex-wrap:nowrap">' + lvTag(x.lv) + '<span style="font-size:.88rem">' + esc(x.t) + '</span></div>'; }).join('');
+  return sec('Kualitas data', '<div class="grid g4">' + kpi('Deal terbaca', cv.nDeals) + kpi('Deal trading', cv.nTradeDeals) + kpi('Trade hasil rekonstruksi', cv.nTrades, cv.nClosed + ' tertutup · ' + cv.nOpen + ' terbuka') + kpi('Versi kalkulasi', W.VERSION, 'dihitung ' + nf(r.ms == null ? 0 : r.ms, 0) + ' ms') + '</div><div class="stack">' + q + '</div>' + (r.notes.length ? '<div class="well stack"><b>Catatan rekonstruksi</b><ul class="clean hint">' + r.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul></div>' : '')) +
+    sec('Definisi dan rumus', '<p class="hint"><b>Trade</b> = satu posisi hasil rekonstruksi dari deal masuk dan keluar. Order, deal, dan posisi dibedakan; satu deal tidak dihitung sebagai satu trade bebas. Hedging dan netting diperlakukan dengan Position ID bila ada, atau alokasi FIFO per symbol bila tidak.</p>' + tbl(['Metrik', 'Rumus', 'Sampel', 'Biaya', 'Dikecualikan'], FORMULAS.map(function (f) { return '<tr><td>' + f[0] + '</td><td class="wrap">' + esc(f[1]) + '</td><td class="wrap">' + esc(f[2]) + '</td><td>' + esc(f[3]) + '</td><td class="wrap">' + esc(f[4]) + '</td></tr>'; })));
+}
+
+/* ---------------- drawers ---------------- */
+function drawerTrade(id) {
+  var r = A(), t = (r.allTrades || []).filter(function (x) { return x.id === id; })[0]; if (!t) return;
+  var d = t.deals.map(function (x) { return '<tr><td class="num">' + esc(x.id) + '</td><td class="num">' + fT(x.t - (S.cfg.brokerUtcOffset) * 3600000) + '</td><td>' + (x.dir || '–') + '</td><td>' + x.type + '</td><td class="num r">' + lot(x.vol) + '</td><td class="num r">' + px(x.price) + '</td><td class="num r">' + nf(x.profit) + '</td><td class="num r">' + nf(x.comm + x.fee + x.swap) + '</td><td class="wrap">' + esc(x.comment) + '</td></tr>'; });
+  var lg = t.layerId ? r.layers.filter(function (g) { return g.id === t.layerId; })[0] : null;
+  V.drawer = { title: 'Trade ' + t.id, html: '<div class="row">' + lvTag(t.quality) + (t.stopOut ? '<span class="tag bad">STOP-OUT (komentar broker)</span>' : '') + '</div>' +
+    '<dl class="dl well"><dt>Akun</dt><dd>' + esc(t.acctName) + '</dd><dt>Instrumen</dt><dd>' + esc(t.symbol) + ' ' + t.side.toUpperCase() + '</dd><dt>Lot masuk / keluar</dt><dd>' + lot(t.entryVol) + ' / ' + lot(t.exitVol) + '</dd><dt>Rata-rata tertimbang masuk</dt><dd>' + px(t.entryPrice) + '</dd><dt>Rata-rata tertimbang keluar</dt><dd>' + px(t.exitPrice) + '</dd><dt>Waktu masuk</dt><dd>' + fT(t.entryT) + '</dd><dt>Waktu keluar</dt><dd>' + fT(t.exitT) + '</dd><dt>Durasi</dt><dd>' + dur(t.holdMin) + '</dd>' +
+    '<dt>Gross profit</dt><dd class="' + cls(t.gross) + '">' + money(t.gross, r.currency) + '</dd><dt>Komisi</dt><dd>' + nf(t.comm) + '</dd><dt>Swap</dt><dd>' + nf(t.swap) + '</dd><dt>Fee</dt><dd>' + nf(t.fee) + '</dd><dt><b>Net P/L</b></dt><dd class="' + cls(t.net) + '"><b>' + money(t.net, r.currency) + '</b></dd>' +
+    '<dt>Stop loss / Take profit</dt><dd>' + (t.sl || t.tp ? px(t.sl) + ' / ' + px(t.tp) + ' (nilai akhir)' : 'tidak tersedia pada data') + '</dd>' + (t.R != null ? '<dt>R-multiple (estimasi)</dt><dd>' + nf(t.R, 2) + '</dd>' : '') + '</dl>' +
+    (t.flags.length ? '<div class="stack"><h4>Flag</h4><div class="row">' + t.flags.map(function (f) { return '<span class="tag warn">' + esc(f) + '</span>'; }).join('') + '</div></div>' : '') +
+    (t.flags.length === 0 && !t.layerId ? '' : '') + (lg ? '<button class="btn" data-a="layer" data-id="' + lg.id + '">Buka rangkaian layering ' + lg.id + '</button>' : '') +
+    (t.orphan ? '<div class="banner">' + IC.info + '<span>' + esc((t.flags[0] || '')) + '. Entry, durasi, dan layering untuk trade ini tidak dapat dihitung.</span></div>' : '') +
+    '<div class="stack"><h4>Deal pembentuk posisi (sumber)</h4>' + tbl(['ID deal', 'Waktu', 'Arah', 'Tipe', 'Lot', 'Harga', 'Profit', 'Biaya', 'Komentar'], d, { r: [4, 5, 6, 7] }) + '<p class="hint">Riwayat perubahan SL/TP dan tick tidak tersedia pada laporan deal. Kolom ini menampilkan nilai sumber apa adanya.</p></div>' };
+  paintDrawer();
+}
+function drawerLayer(id) {
+  var r = A(), g = r.layers.filter(function (x) { return x.id === id; })[0]; if (!g) return;
+  var ts = r.allTrades.filter(function (t) { return g.tradeIds.indexOf(t.id) >= 0; }).sort(function (a, b) { return a.entryT - b.entryT; });
+  var bars = ts.map(function (t, i) { return { l: String(i + 1), v: t.entryVol, c: 'var(--ac)' }; });
+  var cl = r.cfg.layerExclude.indexOf(g.sig) >= 0;
+  V.drawer = { title: 'Rangkaian ' + g.id + ' · ' + g.symbol + ' ' + g.side.toUpperCase(), html: '<div class="row"><span class="tag ' + (g.level === 'Tinggi' ? 'good' : g.level === 'Sedang' ? 'warn' : 'mu') + '">Keyakinan ' + g.level + ' ' + nf(g.confidence * 100, 0) + '%</span><span class="tag warn">KANDIDAT LAYERING</span></div>' +
+    '<div class="meter"><i style="width:' + Math.round(g.confidence * 100) + '%"></i></div>' +
+    '<dl class="dl well"><dt>Jumlah entry</dt><dd>' + g.entries + '</dd><dt>Total lot</dt><dd>' + lot(g.totalLots) + '</dd><dt>Lot maksimum</dt><dd>' + lot(g.maxLot) + '</dd><dt>Rata-rata harga tertimbang</dt><dd>' + px(g.wavg) + '</dd><dt>Rentang harga entry</dt><dd>' + px(g.priceMin) + ' – ' + px(g.priceMax) + ' (' + nf(g.priceDistPct, 2) + '%)</dd><dt>Rentang waktu entry</dt><dd>' + fT(g.firstT) + ' → ' + fT(g.lastEntryT) + '</dd><dt>Durasi rangkaian</dt><dd>' + dur(g.durMin) + '</dd><dt>Eksposur lot puncak</dt><dd>' + lot(g.peakLots) + '</dd><dt>Gross P/L</dt><dd class="' + cls(g.gross) + '">' + money(g.gross) + '</dd><dt>Biaya</dt><dd>' + nf(g.costs) + '</dd><dt><b>Net P/L grup</b></dt><dd class="' + cls(g.net) + '"><b>' + money(g.net, r.currency) + '</b></dd><dt>TP / SL bersama</dt><dd>tidak dapat dinilai (tidak ada di data)</dd></dl>' +
+    '<div class="stack"><h4>Alasan pengelompokan</h4><ul class="clean">' + g.evidence.map(function (e) { return '<li>' + esc(e) + '</li>'; }).join('') + '</ul></div>' +
+    '<div class="stack"><h4>Progresi lot per entry</h4>' + barChart(bars, { h: 150, w: 560, fmt: function (v) { return nf(v, 2) + ' lot'; }, label: 'Progresi lot dalam rangkaian' }) + '</div>' +
+    '<div class="stack"><h4>Trade pembentuk</h4>' + tradeTable(ts, true) + '</div>' +
+    '<div class="row"><button class="btn" data-a="ids" data-n="rangkaian ' + g.id + '" data-ids="' + esc(JSON.stringify(g.tradeIds)) + '">Lihat di Riwayat Trade</button><button class="btn danger" data-a="notlayer" data-sig="' + esc(g.sig) + '">' + (cl ? 'Batalkan koreksi' : 'Tandai: bukan layering') + '</button></div><p class="hint">Koreksi Anda menghapus rangkaian ini dari hitungan di perangkat ini dan bisa dibatalkan di Settings.</p>' };
+  paintDrawer();
+}
+function drawerFormula(f) { V.drawer = { title: 'Rumus: ' + f.formula.split(':')[0], html: '<div class="well stack"><p>' + esc(f.formula) + '</p></div><p class="hint">Versi kalkulasi ' + W.VERSION + '. Semua definisi ada di Deep Jurnal → Kualitas & Rumus.</p>' }; paintDrawer(); }
+function paintDrawer() {
+  var el = $('#drawer'); if (!el) return;
+  if (!V.drawer) { el.innerHTML = ''; return; }
+  el.innerHTML = '<div class="drawer-bg" data-a="drawer-bg"><div class="drawer" role="dialog" aria-modal="true" aria-label="' + esc(V.drawer.title) + '"><div class="row sp"><h3>' + esc(V.drawer.title) + '</h3><button class="btn sm" data-a="drawer-x" aria-label="Tutup">Tutup</button></div>' + V.drawer.html + '</div></div>';
+  var b = el.querySelector('[data-a="drawer-x"]'); if (b) b.focus();
+}
+
+/* ---------------- AI ANALISIS ---------------- */
+function narrate(f, r, tone) {
+  var c = r.currency, P = r.perf, B = r.behavior, R = r.risk, F = W.fm, blunt = tone === 'tegas';
+  var F2 = function (v) { return F(v, c); };
+  switch (f.id) {
+    case 'net': return 'Dari ' + P.n + ' trade tertutup, hasil bersih setelah biaya adalah ' + F2(P.net) + '. Profit factor ' + pf(P.pf) + (P.pf != null && P.pf < 1 ? ', artinya kerugian bersih lebih besar daripada profit bersih' : '') + '. Expectancy ' + F2(P.expectancy) + ' per trade.' + (blunt && P.expectancy < 0 ? ' Rata-rata, setiap trade mengurangi saldo. Selama angka ini negatif, menambah jumlah trade hanya menambah kerugian.' : '');
+    case 'edge': return 'Winrate ' + pct(P.winrate, 1) + ' berada di bawah ' + pct(P.bePct, 1) + ' yang dibutuhkan agar impas pada payoff ' + nf(P.payoff, 2) + ' (rata-rata menang ' + F2(P.avgWin) + ', rata-rata kalah ' + F2(P.avgLoss) + ').' + (blunt ? ' Pada kombinasi ini hasil negatif adalah konsekuensi matematis, bukan nasib buruk.' : '');
+    case 'layer': { var g = r.layers.slice().sort(function (a, b) { return a.net - b.net; })[0]; return r.layers.length + ' kandidat rangkaian layering terdeteksi. Trade di dalam rangkaian menghasilkan ' + F2(W.perf(r.trades.filter(function (t) { return t.layerId; })).net) + ', sedangkan entry tunggal ' + F2(W.perf(r.trades.filter(function (t) { return !t.layerId; })).net) + '. Rangkaian terburuk (' + g.id + ') memakai ' + g.entries + ' entry dengan total ' + lot(g.totalLots) + ' lot dan berakhir ' + F2(g.net) + '.' + (blunt ? ' Menambah entry saat harga bergerak melawan posisi memperbesar eksposur tepat ketika posisi sedang salah.' : ''); }
+    case 'mart': return 'Setelah trade loss, lot entry berikutnya naik minimal ' + B.martingale.ratio + 'x pada ' + B.martingale.hits + ' dari ' + B.martingale.sample + ' kesempatan (' + pct(B.martingale.rate, 0) + '), dibanding ' + pct(B.martingale.rateAfterWin, 0) + ' setelah trade win. Trade yang memenuhi pola ini berakhir ' + F2(B.martingale.net) + '. Ini pola ukuran lot, bukan bukti niat.' + (blunt ? ' Menaikkan lot untuk menutup kerugian membuat satu loss berikutnya jauh lebih mahal.' : '');
+    case 'rev': return B.revenge.hits + ' dari ' + B.revenge.sample + ' entry setelah loss dibuka dalam ' + B.revenge.windowMin + ' menit dengan lot sama atau lebih besar. Rata-rata hasilnya ' + F2(B.revenge.avgNet) + ' per trade, dibanding ' + F2(B.revenge.avgNetOther) + ' untuk entry setelah loss lainnya. Pola ini menyerupai revenge trading; emosi tidak bisa dipastikan dari data transaksi.';
+    case 'over': return B.overtrading.flagged.length + ' dari ' + B.overtrading.days + ' hari aktif melewati ambang ' + nf(B.overtrading.threshold, 1) + ' trade per hari (median ' + nf(B.overtrading.median, 1) + '). Rata-rata P/L pada hari-hari itu ' + F2(B.overtrading.avgPnlFlagged) + ', hari normal ' + F2(B.overtrading.avgPnlNormal) + '. Jumlah hari ekstrem kecil, jadi perbedaan ini belum tentu stabil.';
+    case 'risk': return R.big.length + ' trade memakai lot di atas ' + r.cfg.risk.lotMultiple + 'x median (' + lot(R.medLot) + ' lot); lot terbesar ' + lot(R.maxLot) + '. Net P/L trade tersebut ' + F2(f.impact) + '. Eksposur lot terbuka bersamaan mencapai ' + lot(R.peak.peak) + '.' + (blunt ? ' Konsistensi ukuran posisi tidak ada di sini; satu keputusan lot besar bisa menghapus banyak trade kecil.' : '');
+    case 'dloss': return 'Batas rugi harian Anda dilanggar pada ' + f.days.length + ' hari: ' + f.days.join(', ') + '.';
+    case 'cap': return 'Ada ' + r.cashSummary.nDeposit + ' deposit (total ' + F2(r.cashSummary.deposit) + ') sementara net trading result ' + F2(P.net) + '. Deposit dipisahkan dari hasil trading, jadi angka ini bukan profit atau loss tambahan.';
+    case 'sym': return f.facts[0][1] + ': ' + f.facts[1][1] + ' trade, winrate ' + pct(f.facts[2][1], 0) + ', net ' + F2(f.impact) + '.';
+    case 'tail': return 'Loss terbesar ' + F2(P.worst.net) + ' setara ' + nf(Math.abs(P.worst.net) / P.avgWin, 1) + ' trade menang rata-rata (' + F2(P.avgWin) + ').';
+    case 'cost': return 'Biaya trading ' + F2(P.costs) + ' memakan ' + pct(Math.abs(P.costs) / P.grossProfit, 0) + ' dari gross profit.';
+    case 'so': return f.facts[0][1] + ' trade ditutup dengan penanda stop-out pada komentar broker, dengan net ' + F2(f.impact) + '. Ini tercatat oleh broker; WHY tidak punya data margin level.';
+  }
+  return '';
+}
+function fv(x, c) { var v = x[1], t = x[2]; return t === 'money' ? money(v, c) : t === 'pct' ? pct(v, 1) : t === 'int' ? nf(v, 0) : t === 'num' ? (v === Infinity ? '∞' : nf(v, 2)) : esc(v); }
+function recs(fs, r) {
+  var R = r.risk, B = r.behavior, out = [], ids = fs.map(function (f) { return f.id; }), cur = r.currency;
+  if (ids.indexOf('mart') >= 0 || ids.indexOf('rev') >= 0) out.push('Setelah trade loss, jangan naikkan lot. Tetapkan lot maksimum = lot loss sebelumnya, dan beri jeda minimal ' + Math.max(B.revenge.windowMin, 15) + ' menit sebelum entry berikutnya.');
+  if (ids.indexOf('layer') >= 0) { var med = W.median(r.layers.map(function (g) { return g.entries; })); out.push('Batasi satu rangkaian maksimal ' + Math.max(2, Math.min(3, Math.round(med))) + ' entry dan jangan menambah entry saat harga bergerak melawan posisi. Rata-rata rangkaian saat ini ' + nf(med, 0) + ' entry.'); }
+  if (ids.indexOf('risk') >= 0 && R.medLot) out.push('Pasang batas lot per trade ' + lot(R.medLot * r.cfg.risk.lotMultiple) + ' (' + r.cfg.risk.lotMultiple + 'x median) di Settings supaya pelanggaran terhitung otomatis.');
+  if (ids.indexOf('over') >= 0 && B.overtrading.threshold) out.push('Batasi trade per hari maksimal ' + Math.max(1, Math.floor(B.overtrading.threshold)) + ' (ambang hari ekstrem saat ini).');
+  if (ids.indexOf('edge') >= 0 || ids.indexOf('net') >= 0) out.push('Hentikan penambahan modal sampai expectancy per trade positif pada minimal ' + r.cfg.minSample + ' trade berturut-turut dengan aturan lot yang konsisten.');
+  if (!R.hasSL) out.push('Impor tabel Positions yang memuat S/L dan T/P agar risiko per trade dan R-multiple bisa dihitung.');
+  if (!out.length) out.push('Tidak ada masalah yang melewati ambang deteksi pada data ini. Pertahankan pencatatan dan impor data secara rutin.');
+  return out;
+}
+function pageAI() {
+  var r = A(), h = '<div class="topbar"><h2>AI Analisis</h2><span class="hint">Deep Jurnal menunjukkan bukti. Halaman ini menjelaskan kenyataannya.</span></div>';
+  if (r.empty) return h + noData(); h += ctxBar(r); if (r.error) return h + '<section class="card"><div class="banner">' + IC.info + '<span>' + esc(r.error) + '</span></div></section>';
+  h += demoBanner();
+  if (!r.perf.n) return h + sec('Belum ada bahan analisis', '<p class="mu">Tidak ada trade tertutup pada periode ini.</p>');
+  var fs = W.findings(r), tone = S.tone, c = r.currency, P = r.perf, top = fs.slice(0, 5);
+  var intro = '<div class="banner">' + IC.info + '<span>Laporan ini disusun otomatis dari temuan Analytics Engine (versi ' + W.VERSION + ') memakai aturan tetap, tanpa model bahasa eksternal. Setiap angka berasal dari Deep Jurnal dan tiap kesimpulan punya tombol ke transaksi atau rumusnya. Gaya bahasa diatur di Settings.</span></div>';
+  var concl = 'Dari ' + P.n + ' trade tertutup (' + fT(r.coverage.first, true) + ' sampai ' + fT(r.coverage.last, true) + '), hasil trading bersih ' + W.fm(P.net, c) + '. ' + (top.length ? 'Temuan paling berat: ' + top.slice(0, 3).map(function (f) { return f.title.charAt(0).toLowerCase() + f.title.slice(1); }).join('; ') + '. ' : 'Tidak ada temuan yang melewati ambang. ') + (P.n < r.cfg.minSample ? 'Sampel masih kecil (' + P.n + ' trade), jadi kesimpulan bersifat sementara. ' : '') + (tone === 'tegas' && P.net < 0 ? 'Angkanya jelas: yang perlu diubah adalah perilaku trading, bukan hanya strateginya.' : '');
+  var cards = top.map(function (f, i) {
+    var ev = '<div class="row">' + (f.ids.length ? '<button class="btn sm" data-a="ids" data-n="' + esc(f.title) + '" data-ids="' + esc(JSON.stringify(f.ids)) + '">Lihat transaksi pendukung (' + f.ids.length + ')</button>' : '') + (f.groupIds ? '<button class="btn sm" data-a="dj" data-k="layering">Lihat rangkaian layering</button>' : '') + (f.days ? '<button class="btn sm" data-a="dj" data-k="kalender">Lihat kalender</button>' : '') + '<button class="btn sm" data-a="formula" data-i="' + i + '">Lihat rumus</button><button class="btn sm" data-a="lim" data-i="' + i + '">Keterbatasan data</button></div>';
+    return '<section class="card find"><div class="ttl">' + sevTag(f.sev) + '<h3>' + esc(f.title) + '</h3></div><div class="row"><span class="tag mu">' + esc(f.kind) + '</span>' + confTag(f.conf) + (f.impact != null ? '<span class="tag ' + (f.impact < 0 ? 'bad' : 'mu') + '">Dampak terukur ' + money(f.impact, c) + '</span>' : '') + '</div><p>' + esc(narrate(f, r, tone)) + '</p><div class="well">' + f.facts.map(function (x) { return fact(x[0], fv(x, c)); }).join('') + '</div>' + ev + (V.openLim[i] ? '<div class="banner">' + IC.info + '<span>' + esc(f.limit || 'Tidak ada keterbatasan khusus selain sampel dan periode.') + '</span></div>' : '') + '</section>';
+  }).join('');
+  var impact = tbl(['Temuan', 'Tingkat', 'Dampak terukur', 'Keyakinan'], fs.map(function (f) { return '<tr><td class="wrap">' + esc(f.title) + '</td><td>' + sevTag(f.sev) + '</td><td class="num r ' + cls(f.impact) + '">' + money(f.impact, c) + '</td><td>' + esc(f.conf) + '</td></tr>'; }), { r: [2] }) + '<p class="hint">Dampak terukur = net P/L trade yang memenuhi pola tersebut. Ini yang terjadi pada trade itu, bukan perhitungan "seandainya tidak melakukannya". Dampak antar temuan bisa tumpang tindih, jangan dijumlahkan.</p>';
+  var limits = r.quality.filter(function (q) { return q.lv !== 'Complete'; }).map(function (q) { return '<li>' + esc(q.t) + '</li>'; }).join('');
+  var rec = recs(fs, r), R = r.risk, B = r.behavior;
+  var tg = [['Lot maksimum per trade', R.medLot ? '≤ ' + lot(R.medLot * r.cfg.risk.lotMultiple) : 'tidak tersedia'], ['Trade per hari', B.overtrading.threshold ? '≤ ' + Math.max(1, Math.floor(B.overtrading.threshold)) : 'tidak tersedia'], ['Entry per rangkaian layering', '≤ 3'], ['Entry < ' + B.revenge.windowMin + ' mnt setelah loss', '0 kejadian'], ['Winrate impas yang perlu dilampaui', P.bePct != null ? pct(P.bePct, 0) : 'tidak tersedia']];
+  return h + intro + sec('Kesimpulan utama', '<p>' + esc(concl) + '</p>') + (cards || sec('Masalah paling serius', '<p class="mu">Tidak ada temuan.</p>')) +
+    sec('Dampak finansial per temuan', impact) + sec('Keterbatasan data', '<ul class="clean">' + (limits || '<li>Tidak ada keterbatasan khusus tercatat.</li>') + '</ul><p class="hint" style="margin-top:8px">Laporan membedakan fakta terverifikasi, pola statistik, dan dugaan. Dugaan perilaku tidak pernah dinyatakan sebagai fakta.</p>') +
+    sec('Rekomendasi tindakan', '<ul class="clean">' + rec.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>') +
+    sec('Target evaluasi periode berikutnya', tbl(['Indikator', 'Target saran'], tg.map(function (x) { return '<tr><td>' + esc(x[0]) + '</td><td class="num r">' + esc(x[1]) + '</td></tr>'; }), { r: [1] }) + '<p class="hint">Target adalah saran yang diturunkan dari angka Anda, bukan prediksi hasil. Setelah mengubah perilaku, impor data baru dan bandingkan di <button class="btn sm" data-a="dj" data-k="banding">Perbandingan periode</button>.</p>');
+}
+
+/* ---------------- SETTINGS ---------------- */
+function setNum(label, path, hint, step) { var p = path.split('.'), v = p.length === 2 ? S.cfg[p[0]][p[1]] : S.cfg[p[0]]; return '<label class="f" for="c-' + path + '">' + label + '<input type="number" id="c-' + path + '" data-cfg="' + path + '" value="' + v + '" step="' + (step || 'any') + '" min="0">' + (hint ? '<span class="hint">' + hint + '</span>' : '') + '</label>'; }
+function pageSettings() {
+  var h = '<div class="topbar"><h2>Settings</h2></div>';
+  var accs = S.accounts.length ? S.accounts.map(function (a) { return '<div class="card flat stack"><div class="row sp"><b>' + esc(a.name) + '</b>' + (a.isDemo ? '<span class="tag warn">SIMULASI</span>' : '') + '</div><div class="form"><label class="f" for="an-' + a.id + '">Nama akun<input type="text" id="an-' + a.id + '" data-acc="' + a.id + '" data-f="name" value="' + esc(a.name) + '"></label><label class="f" for="ac-' + a.id + '">Mata uang<input type="text" id="ac-' + a.id + '" data-acc="' + a.id + '" data-f="currency" value="' + esc(a.currency) + '" maxlength="6"></label><label class="f" for="am-' + a.id + '">Jenis akun<select id="am-' + a.id + '" data-acc="' + a.id + '" data-f="mode"><option value="hedging"' + (a.mode === 'hedging' ? ' selected' : '') + '>Hedging</option><option value="netting"' + (a.mode === 'netting' ? ' selected' : '') + '>Netting</option></select></label></div><p class="hint">' + a.deals.length + ' deal · ' + (a.positions || []).length + ' posisi · berkas: ' + esc((a.files || []).map(function (f) { return f.name; }).join(', ') || 'contoh') + '</p><div class="row"><button class="btn sm" data-a="imp-open" data-id="' + a.id + '">Impor ulang / tambah berkas</button><button class="btn sm danger" data-a="acc-del" data-id="' + a.id + '">' + (V.confirmDel === a.id ? 'Klik lagi untuk hapus' : 'Putuskan & hapus data') + '</button></div></div>'; }).join('') : '<p class="mu">Belum ada akun.</p>';
+  var s = '';
+  s += sec('Profil dan zona waktu', '<div class="form"><label class="f" for="pn">Nama tampilan<input type="text" id="pn" data-prof="name" value="' + esc(S.profile.name) + '" placeholder="Opsional"></label>' + setNum('Zona waktu tampilan (UTC±jam)', 'displayUtcOffset', 'Kalender dan jam mengikuti ini. Contoh WIB = 7', 0.5).replace('min="0"', 'min="-12" max="14"') + setNum('Offset waktu server broker (UTC±jam)', 'brokerUtcOffset', 'Dipakai untuk klasifikasi sesi. Cek di MT5: waktu server broker vs UTC.', 0.5).replace('min="0"', 'min="-12" max="14"') + '</div><p class="hint">Waktu sumber disimpan apa adanya. Konversi hanya saat tampil dan tidak mengubah data asli.</p>');
+  s += sec('Akun trading', accs + '<div class="row"><button class="btn solid" data-a="imp-open">Tambah akun / impor berkas</button><button class="btn" data-a="demo">Muat data contoh (simulasi)</button></div>');
+  s += sec('Koneksi langsung MT5 (belum aktif)', '<div class="banner">' + IC.info + '<span><b>Belum tersedia.</b> Login ID, server, dan investor password saja tidak cukup untuk membaca MT5 dari website biasa. Fitur ini sengaja tidak dipalsukan.</span></div><div class="well stack"><b>Syarat yang masih harus dipenuhi</b><ul class="clean hint"><li>Worker Windows dengan terminal MT5 berjalan dan login ke akun (untuk MetaTrader5 Python API), atau integrasi resmi dari broker/penyedia infrastruktur.</li><li>Backend dengan penyimpanan kredensial terenkripsi (secret manager/KMS), antrean sinkronisasi, dan audit log.</li><li>Pengujian terhadap broker nyata: kelengkapan histori, rate limit, dan zona waktu server.</li><li>Hanya investor password (baca-saja). Password utama tidak akan pernah diminta.</li></ul></div><p class="hint">Sampai itu ada, jalur yang berfungsi adalah impor laporan MT5 (CSV/HTML) dari akun Anda.</p>');
+  s += sec('Ambang layering', '<div class="form">' + setNum('Jeda maksimum antar entry (menit)', 'layering.gapMin') + setNum('Jarak harga maksimum (% dari harga)', 'layering.priceDistPct', '0,5% ≈ 13 poin pada emas 2650') + setNum('Minimal entry per rangkaian', 'layering.minEntries', '', 1) + '<label class="f">Wajib overlap posisi<span class="row"><span class="sw"><input type="checkbox" data-cfgb="layering.requireOverlap"' + (S.cfg.layering.requireOverlap ? ' checked' : '') + ' aria-label="Wajib overlap"><i></i></span><span class="hint">Entry baru harus dibuka saat posisi sebelumnya aktif</span></span></label></div>' + (S.cfg.layerExclude.length ? '<div class="row"><span class="hint">' + S.cfg.layerExclude.length + ' rangkaian ditandai bukan layering oleh Anda.</span><button class="btn sm" data-a="reset-excl">Batalkan semua koreksi</button></div>' : ''));
+  s += sec('Batas risiko pribadi', '<div class="form">' + setNum('Lot maksimum per trade (0 = tidak diatur)', 'risk.maxLot') + setNum('Pengali lot terhadap median', 'risk.lotMultiple', 'Lot di atas pengali × median ditandai') + setNum('Eksposur lot maksimum bersamaan (0 = tidak diatur)', 'risk.maxExposureLots') + setNum('Batas rugi harian dalam mata uang akun (0 = tidak diatur)', 'risk.dailyLossLimit') + '</div>');
+  s += sec('Ambang deteksi perilaku', '<div class="form">' + setNum('Jendela entry cepat setelah loss (menit)', 'behavior.revengeWindowMin') + setNum('Rasio kenaikan lot (martingale-like)', 'behavior.martingaleRatio', '', 0.1) + setNum('Simpangan baku untuk hari overtrading', 'behavior.overtradeSd', '', 0.5) + setNum('Sampel minimum per kondisi', 'behavior.minSample', 'Di bawah ini ditandai sampel kecil', 1) + setNum('Sampel minimum keseluruhan', 'minSample', '', 1) + '</div>');
+  s += sec('Preferensi AI Analisis', '<label class="f" for="tone">Gaya bahasa<select id="tone" data-tone="1"><option value="tegas"' + (S.tone === 'tegas' ? ' selected' : '') + '>Tegas dan konfrontatif (berbasis bukti)</option><option value="netral"' + (S.tone === 'netral' ? ' selected' : '') + '>Netral</option></select></label><p class="hint">Dua gaya memakai angka yang sama. Tidak ada hinaan, tebakan emosi, atau janji hasil.</p>');
+  s += sec('Privasi dan data', '<ul class="clean"><li><b>Yang disimpan:</b> deal, posisi, dan pengaturan Anda.</li><li><b>Di mana:</b> hanya di penyimpanan browser ini. Tidak dikirim ke server mana pun, tidak dipakai melatih model, tidak dibagikan.</li><li><b>Yang tidak pernah diminta:</b> password broker apa pun.</li><li><b>Lama simpan:</b> sampai Anda menghapusnya atau membersihkan data browser.</li></ul><div class="row"><button class="btn" data-a="export">Tampilkan semua data (JSON)</button><button class="btn danger" data-a="wipe">' + (V.confirmWipe ? 'Klik lagi untuk hapus SEMUA' : 'Hapus semua data') + '</button></div><p class="hint" id="exp-note"></p>');
+  s += sec('Keamanan akun website', '<div class="banner">' + IC.info + '<span>Versi ini tidak memiliki login pengguna, MFA, atau sesi server karena belum ada backend. Fitur itu perlu dibangun bersama sinkronisasi broker. Sementara itu data terkunci pada browser dan perangkat Anda.</span></div>');
+  s += sec('Riwayat aktivitas', tbl(['Waktu', 'Aktivitas'], S.log.slice(0, 40).map(function (l) { return '<tr><td class="num">' + new Date(l.t + off() * 3600000).toISOString().slice(0, 16).replace('T', ' ') + '</td><td class="wrap">' + esc(l.m) + '</td></tr>'; })));
+  return h + s;
+}
+
+/* ---------------- import ---------------- */
+function readText(f) { return f.arrayBuffer().then(function (buf) { var u = new Uint8Array(buf), enc = 'utf-8'; if (u[0] === 0xFF && u[1] === 0xFE) enc = 'utf-16le'; else if (u[0] === 0xFE && u[1] === 0xFF) enc = 'utf-16be'; else if (u.length > 4 && u[1] === 0 && u[3] === 0) enc = 'utf-16le'; return new TextDecoder(enc).decode(buf); }); }
+function dealKey(d) { return d.id + '|' + d.t + '|' + d.symbol + '|' + d.vol + '|' + d.profit; }
+function paintImport() {
+  var el = $('#modal'); if (!V.imp) { el.innerHTML = ''; return; } var I = V.imp;
+  var tgt = '<option value="new">Akun baru</option>' + S.accounts.filter(function (a) { return !a.isDemo; }).map(function (a) { return '<option value="' + a.id + '"' + (I.target === a.id ? ' selected' : '') + '>' + esc(a.name) + '</option>'; }).join('');
+  var files = I.files.map(function (f) { return '<div class="well stack"><b>' + esc(f.name) + '</b><span class="hint">' + f.res.deals.length + ' deal · ' + f.res.positions.length + ' posisi · tabel terdeteksi: ' + (f.res.kinds.join(', ') || 'tidak ada') + (f.res.skipped ? ' · ' + f.res.skipped + ' baris dilewati' : '') + '</span>' + f.res.warnings.map(function (w) { return '<span class="tag bad" style="white-space:normal">' + esc(w) + '</span>'; }).join('') + '</div>'; }).join('');
+  var nd = I.files.reduce(function (a, f) { return a + f.res.deals.length + f.res.positions.length; }, 0);
+  el.innerHTML = '<div class="drawer-bg" data-a="imp-bg"><div class="drawer" role="dialog" aria-modal="true" aria-label="Impor laporan"><div class="row sp"><h3>Impor laporan MT5</h3><button class="btn sm" data-a="imp-x">Tutup</button></div>' +
+    '<div class="banner">' + IC.info + '<span>Di MT5: Toolbox → History → klik kanan → Report → HTML (atau Open XML lalu simpan CSV). Format Deals (ada baris balance) memberi arus kas lengkap. Tabel Positions menambahkan S/L dan T/P. Berkas diproses di browser ini saja.</span></div>' +
+    '<label class="f" for="imp-file">Berkas laporan (.csv, .html, .htm, .txt), boleh lebih dari satu<input type="file" id="imp-file" multiple accept=".csv,.html,.htm,.txt,text/csv,text/html,text/plain" data-imp="file" style="padding:10px"></label>' + files +
+    '<div class="form"><label class="f" for="imp-t">Simpan ke<select id="imp-t" data-imp="target">' + tgt + '</select></label>' + (I.target === 'new' ? '<label class="f" for="imp-n">Nama akun<input type="text" id="imp-n" data-imp="name" value="' + esc(I.name) + '" placeholder="mis. Exness MT5 #1"></label><label class="f" for="imp-b">Broker<input type="text" id="imp-b" data-imp="broker" value="' + esc(I.broker) + '"></label><label class="f" for="imp-c">Mata uang akun<input type="text" id="imp-c" data-imp="currency" value="' + esc(I.currency) + '" maxlength="6"><span class="hint">Tidak ada di laporan deal; isi sesuai akun.</span></label><label class="f" for="imp-m">Jenis akun<select id="imp-m" data-imp="mode"><option value="hedging">Hedging</option><option value="netting"' + (I.mode === 'netting' ? ' selected' : '') + '>Netting</option></select></label>' : '') + '</div>' +
+    '<p class="hint">Impor ulang berkas yang tumpang tindih aman: deal dengan ID yang sama dilewati.</p><div class="row"><button class="btn solid" data-a="imp-go"' + (nd ? '' : ' disabled') + '>Impor ' + nd + ' baris</button></div></div></div>';
+}
+function doImport() {
+  var I = V.imp, deals = [], pos = [], fn = [];
+  I.files.forEach(function (f) { deals = deals.concat(f.res.deals); pos = pos.concat(f.res.positions); fn.push({ name: f.name, at: Date.now(), deals: f.res.deals.length, pos: f.res.positions.length }); });
+  var a, added = 0, skipped = 0;
+  if (I.target === 'new') {
+    if (!deals.length && !pos.length) return;
+    a = { id: 'a' + Date.now().toString(36), name: I.name.trim() || 'Akun MT5 ' + (S.accounts.length + 1), platform: 'MetaTrader 5', broker: I.broker.trim(), currency: (I.currency || 'USD').trim().toUpperCase(), mode: I.mode, isDemo: false, files: [], deals: [], positions: [], createdAt: Date.now() };
+    S.accounts.push(a);
+  } else a = S.accounts.filter(function (x) { return x.id === I.target; })[0];
+  var seen = {}; a.deals.forEach(function (d) { seen[dealKey(d)] = 1; });
+  deals.forEach(function (d) { var k = dealKey(d); if (seen[k]) skipped++; else { seen[k] = 1; a.deals.push(d); added++; } });
+  var ps = {}; (a.positions || []).forEach(function (p) { ps[p.id + '|' + p.entryT] = 1; }); a.positions = a.positions || [];
+  pos.forEach(function (p) { var k = p.id + '|' + p.entryT; if (ps[k]) skipped++; else { ps[k] = 1; a.positions.push(p); added++; } });
+  a.files = (a.files || []).concat(fn); a.updatedAt = Date.now();
+  logA('Impor ' + fn.map(function (f) { return f.name; }).join(', ') + ' ke ' + a.name + ': ' + added + ' baru, ' + skipped + ' duplikat dilewati');
+  if (I.target === 'new') S.active = a.id; cache = {}; V.imp = null; save(); paintImport(); toast('Impor selesai: ' + added + ' baris baru, ' + skipped + ' duplikat dilewati'); render();
+}
+function addDemo() {
+  if (S.accounts.some(function (a) { return a.isDemo; })) { toast('Data contoh sudah dimuat'); return; }
+  var a = { id: 'demo', name: 'DATA CONTOH (simulasi)', platform: 'MetaTrader 5', broker: 'Simulasi', currency: 'USD', mode: 'hedging', isDemo: true, files: [], deals: W.demoDeals(), positions: [], createdAt: Date.now(), updatedAt: Date.now() };
+  S.accounts.push(a); S.active = 'demo'; logA('Memuat data contoh simulasi (' + a.deals.length + ' deal buatan)'); cache = {}; save(); toast('Data contoh simulasi dimuat'); render();
+}
+
+/* ---------------- shell + events ---------------- */
+var NAV = [['beranda', 'Beranda', IC.home], ['deep-jurnal', 'Deep Jurnal', IC.book], ['ai-analisis', 'AI Analisis', IC.ai], ['pengaturan', 'Settings', IC.gear]];
+function route() { var h = (location.hash || '').replace('#', ''); return NAV.some(function (n) { return n[0] === h; }) ? h : 'beranda'; }
+function shell() {
+  var app = $('#app'); if (app.dataset.ready) return; app.dataset.ready = 1;
+  app.innerHTML = '<div class="app"><aside class="side"><div class="logo"><div class="logo-mark" aria-hidden="true">?</div><div><b>WHY</b><small>JURNAL AKUNTABILITAS</small></div></div><nav class="nav" aria-label="Menu utama" id="nav"></nav><div class="side-foot"><button class="btn sm" data-a="theme" aria-label="Ganti tema">' + IC.moon + '<span class="lbl">Tema</span></button></div></aside><main class="main" id="main" tabindex="-1"></main></div><nav class="bnav" id="bnav" aria-label="Menu utama"></nav><div id="drawer"></div><div id="modal"></div><div id="toast" class="toast" role="status" hidden></div>';
+}
+function render() {
+  shell(); var r = route(), nav = NAV.map(function (n) { return '<a href="#' + n[0] + '"' + (n[0] === r ? ' aria-current="page"' : '') + '>' + n[2] + '<span>' + n[1] + '</span></a>'; }).join('');
+  $('#nav').innerHTML = nav; $('#bnav').innerHTML = nav;
+  var m = $('#main'); var w = m.clientWidth; CW = Math.max(280, w - (w < 700 ? 34 : 48) - 0);
+  var sx = window.scrollY, html, fid = document.activeElement && document.activeElement.id, fsel = null; try { if (fid && document.activeElement.selectionStart != null) fsel = document.activeElement.selectionStart; } catch (x) { }
+  try { html = r === 'beranda' ? pageHome() : r === 'deep-jurnal' ? pageDJ() : r === 'ai-analisis' ? pageAI() : pageSettings(); } catch (e) { console.error(e); html = '<section class="card stack"><h3>Terjadi kesalahan saat menghitung</h3><p class="mu">' + esc(e.message) + '</p><p class="hint">Data Anda tidak berubah. Coba impor ulang atau periksa format berkas.</p></section>'; }
+  m.innerHTML = html; window.scrollTo(0, sx);
+  if (fid) { var n = document.getElementById(fid); if (n && n !== document.activeElement) { n.focus(); try { if (fsel != null) n.setSelectionRange(fsel, fsel); } catch (x) { } } }
+}
+function gotoTradesWith(ids, label) { V.tf = { sym: '', side: '', res: '', flag: '', q: '', ids: ids, idsLabel: label }; V.page = 0; V.dj = 'trade'; V.drawer = null; paintDrawer(); if (route() !== 'deep-jurnal') location.hash = '#deep-jurnal'; else render(); window.scrollTo(0, 0); }
+function downloadNote(text) { var n = $('#exp-note'); if (n) n.textContent = text; }
+document.addEventListener('click', function (e) {
+  var t = e.target.closest('[data-a]'); if (!t) return; var a = t.dataset.a, r;
+  if ((a === 'drawer-bg' || a === 'imp-bg') && e.target !== t) return;
+  switch (a) {
+    case 'theme': var cur = document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), nx = cur === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', nx); try { localStorage.setItem(THEME, nx); } catch (x) { } render(); break;
+    case 'demo': addDemo(); break;
+    case 'copy': var cz = document.getElementById(t.dataset.t); if (cz) { cz.select(); try { navigator.clipboard.writeText(cz.value).then(function () { toast('Tersalin'); }, function () { toast('Teks dipilih, tekan salin manual'); }); } catch (x) { toast('Teks dipilih, tekan salin manual'); } } break;
+    case 'imp-open': V.imp = { files: [], target: t.dataset.id || 'new', name: '', broker: '', currency: 'USD', mode: 'hedging' }; paintImport(); break;
+    case 'imp-x': case 'imp-bg': V.imp = null; paintImport(); break;
+    case 'imp-go': doImport(); break;
+    case 'dj': V.dj = t.dataset.k; V.drawer = null; paintDrawer(); if (route() !== 'deep-jurnal') location.hash = '#deep-jurnal'; else render(); break;
+    case 'goto-acc': S.active = t.dataset.id; V.dj = 'modal'; save(); location.hash = '#deep-jurnal'; render(); break;
+    case 'trade': drawerTrade(t.dataset.id); break;
+    case 'layer': drawerLayer(t.dataset.id); break;
+    case 'drawer-x': case 'drawer-bg': V.drawer = null; paintDrawer(); break;
+    case 'ids': gotoTradesWith(JSON.parse(t.dataset.ids), t.dataset.n); break;
+    case 'tf-clear': V.tf.ids = null; V.page = 0; render(); break;
+    case 'sort': var k = t.dataset.k; V.sort = { k: k, d: V.sort.k === k ? -V.sort.d : -1 }; V.page = 0; render(); break;
+    case 'pg': V.page = Math.max(0, V.page + (+t.dataset.k)); render(); break;
+    case 'calday': V.calDay = t.dataset.k; render(); break;
+    case 'calnav': r = A(); var ms = Array.from(new Set(Object.keys(r.daily).sort().map(function (k) { return k.slice(0, 7); }))), i = ms.indexOf(V.calMonth) + (+t.dataset.k); if (ms[i]) { V.calMonth = ms[i]; V.calDay = null; render(); } break;
+    case 'formula': r = A(); drawerFormula(W.findings(r)[+t.dataset.i]); break;
+    case 'lim': V.openLim[t.dataset.i] = !V.openLim[t.dataset.i]; render(); break;
+    case 'notlayer': var sg = t.dataset.sig, ex = S.cfg.layerExclude, ix = ex.indexOf(sg); if (ix >= 0) ex.splice(ix, 1); else ex.push(sg); logA('Koreksi layering: ' + (ix >= 0 ? 'dibatalkan' : 'ditandai bukan layering')); save(); V.drawer = null; paintDrawer(); render(); break;
+    case 'reset-excl': S.cfg.layerExclude = []; save(); render(); break;
+    case 'acc-del': if (V.confirmDel === t.dataset.id) { var an = S.accounts.filter(function (x) { return x.id === t.dataset.id; })[0]; S.accounts = S.accounts.filter(function (x) { return x.id !== t.dataset.id; }); if (S.active === t.dataset.id) S.active = 'all'; logA('Akun dihapus: ' + an.name); V.confirmDel = null; cache = {}; save(); render(); } else { V.confirmDel = t.dataset.id; render(); } break;
+    case 'wipe': if (V.confirmWipe) { S = { v: 1, profile: { name: '' }, cfg: clone(W.DEF_CFG), accounts: [], active: 'all', preset: 'all', from: '', to: '', log: [{ t: Date.now(), m: 'Semua data dihapus' }], tone: 'tegas' }; V.confirmWipe = false; cache = {}; save(); toast('Semua data dihapus'); location.hash = '#beranda'; render(); } else { V.confirmWipe = true; render(); } break;
+    case 'export': downloadNote('Penampil ini tidak mengizinkan unduhan berkas. Salin teks di kotak bawah dan simpan sebagai why-data.json.'); var ta = $('#exp-note'); if (ta && !$('#exp-ta')) ta.insertAdjacentHTML('afterend', '<label class="f" for="exp-ta">Data (JSON)<textarea id="exp-ta" readonly rows="6" style="width:100%;border:0;border-radius:14px;padding:12px;background:var(--grad-in);box-shadow:var(--inset-s);color:var(--tx);font:12px var(--f-mono)"></textarea></label>'); var te = $('#exp-ta'); if (te) te.value = JSON.stringify(S); break;
+    case 'csv': r = A(); var ts = tradeFilter(r), rows = [['id', 'akun', 'symbol', 'arah', 'lot', 'entry_time', 'entry', 'exit_time', 'exit', 'gross', 'komisi', 'swap', 'fee', 'net', 'durasi_menit', 'kualitas', 'flag']].concat(ts.map(function (x) { return [x.id, x.acctName, x.symbol, x.side, x.entryVol, fT(x.entryT), x.entryPrice, fT(x.exitT), x.exitPrice, x.gross, x.comm, x.swap, x.fee, x.net, x.holdMin, x.quality, x.flags.join('; ')]; }));
+      var csv = rows.map(function (rw) { return rw.map(function (c) { c = c == null ? '' : String(c); return /[",\n;]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(','); }).join('\n');
+      V.drawer = { title: 'Ekspor CSV (' + ts.length + ' trade)', html: '<p class="hint">Penampil ini tidak mengizinkan unduhan berkas. Salin teks di bawah dan tempel ke berkas .csv.</p><textarea id="csv-ta" readonly rows="14" style="width:100%;border:0;border-radius:14px;padding:12px;background:var(--grad-in);box-shadow:var(--inset-s);color:var(--tx);font:12px var(--f-mono)"></textarea><div class="row"><button class="btn" data-a="copy" data-t="csv-ta">Salin</button></div>' }; paintDrawer(); $('#csv-ta').value = csv; break;
+  }
+});
+document.addEventListener('change', function (e) {
+  var t = e.target, d = t.dataset;
+  if (d.ch) { if (d.ch === 'acc') S.active = t.value; else if (d.ch === 'preset') S.preset = t.value; else S[d.ch] = t.value; V.calMonth = null; V.calDay = null; V.page = 0; save(); render(); }
+  else if (d.tf) { V.tf[d.tf] = t.value; V.page = 0; render(); }
+  else if (d.cmp) { V.cmp[d.cmp] = t.value; render(); }
+  else if (d.cfg) { var p = d.cfg.split('.'), v = parseFloat(t.value); if (!isFinite(v)) return; if (p.length === 2) S.cfg[p[0]][p[1]] = v; else S.cfg[p[0]] = v; save(); render(); }
+  else if (d.cfgb) { var q = d.cfgb.split('.'); S.cfg[q[0]][q[1]] = t.checked; save(); render(); }
+  else if (d.tone) { S.tone = t.value; save(); render(); }
+  else if (d.prof) { S.profile[d.prof] = t.value; save(); }
+  else if (d.acc) { var ac = S.accounts.filter(function (x) { return x.id === d.acc; })[0]; if (ac) { ac[d.f] = d.f === 'currency' ? t.value.trim().toUpperCase() : t.value; ac.updatedAt = Date.now(); cache = {}; save(); logA('Akun ' + ac.name + ': ubah ' + d.f); render(); } }
+  else if (d.imp) {
+    var I = V.imp; if (d.imp === 'file') { var fl = Array.from(t.files || []); Promise.all(fl.map(function (f) { return readText(f).then(function (tx) { return { name: f.name, res: W.parseSource(tx, f.name) }; }); })).then(function (rs) { I.files = rs; if (rs[0] && !I.name) I.name = ''; rs.forEach(function (x) { if (x.res.warnings.length) logA('Impor gagal dibaca: ' + x.name + ' — ' + x.res.warnings[0]); }); paintImport(); }).catch(function (er) { logA('Impor gagal: ' + er.message); toast('Berkas tidak dapat dibaca'); }); }
+    else { I[d.imp] = t.value; if (d.imp === 'target') paintImport(); }
+  }
+});
+document.addEventListener('input', function (e) { var t = e.target; if (t.dataset.tf === 'q') { V.tf.q = t.value; V.page = 0; clearTimeout(window.__q); window.__q = setTimeout(render, 250); } });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (V.drawer) { V.drawer = null; paintDrawer(); } else if (V.imp) { V.imp = null; paintImport(); } } });
+window.addEventListener('hashchange', function () { V.drawer = null; paintDrawer(); render(); window.scrollTo(0, 0); });
+var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 200); });
+
+/* ---------------- boot ---------------- */
+try { var th = localStorage.getItem(THEME); if (th) document.documentElement.setAttribute('data-theme', th); } catch (e) { }
+load(); if (!S.log.length) logA('WHY dibuka pertama kali di browser ini');
+function boot() { render(); }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+
+</body></html>
